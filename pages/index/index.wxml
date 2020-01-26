@@ -1,0 +1,45 @@
+<view class='lbs'>
+  <!-- <image src="/image/swiper1.jpg" ></image> -->
+  <swiper indicator-dots="true" style="height: 300rpx">
+    <block wx:for="{{imgUrls}}" wx:key="index">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+
+<view class='navs'>
+  <navigator class='nav' url="" hover-class="navigator-hover">
+    <image src="/image/icon-qiandao.png"></image>
+    <text>所有订单</text>
+  </navigator>
+  <navigator class='nav' url="" hover-class="navigator-hover">
+    <image src="/image/icon-fujin.png"></image>
+    <text>待回收订单</text>
+  </navigator>
+  <navigator class='nav' url="" hover-class="navigator-hover">
+    <image src="/image/icon-zhanhui.png"></image>
+    <text>修理厂确认单</text>
+  </navigator>
+  <navigator class='nav' url="" hover-class="navigator-hover">
+    <image src="/image/icon-fuli.png"></image>
+    <text>加急订单</text>
+  </navigator>
+  <navigator class='nav' url="" hover-class="navigator-hover">
+    <image src="/image/icon-muma.png"></image>
+    <text>逾期订单</text>
+  </navigator>
+  <navigator class='nav' url="" hover-class="navigator-hover">
+    <image src="/image/icon-xingxing.png"></image>
+    <text>本日已收订单</text>
+  </navigator>
+  <navigator class='nav' url="" hover-class="navigator-hover">
+    <image src="/image/icon-tiyu.png"></image>
+    <text>我的订单</text>
+  </navigator>
+  <navigator class='nav' url="" hover-class="navigator-hover">
+    <image src="/image/icon-qinzi.png"></image>
+    <text>新增</text>
+  </navigator>
+</view>

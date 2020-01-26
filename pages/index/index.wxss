@@ -1,0 +1,98 @@
+/*轮播*/
+
+.lbs {
+  width: 100%;
+  height: 300rpx;
+}
+
+.lbs image {
+  width: 100%;
+  height: 100%;
+}
+
+/*导航*/
+
+/*1.给div加宽度和高度 -> 背景*/
+
+/*2.调小导航*/
+
+/*3.调大导航*/
+
+.navs {
+  width: 100%;
+  height: 350rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.navs .nav {
+  width: 33%;
+  height: 175rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navs .nav image {
+  width: 84rpx;
+  height: 84rpx;
+}
+
+/*
+热卖商品
+1. 设置线 w-100%、h-20rpx、bg-#f5f6f7
+2. 设置view宽度高度
+.hots  w-100%、h-不写
+.hots .title w-100%、h-不管、底部边框 #ccc
+.hots .hot w-100%、h-160rpx
+3. 设置hot排列方式，图片左、商品信息右边（继续设置商品图片w30%、商品信息w70%）
+脚下留心：移动端加padding会导致宽度撑大（父宽度变小然后居中margin:auto）
+*/
+
+.line {
+  width: 100%;
+  height: 20rpx;
+  background: #f5f6f7;
+}
+
+.hots {
+  width: 96%;
+  margin: auto;
+}
+
+.hots .title {
+  width: 100%;
+  border-bottom: 2px solid #ccc;
+  padding: 10rpx 0rpx;
+}
+
+.hots .hot {
+  width: 100%;
+  height: 160rpx;
+  display: flex;
+  padding: 20rpx 0rpx;
+  border-bottom: solid 1rpx #ccc;
+}
+
+.hots .hot .goods-img {
+  width: 30%;
+  height: 100%;
+}
+
+.hots .hot .goods-info {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10rpx;
+  position: relative;
+}
+
+.hots .hot .goods-info .cart {
+  position: absolute;
+  width: 50rpx;
+  height: 50rpx;
+  right: 35rpx;
+  bottom: 0rpx;
+}
