@@ -1,6 +1,6 @@
 <view class='lbs'>
   <!-- <image src="/image/swiper1.jpg" ></image> -->
-  <swiper indicator-dots="true" style="height: 300rpx">
+  <swiper indicator-dots="true" style="height: 350rpx">
     <block wx:for="{{imgUrls}}" wx:key="index">
       <swiper-item>
         <image src="{{item}}" class="slide-image" />
@@ -8,38 +8,46 @@
     </block>
   </swiper>
 </view>
-
 <view class='navs'>
-  <navigator class='nav' url="" hover-class="navigator-hover">
+  <navigator class='nav' 
+    url="/pages/list/index?order_name=all_order&order_num={{all_order}}"         hover-class="navigator-hover"
+  >
     <image src="/image/icon-qiandao.png"></image>
+    <text class="nav-num">{{all_order}}</text>
     <text>所有订单</text>
   </navigator>
-  <navigator class='nav' url="" hover-class="navigator-hover">
-    <image src="/image/icon-fujin.png"></image>
+  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+    <image src="/image/icon-qiandao.png"></image>
+    <text class="nav-num">{{canrecv_order}}</text>
     <text>待回收订单</text>
   </navigator>
-  <navigator class='nav' url="" hover-class="navigator-hover">
-    <image src="/image/icon-zhanhui.png"></image>
+  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+    <image src="/image/icon-qiandao.png"></image>
+    <text class="nav-num">{{confirmed_order}}</text>
     <text>修理厂确认单</text>
   </navigator>
-  <navigator class='nav' url="" hover-class="navigator-hover">
-    <image src="/image/icon-fuli.png"></image>
+  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+    <image src="/image/icon-qiandao.png"></image>
+    <text class="nav-num">{{urgent_order}}</text>
     <text>加急订单</text>
   </navigator>
-  <navigator class='nav' url="" hover-class="navigator-hover">
-    <image src="/image/icon-muma.png"></image>
+  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+    <image src="/image/icon-qiandao.png"></image>
+    <text class="nav-num">{{overdue_order}}</text>
     <text>逾期订单</text>
   </navigator>
-  <navigator class='nav' url="" hover-class="navigator-hover">
-    <image src="/image/icon-xingxing.png"></image>
+  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+    <image src="/image/icon-qiandao.png"></image>
+    <text class="nav-num">{{todayrecv_order}}</text>
     <text>本日已收订单</text>
   </navigator>
-  <navigator class='nav' url="" hover-class="navigator-hover">
-    <image src="/image/icon-tiyu.png"></image>
+  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+    <image src="/image/icon-qiandao.png"></image>
+    <text class="nav-num">{{my_order}}</text>
     <text>我的订单</text>
   </navigator>
-  <navigator class='nav' url="" hover-class="navigator-hover">
-    <image src="/image/icon-qinzi.png"></image>
-    <text>新增</text>
+  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+    <image src="/image/icon-qiandao.png"></image>
+    <text>新增订单</text>
   </navigator>
 </view>

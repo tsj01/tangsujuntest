@@ -1,0 +1,33 @@
+<view class="search">
+  <van-search value="{{ value }}" placeholder="请输入搜索关键词" bind:search="onSearch">
+  </van-search>
+  <view class="search-right">
+    <van-icon name="setting-o" />
+  </view>
+</view>
+<view class="ul">
+  <view class="li" wx:for="{{list}}" wx:key="{{index}}">
+    <view class="title">
+      <text class="icon">12</text>
+      <text class="order">订单号</text>
+      <text class="order-name">{{item.orderno}}({{item.srv}})</text>
+      <text class="order-time">预约时间</text>
+      <text class="order-info">{{item.yydt}}</text>
+    </view>
+    <view class="state">
+      <text class="state-left">{{item.car_info}}</text>
+      <text class="state-right">{{item.status}}</text>
+    </view>
+    <view class="company">
+      <text class="company-left">{{item.garage}}</text>
+      <text class="company-right">{{item.insur}}</text>
+    </view>
+    <view class="address">
+      <text class="address-left">{{item.garaddr}}</text>
+    </view>
+    <view class="thing">
+      <text class="thing-left">{{item.dtl_info}}</text>
+      <text class="thing-right">{{item.overdue_info}}</text>
+    </view>
+  </view>
+</view>

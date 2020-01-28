@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/test/test",
     "pages/my/my",
-    "pages/map/map"
+    "pages/map/map",
+    "pages/list/index"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -37,5 +38,8 @@
       }
     ]
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "van-icon": "../../miniprogram_npm/vant-weapp/icon/index"
+  }
 }

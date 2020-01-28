@@ -1,0 +1,117 @@
+.search {
+  padding-right: 30rpx;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.search .search-right {
+  /* width: 34px;
+  height: 34px; */
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-35%, -50%);
+}
+
+.li {
+  padding: 10rpx;
+  border: solid 1px #c0c0c0;
+  margin: 10rpx;
+}
+
+/*标题*/
+.ul .li .title {
+  background-color: #E8E8E8;
+  font-size: 24rpx;
+  color: #000;
+}
+
+.ul .li .title .icon{
+  display:  inline-block;
+  width: 40rpx;
+}
+
+.ul .li .title .order{
+  display:  inline-block;
+  width: 100rpx;
+}
+
+.ul .li .title .order-name{
+  display:  inline-block;
+  width: 248rpx;
+  
+}
+.ul .li .title .order-time{
+  width: 130rpx;
+  display:  inline-block;
+  color: #FF6600;
+}
+.ul .li .title .order-info{
+  color: #FF6600;
+}
+.ul .li .title text{
+  line-height: 50rpx;
+}
+
+/*状态*/
+.ul .li .state{
+  height: 70rpx;
+  font-size: 24rpx;
+  line-height: 70rpx;
+}
+
+.ul .li .state .state-left{
+  display: inline-block;
+  width: 532rpx;
+}
+.ul .li .state .state-right{
+  display: inline-block;
+  width: 160rpx;
+  text-align: center;
+}
+
+.ul .li .company{
+  height: 70rpx;
+  font-size: 24rpx;
+  line-height: 70rpx;
+}
+
+.ul .li .company .company-left{
+  display: inline-block;
+  width: 532rpx;
+}
+.ul .li .company .company-right{
+  display: inline-block;
+  width: 160rpx;
+  text-align: center;
+}
+
+.ul .li .address{
+  height: 70rpx;
+  font-size: 24rpx;
+  line-height: 70rpx;
+}
+
+.ul .li .address .address-left{
+  display: inline-block;
+  width: 100%;
+}
+
+.ul .li .thing{
+  height: 70rpx;
+  font-size: 24rpx;
+  line-height: 70rpx;
+}
+
+.ul .li .thing .thing-left{
+  display: inline-block;
+  width: 532rpx;
+  color: #1E90FF;
+}
+.ul .li .thing .thing-right{
+  display: inline-block;
+  width: 160rpx;
+  text-align: center;
+  color: #FF6600;
+}
