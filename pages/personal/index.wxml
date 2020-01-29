@@ -1,0 +1,17 @@
+<view class="ul">
+  <view class="li">
+    <label>企业类型：</label><text>{{brtp}}</text>
+  </view>
+  <view class="li">
+    <label>企业名称：</label><text>{{brname}}</text>
+  </view>
+  <view class="li">
+    <label>用户账号：</label><text>{{loginid}}</text>
+  </view>
+  <view class="li">
+    <label>用户名称：</label><text>{{name}}</text>
+  </view>
+  <view class="li">
+    <label>所属部门：</label><text>{{dname}}</text>
+  </view>
+</view>

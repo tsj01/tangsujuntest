@@ -18,6 +18,7 @@ Page({
     this.setData({
       order_name: type
     })
+    wx.setNavigationBarTitle({ title: options.order_title })
     wx.showLoading({
       title: '加载中',
     })
@@ -58,7 +59,9 @@ Page({
           })
 
         } else {
-
+          wx.showToast({
+            title: res.data.message,
+          })
         }
       }
     })

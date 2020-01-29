@@ -1,49 +1,38 @@
-// pages/index/index.js
+// pages/wode/wode.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    //轮播图
-    imgUrls: [
-      '/image/1.png',
-      '/image/2.png',
-      '/image/3.png'
-    ],
-    order: {
-      all_order: 0, //所有订单
-      canconfirm_order: 0,
-      candispatch_order: 0,
-      canrecv_order: 0, //待回收订单
-      confirmed_order: 0, //修理厂订单
-      my_order: 0, //我的订单
-      overdue_order: 0, //逾期订单
-      todaynew_order: 0,
-      todayrecv_order: 0, //本日已收
-      urgent_order: 0
-    } //加急订单
+    brtp:"",
+    brname:"",
+    loginid:"",
+    name:"",
+    dname:""
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function() {
+  onLoad: function(options) {
     wx.showLoading({
       title: '加载中',
     })
-    
     this.getList();
   },
   getList: function() {
     var that = this;
     wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getOrderStatiscs',
+      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getUserInfo',
       method: 'POST',
       data: {
         kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        months: -2,
-        for_my: true,
+        uid_: 15372697233,
+        limit: true,
         usePaging: false,
+        openid: "",
+        nickname: "",
         ver: 200
       },
       header: {
@@ -54,28 +43,25 @@ Page({
         if (res.statusCode == 200) {
           wx.hideLoading();
           that.setData({
-            all_order: res.data.rows[0].all_order,
-            canconfirm_order: res.data.rows[0].canconfirm_order,
-            candispatch_order: res.data.rows[0].candispatch_order,
-            canrecv_order: res.data.rows[0].canrecv_order,
-            confirmed_order: res.data.rows[0].confirmed_order,
-            my_order: res.data.rows[0].my_order,
-            overdue_order: res.data.rows[0].overdue_order,
-            todaynew_order: res.data.rows[0].todaynew_order,
-            todayrecv_order: res.data.rows[0].todayrecv_order,
-            urgent_order: res.data.rows[0].urgent_order
+            brtp: res.data.rows[0].brtp,
+            brname: res.data.rows[0].brname,
+            loginid: res.data.rows[0].loginid,
+            name: res.data.rows[0].name,
+            dname: res.data.rows[0].dname
           })
+
         } else {
 
         }
       }
-
     })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {},
+  onReady: function() {
+
+  },
 
   /**
    * 生命周期函数--监听页面显示
