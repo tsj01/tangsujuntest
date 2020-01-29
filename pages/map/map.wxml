@@ -1,1 +1,10 @@
-<text>pages/map/map.wxml</text>
+<button bindtap="moveToLocation"  type="primary">当前位置</button>
+<button bindtap="getCenterLocation" type="primary">订单分布</button>
+<map 
+  id="myMap" 
+  style="width: 750rpx; height: 250px;" 
+  latitude="{{latitude}}" 
+  longitude="{{longitude}}" 
+  markers="{{markers}}" 
+  show-location>
+</map>

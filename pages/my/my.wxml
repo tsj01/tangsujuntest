@@ -1,29 +1,29 @@
 <view class='header'>
-<image src="/image/test.jpg"></image>
-孤独的狼
+  <image src="/image/test.jpg"></image>
+  孤独的狼
 </view>
 
 <view class='navs'>
-<view class='nav topline'>
-  <view>
-    <text>个人资料</text>
-    <text>></text>
+  <view class='nav topline'>
+    <view>
+      <text>个人资料</text>
+      <van-icon custom-style="line-height:45px" size="28rpx" color="#555" name="arrow" />
+    </view>
   </view>
-</view>
-<view class='nav'>
-<view>
-<text>修改密码</text>
-<text>></text>
-</view>
-</view>
-<view class='nav'>
-<view>
-<text>关于我们</text>
-<text>></text>
-</view>
-</view>
+  <view class='nav'>
+    <view>
+      <text>修改密码</text>
+      <van-icon custom-style="line-height:45px" size="28rpx" color="#555" name="arrow" />
+    </view>
+  </view>
+  <view class='nav'>
+    <view>
+      <text>关于我们</text>
+      <van-icon custom-style="line-height:45px" size="28rpx" color="#555" name="arrow" />
+    </view>
+  </view>
 </view>
 
 <view class='logout'>
-注销
+  注销
 </view>

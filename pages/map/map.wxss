@@ -1,0 +1,6 @@
+/* map{
+  margin: 20rpx;
+} */
+button{
+  margin: 20rpx;
+}

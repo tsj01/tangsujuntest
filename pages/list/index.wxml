@@ -31,3 +31,6 @@
     </view>
   </view>
 </view>
+<text wx:if="{{list.length == 0}}" class="last">
+  已经到最后
+</text>

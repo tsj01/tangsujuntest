@@ -15,9 +15,9 @@ Page({
   onLoad: function (options) {
     let type = options.order_name;
     console.log(type)
-    // this.setData({
-    //   order_name: type
-    // })
+    this.setData({
+      order_name: type
+    })
     wx.showLoading({
       title: '加载中',
     })

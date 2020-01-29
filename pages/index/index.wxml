@@ -16,32 +16,34 @@
     <text class="nav-num">{{all_order}}</text>
     <text>所有订单</text>
   </navigator>
-  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+  <navigator class='nav' 
+    url="/pages/list/index?order_name=canrecv_order&order_num={{canrecv_order}}"          
+    hover-class="navigator-hover">
     <image src="/image/icon-qiandao.png"></image>
     <text class="nav-num">{{canrecv_order}}</text>
     <text>待回收订单</text>
   </navigator>
-  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+  <navigator class='nav' url="/pages/list/index?order_name=confirmed_order&order_num={{confirmed_order}}" hover-class="navigator-hover">
     <image src="/image/icon-qiandao.png"></image>
     <text class="nav-num">{{confirmed_order}}</text>
     <text>修理厂确认单</text>
   </navigator>
-  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+  <navigator class='nav' url="/pages/list/index?order_name=urgent_order&order_num={{urgent_order}}" hover-class="navigator-hover">
     <image src="/image/icon-qiandao.png"></image>
     <text class="nav-num">{{urgent_order}}</text>
     <text>加急订单</text>
   </navigator>
-  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+  <navigator class='nav' url="/pages/list/index?order_name=overdue_order&order_num={{overdue_order}}" hover-class="navigator-hover">
     <image src="/image/icon-qiandao.png"></image>
     <text class="nav-num">{{overdue_order}}</text>
     <text>逾期订单</text>
   </navigator>
-  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+  <navigator class='nav' url="/pages/list/index?order_name=todayrecv_order&order_num={{todayrecv_order}}" hover-class="navigator-hover">
     <image src="/image/icon-qiandao.png"></image>
     <text class="nav-num">{{todayrecv_order}}</text>
     <text>本日已收订单</text>
   </navigator>
-  <navigator class='nav' url="/pages/list/index" hover-class="navigator-hover">
+  <navigator class='nav' url="/pages/list/index?order_name=my_order&order_num={{my_order}}" hover-class="navigator-hover">
     <image src="/image/icon-qiandao.png"></image>
     <text class="nav-num">{{my_order}}</text>
     <text>我的订单</text>

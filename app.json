@@ -21,20 +21,20 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "image/shouye1.png",
-        "selectedIconPath": "image/shouye.png"
+        "iconPath": "image/shouy.png",
+        "selectedIconPath": "image/shouy.png"
       },
       {
         "pagePath": "pages/map/map",
         "text": "位置分布",
-        "iconPath": "image/car1.png",
-        "selectedIconPath": "image/car.png"
+        "iconPath": "image/dibiao.png",
+        "selectedIconPath": "image/dibiao.png"
       },
       {
         "pagePath": "pages/my/my",
         "text": "我的",
-        "iconPath": "image/wode1.png",
-        "selectedIconPath": "image/wode.png"
+        "iconPath": "image/yonghu.png",
+        "selectedIconPath": "image/yonghu.png"
       }
     ]
   },
