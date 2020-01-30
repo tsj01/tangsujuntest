@@ -24,7 +24,6 @@
     </view>
   </view>
 </view>
-
 <view bindtap="goCancel" class='logout'>
   注销
 </view>

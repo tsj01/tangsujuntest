@@ -6,7 +6,8 @@ Page({
    */
   data: {
     list:[],
-    order_name:''
+    order_name:'',
+    title:''
   },
 
   /**
@@ -16,7 +17,8 @@ Page({
     let type = options.order_name;
     console.log(type)
     this.setData({
-      order_name: type
+      order_name: type,
+      title: options.order_title
     })
     wx.setNavigationBarTitle({ title: options.order_title })
     wx.showLoading({
@@ -36,7 +38,7 @@ Page({
         withtj: true,
         sdt: '2019 - 11 - 28',
         actid: that.data.order_name,
-        title:'所有订单',
+        title: that.data.title,
         ver: 200
       },
       header: {

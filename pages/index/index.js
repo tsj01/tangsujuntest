@@ -66,7 +66,10 @@ Page({
             urgent_order: res.data.rows[0].urgent_order
           })
         } else {
-
+          wx.showToast({
+            title: res.data.errMsg,
+            icon: 'none'
+          });
         }
       }
 
