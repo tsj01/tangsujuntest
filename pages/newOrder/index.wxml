@@ -1,0 +1,163 @@
+<view class="content"> 
+  <van-tabs 
+    swipeable 
+    color="#2fa4e7"
+    active="{{ active }}" 
+    bind:change="onChange"
+  >
+    <van-tab title="基本信息">
+      <van-cell-group>
+        <van-field
+          value="{{ sms }}"
+          center
+          required
+          clearable
+          label="保险公司"
+          placeholder="请选择"
+          border="{{ true }}"
+          use-button-slot
+          disabled="{{ true }}"
+        >
+          <van-button 
+            slot="button" 
+            color="#2fa4e7" 
+            size="mini" 
+            icon="arrow" 
+            type="primary" 
+          />
+        </van-field>
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          value="{{ sms }}"
+          center
+          required
+          clearable
+          label="勘查员"
+          placeholder="请选择"
+          border="{{ true }}"
+          use-button-slot
+          disabled="{{ true }}"
+        >
+          <van-button 
+            slot="button" 
+            color="#2fa4e7" 
+            size="mini" 
+            icon="arrow" 
+            type="primary" 
+          />
+        </van-field>
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          value="{{ sms }}"
+          center
+          clearable
+          label="联系方式"
+          placeholder="请选择"
+          border="{{ true }}"
+          use-button-slot
+          disabled="{{ true }}"
+        >
+        </van-field>
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          value="{{ sms }}"
+          center
+          clearable
+          required
+          label="报案号"
+          placeholder="请输入报案号"
+          border="{{ true }}"
+          use-button-slot
+        >
+        </van-field>
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          value="{{ sms }}"
+          center
+          clearable
+          required
+          label="车牌号"
+          placeholder="请输入车牌号"
+          border="{{ true }}"
+          use-button-slot
+        >
+        </van-field>
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          value="{{ sms }}"
+          center
+          clearable
+          required
+          label="车型名称"
+          placeholder="请输入车型名称"
+          border="{{ true }}"
+          use-button-slot
+        >
+        </van-field>
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          value="{{ sms }}"
+          center
+          clearable
+          label="汽修单位"
+          placeholder="请选择"
+          border="{{ true }}"
+          use-button-slot
+          disabled="{{ true }}"
+        >
+          <van-button 
+            slot="button" 
+            color="#2fa4e7" 
+            size="mini" 
+            icon="arrow" 
+            type="primary" 
+          />
+        </van-field>
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          value="{{ sms }}"
+          center
+          clearable
+          label="详细地址"
+          placeholder="请选择"
+          border="{{ true }}"
+          use-button-slot
+          disabled="{{ true }}"
+        >
+        </van-field>
+      </van-cell-group>
+      <van-cell-group>
+        <van-field
+          value="{{ sms }}"
+          center
+          clearable
+          label="联系人"
+          placeholder="请输入联系人"
+          border="{{ true }}"
+          use-button-slot
+        >
+          <van-button 
+            slot="button" 
+            color="#2fa4e7" 
+            size="mini" 
+            icon="arrow" 
+            type="primary" 
+          />
+        </van-field>
+      </van-cell-group>
+      <van-dropdown-menu>
+        <van-dropdown-item value="{{ value }}" options="{{ option }}" />
+      </van-dropdown-menu>
+    </van-tab>
+    <van-tab title="订单明细">订单明细</van-tab>
+    <van-tab title="定损照片">定损照片</van-tab>
+  </van-tabs>
+</view>
+  

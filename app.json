@@ -4,7 +4,11 @@
     "pages/test/test",
     "pages/my/my",
     "pages/map/map",
-    "pages/list/index"
+    "pages/list/index",
+    "pages/personal/index",
+    "pages/password/index",
+    "pages/about/index",
+    "pages/newOrder/index"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -40,6 +44,7 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "van-icon": "../../miniprogram_npm/vant-weapp/icon/index"
+    "van-icon": "../../miniprogram_npm/vant-weapp/icon/index",
+    "van-button": "../../miniprogram_npm/vant-weapp/button/index"
   }
 }

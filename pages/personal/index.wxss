@@ -1,0 +1,16 @@
+page {
+  background: #f5f6f7;
+}
+.ul .li{
+  font-size: 28rpx;
+  border: solid 1px #eee;
+  color: #555;
+  padding: 28rpx 30rpx;
+  margin-bottom: -1px;
+  background: #fff;
+}
+
+.ul .li label{
+  display: inline-block;
+  width: 30%;
+}

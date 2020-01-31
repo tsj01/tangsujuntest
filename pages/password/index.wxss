@@ -1,0 +1,7 @@
+page {
+  background: #f5f6f7;
+}
+
+.btn{
+  padding: 60rpx;
+}
