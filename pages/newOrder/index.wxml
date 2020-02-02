@@ -152,9 +152,29 @@
           />
         </van-field>
       </van-cell-group>
-      <van-dropdown-menu>
-        <van-dropdown-item value="{{ value }}" options="{{ option }}" />
-      </van-dropdown-menu>
+      <van-cell-group>
+        <van-field
+          value="{{ sms }}"
+          center
+          clearable
+          label="联系方式"
+          placeholder="请输入联系方式"
+          border="{{ true }}"
+          use-button-slot
+        >
+        </van-field>
+      </van-cell-group>
+      <view class="section">
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="picker">
+            <text class="picker-text" style="margin-right: 60rpx">是否加急</text>{{array[index]}}
+          </view>
+        </picker>
+      </view>
+      <view class="detePicker">
+        <text class="picker-text" style="margin-right: 60rpx">预约日期</text>{{time}}
+      </view>
+      
     </van-tab>
     <van-tab title="订单明细">订单明细</van-tab>
     <van-tab title="定损照片">定损照片</van-tab>

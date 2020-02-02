@@ -1,4 +1,4 @@
-
+page{ height:100%;}
 .search {
   padding-right: 30rpx;
   position: relative;

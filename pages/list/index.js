@@ -7,7 +7,9 @@ Page({
   data: {
     list:[],
     order_name:'',
-    title:''
+    title:'',
+    page:0,
+    total:0
   },
 
   /**
@@ -26,15 +28,18 @@ Page({
     })
     this.getList();
   },
-  getList: function () {
+  getList: function (pages) {
+    
     var that = this;
+    console.log(that.data.page, pages, 111)
     wx.request({
       url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getOrderInfo',
       method: 'POST',
       data: {
+        usePaging:true,
         kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        start: 0,
-        limit: true,
+        start: pages || 0,
+        limit: 5,
         withtj: true,
         sdt: '2019 - 11 - 28',
         actid: that.data.order_name,
@@ -55,10 +60,20 @@ Page({
               console.log(item.yydt.substring(5))
             }
           })
-
-          that.setData({
-            list: lists
-          })
+          if(that.data.list && pages){
+            let info = that.data.list.concat(lists);
+            that.setData({
+              list: info,
+              page:pages,
+              total: res.data.total
+            })
+          } else {
+            that.setData({
+              list: lists,
+              page: 0,
+              total: res.data.total
+            })
+          }
 
         } else {
           wx.showToast({
@@ -66,17 +81,6 @@ Page({
           })
         }
       }
-    })
-  },
-  onReachBottom() {
-    // 下拉触底，先判断是否有请求正在进行中
-    // 以及检查当前请求页数是不是小于数据总页数，如符合条件，则发送请求
-    // if (!this.loading && this.data.page < this.data.pages) {
-    //   this.fetchArticleList(this.data.page + 1)
-    // }
-    console.log(1111)
-    wx.showLoading({
-      title: '加载中',
     })
   },
   /**
@@ -111,14 +115,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getList();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.getList(Number(this.data.page) + 5)
   },
 
   /**

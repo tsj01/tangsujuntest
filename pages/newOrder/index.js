@@ -5,15 +5,10 @@ Page({
    */
   data: {
     active: 0,
-    columns: [
-      { text: '是'},
-      { text: '否' },
-    ],
     show: false,
-    option: [
-      { text: '是', value: 0 },
-      { text: '否', value: 1 },
-    ],
+    array: ['是', '否'],
+    index:1,
+    time:''
   },
   showPopup() {
     this.setData({ show: true });
@@ -24,6 +19,12 @@ Page({
   },
   onChange(event) {
     console.log(event,111)
+  },
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
   },
   /**
    * 生命周期函数--监听页面加载
