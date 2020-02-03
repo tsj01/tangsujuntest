@@ -1,9 +1,8 @@
-page {
-  background: #f5f6f7;
-}
+
 
 .content {
   height: 100%;
+  padding-bottom: 80rpx;
 }
 
 .content .section {
@@ -34,4 +33,83 @@ page {
   color: #f44;
   content: "*";
 }
+.content .sub{
+  position: fixed;
+  bottom: 0;
+  background: #fff;
+  z-index: 99;
+  width: 100%;
+  display: flex;
+  height: 100rpx;
+  padding: 5px;
+  box-sizing:border-box; 
+  font-size: 28rpx;
+}
 
+.content .sub .storage{
+  flex: 1;
+  width: 100%;
+  display: block;
+  line-height: 80rpx;
+  text-align: center;
+  margin-right: 5px;
+}
+.content .sub .submits{
+  flex: 1;
+  width: 100%;
+  display: block;
+  line-height: 80rpx;
+  text-align: center;
+}
+
+.order-title{
+  height: 66rpx;
+  width: 100%;
+  font-size: 28rpx;
+  color: #555;
+  background: #ccff66;
+  display: flex;
+}
+.order-title text{
+  flex: 1;
+  width: 100%;
+  display: inline-block;
+  line-height: 66rpx;
+  text-align: center;
+}
+
+.order-list{
+  height: 66rpx;
+  width: 100%;
+  font-size: 28rpx;
+  color: #555;
+  background: #ccff66;
+  display: flex;
+  border-bottom: solid 1px #ddd;
+}
+.order-list:nth-child(even){
+  background:#e8e8e8;
+}
+.order-list:nth-child(odd){
+  background:#fff;
+}
+.order-list text{
+  flex: 1;
+  width: 100%;
+  display: inline-block;
+  line-height: 66rpx;
+  text-align: center;
+}
+.order-list-add{
+  height: 80rpx;
+  margin: 10rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  border: solid 1px #1E90FF;
+  font-size: 28rpx;
+  line-height: 80rpx;
+}
+.order-list-box{
+  width: 600rpx;
+}
+ 
