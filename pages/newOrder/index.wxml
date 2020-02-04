@@ -8,7 +8,7 @@
     <van-tab title="基本信息">
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ insur }}"
           center
           required
           clearable
@@ -23,17 +23,18 @@
             color="#2fa4e7" 
             size="mini" 
             icon="arrow" 
-            type="primary" 
+            type="primary"
+            bindtap="choiceCompany" 
           />
         </van-field>
       </van-cell-group>
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ dsy }}"
           center
           required
           clearable
-          label="勘查员"
+          label="查勘员"
           placeholder="请选择"
           border="{{ true }}"
           use-button-slot
@@ -45,12 +46,13 @@
             size="mini" 
             icon="arrow" 
             type="primary" 
+            bindtap="prospecting" 
           />
         </van-field>
       </van-cell-group>
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ dsytel }}"
           center
           clearable
           label="联系方式"
@@ -63,7 +65,7 @@
       </van-cell-group>
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ accno }}"
           center
           clearable
           required
@@ -76,7 +78,7 @@
       </van-cell-group>
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ plateno }}"
           center
           clearable
           required
@@ -89,7 +91,7 @@
       </van-cell-group>
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ carmodel }}"
           center
           clearable
           required
@@ -102,7 +104,7 @@
       </van-cell-group>
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ garaddr }}"
           center
           clearable
           label="汽修单位"
@@ -117,12 +119,13 @@
             size="mini" 
             icon="arrow" 
             type="primary" 
+            bindtap="goGaraddr"
           />
         </van-field>
       </van-cell-group>
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ garage }}"
           center
           clearable
           label="详细地址"
@@ -135,7 +138,7 @@
       </van-cell-group>
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ garlxr }}"
           center
           clearable
           label="联系人"
@@ -149,12 +152,13 @@
             size="mini" 
             icon="arrow" 
             type="primary" 
+            bindtap="goGarlxr"
           />
         </van-field>
       </van-cell-group>
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ gartel }}"
           center
           clearable
           label="联系方式"
@@ -183,7 +187,7 @@
       </view>
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ memo }}"
           center
           clearable
           label="订单备注"

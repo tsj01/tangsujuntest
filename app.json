@@ -8,7 +8,8 @@
     "pages/personal/index",
     "pages/password/index",
     "pages/about/index",
-    "pages/newOrder/index"
+    "pages/newOrder/index",
+    "pages/choicelist/index"
   ],
   "window": {
     "navigationBarTextStyle": "white",

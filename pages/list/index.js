@@ -53,6 +53,7 @@ Page({
         console.log(res)
         if (res.statusCode == 200) {
           wx.hideLoading();
+          wx.stopPullDownRefresh();
           let lists = res.data.rows;
           lists.forEach((item,index)=>{
             if (item.yydt!=null){

@@ -8,5 +8,6 @@
     "van-popup": "../../miniprogram_npm/vant-weapp/popup/index",
     "pickerYMDHM": "/components/pickerYMDHM/pickerYMDHM",
     "van-uploader": "../../miniprogram_npm/@vant/weapp/uploader/index"
-  }
+  },
+  "disableSwipeBack": true
 }
