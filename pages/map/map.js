@@ -1,12 +1,12 @@
 Page({
   data: {
-    latitude: 23.099994,
-    longitude: 113.324520,
+    latitude: 29.28946,
+    longitude: 120.24191,
     markers: [{
       id: 1,
-      latitude: 23.099994,
-      longitude: 113.324520,
-      name: '腾讯'
+      latitude: 29.28946,
+      longitude: 120.24191,
+      name: '腾讯\naass'
     }],
   },
   onReady: function (e) {
