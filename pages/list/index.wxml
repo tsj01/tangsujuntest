@@ -31,6 +31,6 @@
     </view>
   </view>
 </view>
-<text wx:if="{{list.length == 0}}" class="last">
+<text wx:if="{{list.length == 0 || list.length == total}}" class="last">
   已经到最后
 </text>

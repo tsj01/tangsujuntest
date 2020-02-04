@@ -1,0 +1,17 @@
+<view>
+
+<van-search
+  value="{{ value }}"
+  placeholder="请输入搜索关键词"
+  use-action-slot
+  bind:search="onSearch"
+>
+  <view slot="action" bind:tap="onClick">搜索</view>
+</van-search>
+<view class="title">
+  <text class="label">简称</text><text>名称</text>
+</view>
+<view class="title" wx:for="{{list}}" wx:key="{{index}}" bindtap="choiceCompany" data-item="{{item}}">
+  <text class="label">{{item.shortname}}</text><text style="text-align: left;">{{item.brname}}</text>
+</view>
+</view>

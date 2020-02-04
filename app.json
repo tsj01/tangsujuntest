@@ -8,13 +8,15 @@
     "pages/personal/index",
     "pages/password/index",
     "pages/about/index",
-    "pages/newOrder/index"
+    "pages/newOrder/index",
+    "pages/choicelist/index"
   ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "订单管理",
     "navigationBarBackgroundColor": "#69c3aa",
-    "backgroundColor": "#fbf9fe"
+    "backgroundColor": "#fbf9fe",
+    "onReachBottomDistance": 50
   },
   "tabBar": {
     "color": "#929292",
