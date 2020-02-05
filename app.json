@@ -9,7 +9,8 @@
     "pages/password/index",
     "pages/about/index",
     "pages/newOrder/index",
-    "pages/choicelist/index"
+    "pages/choicelist/index",
+    "pages/detail/index"
   ],
   "window": {
     "navigationBarTextStyle": "white",

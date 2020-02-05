@@ -1,0 +1,47 @@
+/* pages/detail/index.wxss */
+.content{
+}
+.status{
+  display: flex;
+  font-size: 24rpx;
+  color: #555;
+  margin: 20rpx;
+}
+.status .left{
+  flex: 1;
+  display: inline-block;
+}
+.status .right{
+  flex: 1;
+  display: inline-block;
+}
+.status .left text{
+  color: #FF8040;
+}
+.status .right text{
+  color: #FF8040;
+}
+.main {
+  margin: 0 20rpx 0 20rpx;
+  font-size: 24rpx;
+  color: #555;
+  
+  padding-left: 130rpx;
+  position: relative;
+  line-height: 60rpx;
+}
+.borderline {
+  border-top: 1px solid #c0c0c0;
+}
+.main .left{
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 130rpx;
+}
+.main .right{
+  display: inline-block;
+  width: 100%;
+  text-align: right;
+}

@@ -11,7 +11,12 @@ Page({
     page:0,
     total:0
   },
-
+  goDetail(e){
+    console.log(e,3333)
+    wx.navigateTo({
+      url: '../detail/index?id=' + e.currentTarget.dataset.item.id
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

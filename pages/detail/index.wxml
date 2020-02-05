@@ -1,0 +1,80 @@
+<!--pages/detail/index.wxml-->
+<view class="content">
+  <van-tabs swipeable color="#2fa4e7" active="{{ active }}" bind:change="onChange">
+    <van-tab title="基本信息">
+      <van-steps steps="{{ steps }}" active="{{ steps.length }}" active-color="#38f" />
+      <view class="status">
+        <text class="left">订单状态：<text>已派单</text></text>
+        <text class="right">建单人员：<text>已派单</text></text>
+      </view>
+      <view class="main borderline">
+        <text class="left">派工单号</text>
+        <text class="right">{{data.srv}}-{{data.orderno}}</text>
+      </view>
+      <view class="main">
+        <text class="left">车牌号</text>
+        <text class="right">{{data.plateno}}</text>
+      </view>
+      <view class="main">
+        <text class="left">报案号</text>
+        <text class="right">{{data.accno}}</text>
+      </view>
+      <view class="main">
+        <text class="left">车型名称</text>
+        <text class="right">{{data.carmodel}}</text>
+      </view>
+      <view class="main">
+        <text class="left">保险公司</text>
+        <text class="right">{{data.insur}}</text>
+      </view>
+      <view class="main borderline">
+        <text class="left">汽修单位</text>
+        <text class="right">{{data.garage}}</text>
+      </view>
+      <view class="main">
+        <text class="left">回收线路</text>
+        <text class="right">{{data.disparea}}</text>
+      </view>
+      <view class="main">
+        <text class="left">详细地址</text>
+        <text class="right">{{data.garaddr}}</text>
+      </view>
+      <view class="main">
+        <text class="left">预约日期</text>
+        <text class="right">{{data.yydt}}</text>
+      </view>
+      <view class="main">
+        <text class="left">联系人</text>
+        <text class="right">{{data.garlxr}}</text>
+      </view>
+      <view class="main">
+        <text class="left">联系方式</text>
+        <text class="right">{{data.gartel}}</text>
+      </view>
+      <view class="main borderline">
+        <text class="left">查勘员</text>
+        <text class="right">{{data.dsy}}</text>
+      </view>
+      <view class="main">
+        <text class="left">联系方式</text>
+        <text class="right">{{data.dsytel}}</text>
+      </view>
+      <view class="main">
+        <text class="left">订单备注</text>
+        <text class="right">{{datq.memo}}</text>
+      </view>
+      <view class="main borderline">
+        <text class="left">未收原因</text>
+        <text class="right">宁波格斯美-015605</text>
+      </view>
+      <view class="main">
+        <text class="left">回收备注</text>
+        <text class="right">宁波格斯美-015605</text>
+      </view>
+    </van-tab>
+    <van-tab title="收件明细">
+    </van-tab>
+    <van-tab title="图片信息">
+    </van-tab>
+  </van-tabs>
+</view>
