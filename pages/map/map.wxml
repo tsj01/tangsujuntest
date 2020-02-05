@@ -2,7 +2,7 @@
 <button bindtap="getCenterLocation" type="primary">订单分布</button>
 <map 
   id="myMap" 
-  style="width: 750rpx; height: 250px;" 
+  style="width: 750rpx; height: 70vh;" 
   latitude="{{latitude}}" 
   longitude="{{longitude}}" 
   markers="{{markers}}" 
