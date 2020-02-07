@@ -12,7 +12,6 @@ Page({
     total:0
   },
   goDetail(e){
-    console.log(e,3333)
     wx.navigateTo({
       url: '../detail/index?id=' + e.currentTarget.dataset.item.id
     })
@@ -22,7 +21,6 @@ Page({
    */
   onLoad: function (options) {
     let type = options.order_name;
-    console.log(type)
     this.setData({
       order_name: type,
       title: options.order_title
@@ -36,7 +34,6 @@ Page({
   getList: function (pages) {
     
     var that = this;
-    console.log(that.data.page, pages, 111)
     wx.request({
       url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getOrderInfo',
       method: 'POST',
@@ -55,7 +52,6 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' //修改此处即可
       },
       success: function (res) {
-        console.log(res)
         if (res.statusCode == 200) {
           wx.hideLoading();
           wx.stopPullDownRefresh();
@@ -63,7 +59,6 @@ Page({
           lists.forEach((item,index)=>{
             if (item.yydt!=null){
               item.yydt = item.yydt.substring(5);
-              console.log(item.yydt.substring(5))
             }
           })
           if(that.data.list && pages){

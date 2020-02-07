@@ -15,7 +15,6 @@ Page({
    */
   onLoad: function(options) {
     let type = options.brtp;
-    console.log(options, 1111)
     this.setData({
       type: type,
     })
@@ -52,14 +51,12 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' //修改此处即可
       },
       success: function(res) {
-        console.log(res)
         if (res.statusCode == 200) {
           wx.hideLoading();
           wx.stopPullDownRefresh();
           that.setData({
             list: res.data.rows
           })
-          console.log(that.data.list)
         } else {
           wx.showToast({
             title: res.data.message,
@@ -88,14 +85,12 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' //修改此处即可
       },
       success: function(res) {
-        console.log(res)
         if (res.statusCode == 200) {
           wx.hideLoading();
           wx.stopPullDownRefresh();
           that.setData({
             list: res.data.rows
           })
-          console.log(that.data.list)
         } else {
           wx.showToast({
             title: res.data.message,
@@ -112,7 +107,7 @@ Page({
       method: 'POST',
       data: {
         usePaging: true,
-        limit: 1,
+        limit: 20,
         start: 0,
         bid: e,
         dname: "",
@@ -125,14 +120,12 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' //修改此处即可
       },
       success: function(res) {
-        console.log(res)
         if (res.statusCode == 200) {
           wx.hideLoading();
           wx.stopPullDownRefresh();
           that.setData({
             list: res.data.rows
           })
-          console.log(that.data.list)
         } else {
           wx.showToast({
             title: res.data.message,
@@ -142,14 +135,13 @@ Page({
     })
   },
   getGarlxr: function (e) {
-    console.log(e,4444)
     var that = this;
     wx.request({
       url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getUser',
       method: 'POST',
       data: {
         usePaging: true,
-        limit: 1,
+        limit: 20,
         start: 0,
         bid: e,
         dname: "",
@@ -162,14 +154,12 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' //修改此处即可
       },
       success: function (res) {
-        console.log(res)
         if (res.statusCode == 200) {
           wx.hideLoading();
           wx.stopPullDownRefresh();
           that.setData({
             list: res.data.rows
           })
-          console.log(that.data.list)
         } else {
           wx.showToast({
             title: res.data.message,
@@ -179,13 +169,13 @@ Page({
     })
   },
   choiceCompany: function(e) {
-    console.log(e, 2222)
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
     if (this.data.type == "保险公司") {
       prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
         insurid: e.currentTarget.dataset.item.id,
         insur: e.currentTarget.dataset.item.shortname,
+        mopr: e.currentTarget.dataset.item.mopr,
       })
       wx.navigateBack({
         delta: 1 // 返回上一级页面。
@@ -196,6 +186,25 @@ Page({
         garaddr: e.currentTarget.dataset.item.shortname,
         garage: e.currentTarget.dataset.item.braddr,
         garageid: e.currentTarget.dataset.item.id
+      })
+      wx.navigateBack({
+        delta: 1 // 返回上一级页面。
+      })
+    }
+    if (this.data.type == "查勘员") {
+      prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+        dsy: e.currentTarget.dataset.item.name,
+        dsytel: e.currentTarget.dataset.item.tel,
+        dsyid: e.currentTarget.dataset.item.id
+      })
+      wx.navigateBack({
+        delta: 1 // 返回上一级页面。
+      })
+    }
+    if (this.data.type == "汽修联系人") {
+      prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+        garlxr: e.currentTarget.dataset.item.name,
+        gartel: e.currentTarget.dataset.item.tel
       })
       wx.navigateBack({
         delta: 1 // 返回上一级页面。
