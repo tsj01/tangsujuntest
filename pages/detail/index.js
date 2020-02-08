@@ -26,7 +26,7 @@ Page({
    */
   onLoad: function(options) {
     let type = options;
-    console.log(type, 111)
+    
     this.getDetail(type.id);
   },
   getDetail: function(e) {
@@ -46,7 +46,7 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' //修改此处即可
       },
       success: function(res) {
-        console.log(res)
+        
         if (res.statusCode == 200) {
           let steps = []
           res.data.rows.forEach((itme,index)=>{
@@ -55,7 +55,7 @@ Page({
               desc: itme.dtm.slice(0, 10)
             })
           })
-          console.log(steps,555)
+          
           that.setData({
             steps: steps
           })
@@ -84,7 +84,7 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' //修改此处即可
       },
       success: function(res) {
-        console.log(res)
+        
         if (res.statusCode == 200) {
           that.setData({
             data: res.data.rows[0]

@@ -73,6 +73,7 @@
           placeholder="请输入报案号"
           border="{{ true }}"
           use-button-slot
+          bind:change="accnoChange"
         >
         </van-field>
       </van-cell-group>
@@ -86,6 +87,7 @@
           placeholder="请输入车牌号"
           border="{{ true }}"
           use-button-slot
+          bind:change="platenoChange"
         >
         </van-field>
       </van-cell-group>
@@ -99,6 +101,7 @@
           placeholder="请输入车型名称"
           border="{{ true }}"
           use-button-slot
+          bind:change="carmodelChange"
         >
         </van-field>
       </van-cell-group>
@@ -106,6 +109,7 @@
         <van-field
           value="{{ garaddr }}"
           center
+          required
           clearable
           label="汽修单位"
           placeholder="请选择"
@@ -140,11 +144,13 @@
         <van-field
           value="{{ garlxr }}"
           center
+          required
           clearable
           label="联系人"
           placeholder="请输入联系人"
           border="{{ true }}"
           use-button-slot
+          bind:change="garlxrChange"
         >
           <van-button 
             slot="button" 
@@ -160,11 +166,13 @@
         <van-field
           value="{{ gartel }}"
           center
+          required
           clearable
           label="联系方式"
           placeholder="请输入联系方式"
           border="{{ true }}"
           use-button-slot
+          bind:change="gartelChange"
         >
         </van-field>
       </van-cell-group>
@@ -194,48 +202,61 @@
           placeholder="请输入订单备注"
           border="{{ true }}"
           use-button-slot
+          bind:change="memoChange"
         >
         </van-field>
       </van-cell-group>
     </van-tab>
     <van-tab title="订单明细">
+    
       <view class="order-title">
         <text>配件名称</text>
         <text>易碎贴</text>
-      </view>
-      <view 
-        wx:for="{{orderList}}" 
-        bindtap="edit" 
-        data-index="{{index}}"
-        class="order-list">
-        <text>{{item.name}}</text>
-        <text>{{item.num}}</text>
+        <view style="width:100rpx;line-height: 66rpx;">价值件</view>
       </view>
       <view  
         bindtap="add"
         class="order-list-add">
         <text>增加行</text>
       </view>
-      <van-popup show="{{ show }}" bind:close="onClose">
+      <view 
+        wx:for="{{orderList}}" 
+        class="order-list">
+        <view class="text" bindtap="edit" data-index="{{index}}">
+          {{index+1}}<text>{{item.partname}}</text>
+          <text>{{item.partno}}</text>
+        </view>
+        <view style="width:100rpx;line-height: 66rpx;text-align: center;">
+        <checkbox-group bindchange="checkboxChange">
+          <checkbox 
+          value= "{{item.isvalue}}"
+          checked="{{item.ischeck}}"
+          ></checkbox>
+          </checkbox-group>
+        </view>
+      </view>
+
+      <van-popup show="{{ orderShow }}" bind:close="onClose">
       <view class="order-list-box">
         <van-cell-group>
           <van-field
             label="配件名"
-            value="{{ value }}"
-            placeholder="请输入用户名"
+            value="{{ editpartname }}"
+            placeholder="请输入名称"
             border="{{ true }}"
-            bind:change="onChange"
+            bind:change="editpartnameOnChange"
           />
         </van-cell-group>
       <van-cell-group>
         <van-field
-          value="{{ sms }}"
+          value="{{ editpartno }}"
           center
           clearable
           label="易碎贴"
-          placeholder="请输入联系人"
+          placeholder="请输入易碎贴"
           border="{{ true }}"
           use-button-slot
+          bind:change="editpartnoOnChange"
         >
           <van-button 
             slot="button" 
@@ -248,10 +269,10 @@
         </van-field>
       </van-cell-group>
         <view style="padding:10px;text-align: center">
-          <van-button  block size="small" round type="info">保存</van-button>
+          <van-button bindtap="subOrderlist" block size="small" round type="info">保存</van-button>
         </view>
         <view style="padding:10px;text-align: center">
-          <van-button block size="small" round type="danger">删除本行</van-button>
+          <van-button bindtap="delOrderlist" block size="small" round type="danger">删除本行</van-button>
         </view>
       </view>
       </van-popup>
@@ -264,12 +285,24 @@
       bind:after-read="afterRead"
       bind:delete="deleteimg" />
     </view>
-      
     </van-tab>
   </van-tabs>
   <view class="sub">
-    <view class="storage"><van-button  block  type="info">暂存</van-button></view>
-    <view class="submits"><van-button block  type="info">提交</van-button></view>
+    <view bindtap="storage" class="storage"><van-button  block  type="info">暂存</van-button></view>
+    <view bindtap="submits" class="submits"><van-button block  type="info">提交</van-button></view>
   </view>
+  <van-popup show="{{ subShow }}" bind:close="onClose">
+    <view class="order-sub-box">
+      <view class="order-sub-info">
+        确认提交？
+      </view>
+      <view class="order-sub-left">
+        <van-button bindtap="subOrder" block size="small"  type="info">确认</van-button>
+      </view>
+      <view class="order-sub-right">
+        <van-button bindtap="delOrder" block size="small"  type="danger">取消</van-button>
+      </view>
+    </view>
+  </van-popup>
 </view>
   

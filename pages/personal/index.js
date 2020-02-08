@@ -39,7 +39,6 @@ Page({
         'content-type': 'application/x-www-form-urlencoded' //修改此处即可
       },
       success: function(res) {
-        console.log(res)
         if (res.statusCode == 200) {
           wx.hideLoading();
           that.setData({
