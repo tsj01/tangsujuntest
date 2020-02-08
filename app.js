@@ -36,5 +36,8 @@ App({
   globalData: {
     userInfo: null,
     serverUrl:''
+  },
+  kldBase:{
+    
   }
 })

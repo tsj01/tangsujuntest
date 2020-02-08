@@ -2,16 +2,28 @@ Page({
   data: {
     latitude: 29.28946,
     longitude: 120.24191,
-    markers: [{
-      id: 1,
-      latitude: 29.28946,
-      longitude: 120.24191,
-      name: '腾讯\naass'
-    }],
+    markers: [],
+    map:false
   },
   onReady: function (e) {
     //创建 map 上下文 MapContext 对象。
-    this.mapCtx = wx.createMapContext('myMap')
+    this.mapCtx = wx.createMapContext('myMap');
+    
+  },
+  onLoad: function (options) {
+    var that = this;
+    
+    that.setData({
+      latitude: 29.28946,
+      longitude: 120.24191,
+      markers: [{
+        id: 1,
+        latitude: 29.28946,
+        longitude: 120.24191,
+        name: '腾讯\naass'
+      }],
+      map: false
+    });
   },
   //获取当前地图中心的经纬度
   getCenterLocation: function () {
