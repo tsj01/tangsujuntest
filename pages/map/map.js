@@ -5,7 +5,10 @@ Page({
     latitude: 30.240243,
     longitude: 121.263275,
     markers: [],
-    map:false
+    items: [
+      { name: '显示标签', value: 'label' },
+      { name: '显示预约', value: 'ycnt' },
+    ]
   },
   onReady: function (e) {
     //创建 map 上下文 MapContext 对象。

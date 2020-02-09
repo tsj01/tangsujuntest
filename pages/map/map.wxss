@@ -4,3 +4,13 @@
 button{
   margin: 20rpx;
 }
+
+.order-sub-box .order-sub-left{
+  float: left;
+  width: 155rpx;
+} 
+.order-sub-box .order-sub-right{
+  float: left;
+  width: 155rpx;
+  margin-left: 10rpx
+} 
