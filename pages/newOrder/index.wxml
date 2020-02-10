@@ -281,6 +281,7 @@
     <view style="padding:20rpx;box-sizing:border-box">
     <van-uploader 
       multiple="{{true}}"
+      accept="{{image}}"
       file-list="{{ fileList }}" 
       bind:after-read="afterRead"
       bind:delete="deleteimg" />

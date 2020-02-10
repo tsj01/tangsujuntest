@@ -57,9 +57,10 @@ Page({
     const {
       file
     } = event.detail;
+    console.log(file)
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     wx.uploadFile({
-      url: 'https://example.weixin.qq.com/upload', // 仅为示例，非真实的接口地址
+      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=addImage', // 仅为示例，非真实的接口地址
       filePath: file.path,
       name: 'file',
       formData: {
