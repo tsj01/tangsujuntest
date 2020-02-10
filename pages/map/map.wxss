@@ -4,13 +4,25 @@
 button{
   margin: 20rpx;
 }
-
+.order-box{
+  overflow: hidden;
+}
+.order-sub-box{
+  float: left;
+  overflow: hidden;
+  height: 100rpx;
+}
 .order-sub-box .order-sub-left{
   float: left;
-  width: 155rpx;
-} 
+  margin-right: 10rpx;
+}
 .order-sub-box .order-sub-right{
-  float: left;
-  width: 155rpx;
-  margin-left: 10rpx
-} 
+  float: right;
+}
+.order-sub-check{
+  margin-right: 20rpx;
+  float: right;
+  display: inline-block;
+  line-height: 90rpx;
+  font-size: 28rpx;
+}
