@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -35,6 +35,77 @@ App({
   },
   globalData: {
     userInfo: null,
-    serverUrl:''
+    serverUrl: 'http://kld.8866.org:8088/dingdong/mobile',
+    kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313'
+  },
+  sendRequest: function(options) {
+    var self = this;
+    var kldkey = self.globalData['kldkey'] || '';
+    var serverUrl = self.globalData['serverUrl'];
+    options.params = options.params || {};
+    options.params.usePaging = options.params.usePaging || false;
+    options.params.kldkey = kldkey;
+    options.params.ver = 200;
+    var tarUrl = serverUrl;
+    if (options.action)
+      tarUrl += "/doAction?method=" + options.action;
+    else if (options.callMethod)
+      tarUrl += "/" + options.callMethod;
+    var contentType = options.contentType || 'application/x-www-form-urlencoded';
+    wx.request({
+      method: options.type || "post",
+      url: tarUrl,
+      data: options.params,
+      header: {
+        'content-type': contentType //修改此处即可
+      },
+      complete: function(xhr) {
+        if (xhr.statusCode == 200) {
+          if (options.success) {
+            if (xhr.data.success) {
+              options.success.call(this, xhr.data, xhr);
+            } else {
+              if (xhr.data.NeedLogin) {
+                wx.showToast({
+                  title: '需要登陆',
+                  icon: 'fail',
+                  duration: 2000
+                });
+              } else {
+                if (options.error) {
+                  //options.error.call(this, xhr.responseJSON.message, xhr);
+                } else {
+                  if (xhr.data.message) {
+                    wx.showToast({
+                      title: xhr.data.message,
+                      icon: 'fail',
+                      duration: 2000
+                    });
+                  } else {
+                    wx.showToast({
+                      title: '服务端错误',
+                      icon: 'fail',
+                      duration: 2000
+                    });
+                  }
+                }
+              }
+            }
+          }
+        } else {
+          var msg = xhr.errMsg;
+          if (options.error) {
+            options.error.call(this, msg, xhr);
+          } else {
+            wx.showToast({
+              title: msg,
+              icon: 'fail',
+              duration: 2000
+            });
+          }
+        }
+      }
+    });
   }
+
 })

@@ -1,10 +1,20 @@
-<button bindtap="moveToLocation"  type="primary">当前位置</button>
-<button bindtap="getCenterLocation" type="primary">订单分布</button>
-<map 
-  id="myMap" 
-  style="width: 750rpx; height: 70vh;" 
-  latitude="{{latitude}}" 
-  longitude="{{longitude}}" 
-  markers="{{markers}}" 
-  show-location>
+<van-popup>
+  <view class="order-sub-box">
+    <view class="order-sub-left">
+      <van-button bindtap="moveToLocation" block size="small" type="info">当前位置</van-button>
+    </view>
+    <view class="order-sub-right">
+      <van-button bindtap="getCenterLocation" block size="small" type="info">订单分布</van-button>
+    </view>
+
+
+  </view>
+</van-popup>
+<checkbox-group bindchange="checkboxChange">
+  <label class="checkbox" wx:for="{{items}}">
+    <checkbox value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+  </label>
+</checkbox-group>
+
+<map id="myMap" style="width: 750rpx; height: 90vh;" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" show-location>
 </map>

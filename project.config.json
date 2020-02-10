@@ -25,9 +25,9 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.5.0",
-	"appid": "wxf4a17961f6cfb966",
-	"projectname": "h5-pro-master",
+	"libVersion": "2.10.1",
+	"appid": "wxda092bffb414982e",
+	"projectname": "tswsoft",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

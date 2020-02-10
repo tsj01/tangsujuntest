@@ -1,17 +1,24 @@
+const app = getApp();
+
 Page({
   data: {
-    latitude: 29.28946,
-    longitude: 120.24191,
-    markers: [{
-      id: 1,
-      latitude: 29.28946,
-      longitude: 120.24191,
-      name: '腾讯\naass'
-    }],
+    latitude: 30.240243,
+    longitude: 121.263275,
+    markers: [],
+    items: [
+      { name: '显示标签', value: 'label' },
+      { name: '显示预约', value: 'ycnt' },
+    ]
   },
   onReady: function (e) {
     //创建 map 上下文 MapContext 对象。
-    this.mapCtx = wx.createMapContext('myMap')
+    this.mapCtx = wx.createMapContext('myMap');
+    
+  },
+  onLoad: function (options) {
+    var that = this;
+    that.getOrderDistribution();
+  
   },
   //获取当前地图中心的经纬度
   getCenterLocation: function () {
@@ -21,6 +28,40 @@ Page({
         console.log(res.latitude)
       }
     })
+  },
+  getOrderDistribution:function(){
+    var that = this;
+    app.sendRequest({
+      action: 'getOrderDistribution',
+      params: {
+        months: -2
+      },
+      success: function (res) {
+        if (res.success === true) {
+          var rows = res.rows;
+          var markers = [];
+          for (var i = 0; i < rows.length; i++) {
+            var m = {
+              id: rows[i].garageid,
+              latitude: rows[i].lat,
+              longitude: rows[i].lng,
+              name: rows[i].garage,
+              cnt: rows[i].C_cnt,
+              locateaddr: rows[i].locateaddr,
+              status: rows[i].status
+            };
+            markers.push(m);
+          }
+          that.setData({
+            latitude: that.data.latitude,
+            longitude: that.data.longitude,
+            markers: markers
+          });
+        } else {
+
+        }
+      }
+    });
   },
   //将地图中心移动到当前定位点
   moveToLocation: function () {
