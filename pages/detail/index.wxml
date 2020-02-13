@@ -73,6 +73,18 @@
       </view>
     </van-tab>
     <van-tab title="收件明细">
+      <view class="list" wx:for="{{list}}">
+        <view>
+        <text>{{item.partname}}</text>
+        </view>
+        <view>
+        <text>{{item.partno}}</text>
+        </view>
+        <view style="text-align: right;">
+        <text>{{item.status}}</text>
+        <van-icon name="arrow" />
+        </view>
+      </view>
     </van-tab>
     <van-tab title="图片信息">
     </van-tab>

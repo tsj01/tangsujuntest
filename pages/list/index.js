@@ -9,11 +9,26 @@ Page({
     order_name:'',
     title:'',
     page:0,
-    total:0
+    total:0,
+    order_search:''
   },
   goDetail(e){
     wx.navigateTo({
       url: '../detail/index?id=' + e.currentTarget.dataset.item.id
+    })
+  },
+  onSearch:function(e){
+    this.setData({
+      order_search: e.detail
+    })
+    if (e.detail != ''){
+      this.getList();
+    }
+  },
+  serchList:function(){
+    console.log(1111)
+    wx.navigateTo({
+      url: '../searchlist/index'
     })
   },
   /**
@@ -46,6 +61,7 @@ Page({
         sdt: '2019 - 11 - 28',
         actid: that.data.order_name,
         title: that.data.title,
+        order_search: that.data.order_search,
         ver: 200
       },
       header: {

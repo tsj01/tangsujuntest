@@ -45,3 +45,15 @@
   width: 100%;
   text-align: right;
 }
+.list{
+  overflow: hidden;
+  font-size: 28rpx;
+  color: #555;
+  line-height: 80rpx;
+  border-bottom: 1px solid #c0c0c0;
+  margin: 10px;
+  display: flex;
+}
+.list view{
+  flex: 1;
+}

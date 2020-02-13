@@ -1,0 +1,120 @@
+<!--pages/searchlist/index.wxml-->
+<view>
+  <van-cell-group>
+    <van-field
+      value="{{ insur }}"
+      center
+      required
+      clearable
+      label="保险公司"
+      placeholder="请选择"
+      border="{{ true }}"
+      use-button-slot
+      disabled="{{ false }}"
+    >
+      <van-button 
+        slot="button" 
+        color="#2fa4e7" 
+        size="mini" 
+        icon="arrow" 
+        type="primary"
+        bindtap="choiceCompany" 
+      />
+    </van-field>
+  </van-cell-group>
+  <van-cell-group>
+    <van-field
+      value="{{ dsy }}"
+      center
+      required
+      clearable
+      label="查勘员"
+      placeholder="请选择"
+      border="{{ true }}"
+      use-button-slot
+      disabled="{{ false }}"
+    >
+      <van-button 
+        slot="button" 
+        color="#2fa4e7" 
+        size="mini" 
+        icon="arrow" 
+        type="primary" 
+        bindtap="prospecting" 
+      />
+    </van-field>
+  </van-cell-group>
+  <van-cell-group>
+    <van-field
+      value="{{ garaddr }}"
+      center
+      required
+      clearable
+      label="汽修单位"
+      placeholder="请选择"
+      border="{{ true }}"
+      use-button-slot
+      disabled="{{ false }}"
+    >
+      <van-button 
+        slot="button" 
+        color="#2fa4e7" 
+        size="mini" 
+        icon="arrow" 
+        type="primary" 
+        bindtap="goGaraddr"
+      />
+    </van-field>
+  </van-cell-group>
+    <van-cell-group>
+    <van-field
+      value="{{ garaddr }}"
+      center
+      required
+      clearable
+      label="订单状态"
+      placeholder="请选择"
+      border="{{ true }}"
+      use-button-slot
+      disabled="{{ false }}"
+    >
+      <van-button 
+        slot="button" 
+        color="#2fa4e7" 
+        size="mini" 
+        icon="arrow" 
+        type="primary" 
+        bindtap="goGaraddr"
+      />
+    </van-field>
+  </van-cell-group>
+  <view class="section">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+      <view class="picker">
+        <text class="picker-text" style="margin-right: 60rpx">是否确认</text>{{array[index]}}
+      </view>
+    </picker>
+  </view>
+    <van-cell-group>
+    <van-field
+      value="{{ garaddr }}"
+      center
+      required
+      clearable
+      label="回收人员"
+      placeholder="请选择"
+      border="{{ true }}"
+      use-button-slot
+      disabled="{{ false }}"
+    >
+      <van-button 
+        slot="button" 
+        color="#2fa4e7" 
+        size="mini" 
+        icon="arrow" 
+        type="primary" 
+        bindtap="goGaraddr"
+      />
+    </van-field>
+  </van-cell-group>
+</view>

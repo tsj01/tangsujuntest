@@ -14,8 +14,8 @@ Page({
     time: '1212',
     date: formatTime,
     disabled: false, //设置是否能点击 false可以 true不能点击
-    startDate: '2000-01-01 12:37',
-    endDate: '2050-03-12 12:38',
+    startDate: '2000-01-01',
+    endDate: '2050-03-12',
     placeholder: '请选择时间',
     orderList: [{
       id: 0,
@@ -61,13 +61,12 @@ Page({
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     wx.uploadFile({
       url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=addImage', // 仅为示例，非真实的接口地址
-      filePath: file.path,
-      name: 'file',
-      formData: {
-        user: 'test'
+      data:{
+        file: file.path
       },
       success(res) {
         // 上传完成需要更新 fileList
+        console.log(111)
         const {
           fileList = []
         } = this.data;

@@ -1,7 +1,7 @@
 <view class="search">
-  <van-search value="{{ value }}" placeholder="请输入搜索关键词" bind:search="onSearch">
+  <van-search value="{{ value }}" placeholder="请输入车牌号、报案号或订单号" bind:search="onSearch">
   </van-search>
-  <view class="search-right">
+  <view class="search-right" bindtap="serchList">
     <van-icon name="setting-o" />
   </view>
 </view>

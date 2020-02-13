@@ -27,12 +27,9 @@ Page({
     })
   },
   goCancel:function (){
-    Dialog({
-      title: '标题',
-      message: '弹窗内容'
-    }).then(() => {
-      // on close
-    });
+    wx.navigateTo({
+      url: '/pages/login/index',
+    })
   },
   /**
    * 生命周期函数--监听页面加载
