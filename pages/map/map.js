@@ -48,7 +48,27 @@ Page({
               name: rows[i].garage,
               cnt: rows[i].C_cnt,
               locateaddr: rows[i].locateaddr,
-              status: rows[i].status
+              status: rows[i].status,
+              label: {
+                content: rows[i].garage,  //文本
+                color: '#0F0F0F',  //文本颜色
+                borderRadius: 3,  //边框圆角
+                borderWidth: 1,  //边框宽度
+                borderColor: '#FF0202',  //边框颜色
+                bgColor: '#ffffff',  //背景色
+                padding: 5,  //文本边缘留白
+                textAlign: 'left'  //文本对齐方式。有效值: left, right, center
+              },
+              callout: {
+                content: rows[i].locateaddr,  //文本
+                color: '#0F0F0F',  //文本颜色
+                borderRadius: 3,  //边框圆角
+                borderWidth: 1,  //边框宽度
+                borderColor: '#0F0F0F',  //边框颜色
+                bgColor: '#ffffff',  //背景色
+                padding: 5,  //文本边缘留白
+                textAlign: 'left'  //文本对齐方式。有效值: left, right, center
+              }
             };
             markers.push(m);
           }
@@ -62,6 +82,9 @@ Page({
         }
       }
     });
+  },
+  callouttap:function(e){
+    console.log(e);
   },
   //将地图中心移动到当前定位点
   moveToLocation: function () {

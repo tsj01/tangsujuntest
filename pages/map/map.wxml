@@ -4,7 +4,7 @@
       <van-button bindtap="moveToLocation" block size="small" type="info">当前位置</van-button>
     </view>
     <view class="order-sub-right">
-      <van-button bindtap="getCenterLocation" block size="small" type="info">订单分布</van-button>
+      <van-button bindtap="includePoints" block size="small" type="info">订单分布</van-button>
     </view>
   </view>
   <view class="order-sub-check">
@@ -18,5 +18,5 @@
 
 
 
-<map id="myMap" style="width: 750rpx; height: 90vh;" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" show-location>
+<map id="myMap" style="width: 750rpx; height: 90vh;" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" show-location bindcallouttap="callouttap">
 </map>
