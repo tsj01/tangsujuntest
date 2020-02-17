@@ -18,14 +18,19 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.getOrderDistribution();
-  
   },
   //获取当前地图中心的经纬度
   getCenterLocation: function () {
+    var that = this;
     this.mapCtx.getCenterLocation({
       success: function (res) {
-        console.log(res.longitude)
-        console.log(res.latitude)
+        console.log(res.longitude);
+        console.log(res.latitude);
+        that.setData({
+          latitude: res.longitude,
+          longitude: res.latitude,
+          markers: that.data.markers
+        });
       }
     })
   },
@@ -49,7 +54,7 @@ Page({
               cnt: rows[i].C_cnt,
               locateaddr: rows[i].locateaddr,
               status: rows[i].status,
-              label: {
+              labelData: {
                 content: rows[i].garage,  //文本
                 color: '#0F0F0F',  //文本颜色
                 borderRadius: 3,  //边框圆角
@@ -59,7 +64,7 @@ Page({
                 padding: 5,  //文本边缘留白
                 textAlign: 'left'  //文本对齐方式。有效值: left, right, center
               },
-              callout: {
+              calloutData: {
                 content: rows[i].locateaddr,  //文本
                 color: '#0F0F0F',  //文本颜色
                 borderRadius: 3,  //边框圆角
