@@ -19,13 +19,11 @@ page{
 .login-icon{
   flex: none;
   margin: 0 auto;
-  margin-top: 200rpx;
 }
 
  
 /*表单内容*/
 .login-from {
-  margin-top: 90px;
   flex: auto;
   height:100%;
   width: 100%;

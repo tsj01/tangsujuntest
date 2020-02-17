@@ -56,11 +56,6 @@ Page({
               icon: 'success',
               duration: 2000
             })
-            setTimeout(function () {
-              wx.switchTab({
-                url: '../teacher/teacher',
-              })
-            }, 2000)
           }
         } else {
           wx.showToast({
