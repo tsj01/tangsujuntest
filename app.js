@@ -66,11 +66,9 @@ App({
               options.success.call(this, xhr.data, xhr);
             } else {
               if (xhr.data.NeedLogin) {
-                wx.showToast({
-                  title: '需要登陆',
-                  icon: 'fail',
-                  duration: 2000
-                });
+                wx.navigateTo({
+                  url: 'pages/login/index'
+                })
               } else {
                 if (options.error) {
                   //options.error.call(this, xhr.responseJSON.message, xhr);
