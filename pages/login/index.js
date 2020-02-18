@@ -1,4 +1,5 @@
-const app = getApp()
+const app = getApp();
+var md5 = require('../../utils/md5.js');
 Page({
   /**
    * 页面的初始数据
@@ -26,20 +27,32 @@ Page({
     }
   },
   formSubmit: function (e) {
+    var that = this;
     wx.showLoading({
       title: '登录中...',
     })
-    console.log(e);
-    this.setData({ disabled: true });
+    
+    that.setData({ disabled: true });
     app.sendRequest({
       action: 'login',
       params: {
         ultype:'branch',
-        loginid: e.detail.value.no,
-        pwd: e.detail.value.pwd
+        loginid: that.data.no,
+        pwd: md5.hexMD5(that.data.pwd)
       },
       success: function (res) {
+        wx.hideLoading();
         console.log(res);
+        that.setData({ no: '' });
+        that.setData({ pwd: '' });
+        wx.setStorageSync('kldkey', res.kldkey);
+        //app.globalData.kldkey = res.kldkey;
+        wx.switchTab({
+          url: '/pages/index/index'
+        })
+      },
+      fail(res){
+        this.setData({ disabled: false });
       }
     });
   

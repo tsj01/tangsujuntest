@@ -10,6 +10,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log(res);
       }
     })
     // 获取用户信息
@@ -35,12 +36,11 @@ App({
   },
   globalData: {
     userInfo: null,
-    serverUrl: 'http://kld.8866.org:8088/dingdong/mobile',
-    kldkey: ''
+    serverUrl: 'http://kld.8866.org:8088/dingdong/mobile'
   },
   sendRequest: function(options) {
     var self = this;
-    var kldkey = self.globalData['kldkey'] || '';
+    var kldkey = wx.getStorageSync('kldkey') || '';
     var serverUrl = self.globalData['serverUrl'];
     options.params = options.params || {};
     options.params.usePaging = options.params.usePaging || false;
@@ -70,8 +70,8 @@ App({
                   url: '/pages/login/index'
                 })
               } else {
-                if (options.error) {
-                  //options.error.call(this, xhr.responseJSON.message, xhr);
+                if (options.fail) {
+                  options.fail.call(this, xhr.data, xhr);
                 } else {
                   if (xhr.data.message) {
                     wx.showToast({
