@@ -36,7 +36,7 @@ App({
   globalData: {
     userInfo: null,
     serverUrl: 'http://kld.8866.org:8088/dingdong/mobile',
-    kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313'
+    kldkey: ''
   },
   sendRequest: function(options) {
     var self = this;
@@ -66,8 +66,8 @@ App({
               options.success.call(this, xhr.data, xhr);
             } else {
               if (xhr.data.NeedLogin) {
-                wx.navigateTo({
-                  url: 'pages/login/index'
+                wx.redirectTo({
+                  url: '/pages/login/index'
                 })
               } else {
                 if (options.error) {

@@ -1,4 +1,4 @@
-// pages/index/index.js
+const app = getApp();
 Page({
 
   /**
@@ -28,51 +28,36 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function() {
-    wx.showLoading({
-      title: '加载中',
-    })
-    
     this.getList();
   },
   getList: function() {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this;
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getOrderStatiscs',
-      method: 'POST',
-      data: {
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
+    app.sendRequest({
+      action: 'getOrderStatiscs',
+      params: {
         months: -2,
         for_my: true,
-        usePaging: false,
-        ver: 200
       },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
-      },
-      success: function(res) {
-        if (res.statusCode == 200) {
-          wx.hideLoading();
-          that.setData({
-            all_order: res.data.rows[0].all_order,
-            canconfirm_order: res.data.rows[0].canconfirm_order,
-            candispatch_order: res.data.rows[0].candispatch_order,
-            canrecv_order: res.data.rows[0].canrecv_order,
-            confirmed_order: res.data.rows[0].confirmed_order,
-            my_order: res.data.rows[0].my_order,
-            overdue_order: res.data.rows[0].overdue_order,
-            todaynew_order: res.data.rows[0].todaynew_order,
-            todayrecv_order: res.data.rows[0].todayrecv_order,
-            urgent_order: res.data.rows[0].urgent_order
-          })
-        } else {
-          wx.showToast({
-            title: res.data.errMsg,
-            icon: 'none'
-          });
-        }
+      success: function (res) {
+        wx.hideLoading();
+        var data = res.rows[0];
+        that.setData({
+          all_order: data.all_order,
+          canconfirm_order: data.canconfirm_order,
+          candispatch_order: data.candispatch_order,
+          canrecv_order: data.canrecv_order,
+          confirmed_order: data.confirmed_order,
+          my_order: data.my_order,
+          overdue_order: data.overdue_order,
+          todaynew_order: data.todaynew_order,
+          todayrecv_order: data.todayrecv_order,
+          urgent_order: data.urgent_order
+        })
       }
-
-    })
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
