@@ -1,4 +1,7 @@
 var formatTime = require('../../utils/util.js')
+let exif = require("../../utils/exif");
+const FileSystemManager = wx.getFileSystemManager();
+const app = getApp();
 Page({
 
   /**
@@ -54,28 +57,44 @@ Page({
   },
   deleteimg(e) {},
   afterRead(event) {
+    //exif.getData();
+    var me = this;
     const {
       file
     } = event.detail;
-    console.log(file)
-    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
-    wx.uploadFile({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=addImage', // 仅为示例，非真实的接口地址
-      data:{
-        file: file.path
+    console.log(file);
+    if (file.size >= 1024 * 1024 * 10) {
+      alert('图片大小过大，应小于10M');
+      wx.showToast({
+        title: '图片大小过大，应小于10M',
+        icon: 'fail',
+        duration: 2000
+      });
+    }
+    var fileTypeArr = file[0].name.split('.');
+    var fileType = fileTypeArr[fileTypeArr.length - 1];
+    FileSystemManager.readFile({ 
+      filePath: file[0].path, 
+      encoding:'base64',
+      success:function(data){
+        console.log(data);
+        wx.showLoading({
+          title: '上传中...',
+        })
+        app.sendRequest({
+          action: 'addImageMP',
+          params: {
+            image_data: 'data:image/' + fileType+';base64,' + data.data
+          },
+          success: function (res) {
+            wx.hideLoading();
+            console.log(res);
+           
+          }
+        });
       },
-      success(res) {
-        // 上传完成需要更新 fileList
-        console.log(111)
-        const {
-          fileList = []
-        } = this.data;
-        fileList.push({ ...file,
-          url: res.data
-        });
-        this.setData({
-          fileList
-        });
+      fail:function(res){
+        console.log(res);
       }
     });
   },
