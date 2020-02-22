@@ -77,15 +77,18 @@
   line-height: 66rpx;
   text-align: center;
 }
-
+.uploader{
+  margin: 0 20rpx 0 20rpx;
+  border-top: solid 1px #ddd;
+}
 .order-list{
   height: 66rpx;
   width: 100%;
   font-size: 28rpx;
   color: #555;
-  background: #ccff66;
   display: flex;
-  border-bottom: solid 1px #ddd;
+  margin-top: -1px;
+  border-top: solid 1px #ddd;
 }
 .order-list:nth-child(even){
   background:#e8e8e8;
