@@ -1,8 +1,5 @@
 <van-dialog id="van-dialog" />
-<view class='header'>
-  <image src="/image/test.jpg"></image>
-  孤独的狼
-</view>
+
 
 <view class='navs'>
   <view class='nav topline'>
