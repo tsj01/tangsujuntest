@@ -28,7 +28,8 @@ Page({
       partname: '',
       partno: '',
       price: 0,
-      status: "未收"
+      status: "未收",
+      showUploaderImg:false
     }],
     editpartname: '',
     editpartno: '',
@@ -53,9 +54,24 @@ Page({
     memo: '', //订单备注
     insurid: '', //保险公司id
     garageid: '', //汽修公司id
-    mopr:''
+    mopr:'',
   },
   deleteimg(e) {},
+  showUploader:function(e){
+    let query = e.currentTarget.dataset['index'];
+    this.data.orderList.forEach((item, index) => {
+      if (query == index) {
+        if(item.showUploaderImg == false) {
+          item.showUploaderImg = true
+        }else{
+          item.showUploaderImg = false
+        }
+      }
+    })
+    this.setData({
+      orderList: this.data.orderList
+    });
+  },
   afterRead(event) {
     //exif.getData();
     var me = this;
@@ -123,7 +139,8 @@ Page({
       partname: "",
       partno: "",
       price: 0,
-      status: "未收"
+      status: "未收",
+      showUploaderImg:false
     })
     this.setData({
       orderList: this.data.orderList

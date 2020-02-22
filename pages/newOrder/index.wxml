@@ -219,22 +219,32 @@
         class="order-list-add">
         <text>增加行</text>
       </view>
-      <view 
-        wx:for="{{orderList}}" 
-        class="order-list">
-        <view class="text" bindtap="edit" data-index="{{index}}">
-          {{index+1}}<text>{{item.partname}}</text>
-          <text>{{item.partno}}</text>
+
+      <view style="border-bottom: solid 1px #ddd;" wx:for="{{orderList}}" >
+        <view 
+          class="order-list">
+          <view class="text" bindtap="edit" data-index="{{index}}">
+            {{index+1}}<text>{{item.partname}}</text>
+            <text>{{item.partno}}</text>
+          </view>
+          <view style="width:60rpx;line-height: 66rpx;text-align: center;">
+          <checkbox-group bindchange="checkboxChange">
+            <checkbox 
+            value= "{{item.isvalue}}"
+            checked="{{item.ischeck}}"
+            ></checkbox>
+            </checkbox-group>
+          </view>
+          <view bindtap="showUploader" data-index="{{index}}" style="width:60rpx;line-height: 66rpx;text-align: center;">
+          <van-icon name="arrow-down" wx:if="{{item.showUploaderImg == false}}" />
+          <van-icon name="arrow-up" wx:if="{{item.showUploaderImg == true}}" />
+          </view>
         </view>
-        <view style="width:100rpx;line-height: 66rpx;text-align: center;">
-        <checkbox-group bindchange="checkboxChange">
-          <checkbox 
-          value= "{{item.isvalue}}"
-          checked="{{item.ischeck}}"
-          ></checkbox>
-          </checkbox-group>
+        <view wx:if="{{item.showUploaderImg}}" class="uploader">
+          上传
         </view>
       </view>
+
 
       <van-popup show="{{ orderShow }}" bind:close="onClose">
       <view class="order-list-box">
