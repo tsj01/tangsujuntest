@@ -241,7 +241,15 @@
           </view>
         </view>
         <view wx:if="{{item.showUploaderImg}}" class="uploader">
-          上传
+          <view style="padding:20rpx;box-sizing:border-box">
+          <van-uploader 
+            data-index="{{index}}"
+            multiple="{{true}}"
+            accept="{{image}}"
+            file-list="{{ item.attAdd }}" 
+            bind:after-read="afterRead"
+            bind:delete="deleteimg" />
+          </view>
         </view>
       </view>
 
@@ -286,16 +294,6 @@
         </view>
       </view>
       </van-popup>
-    </van-tab>
-    <van-tab title="定损照片">
-    <view style="padding:20rpx;box-sizing:border-box">
-    <van-uploader 
-      multiple="{{true}}"
-      accept="{{image}}"
-      file-list="{{ fileList }}" 
-      bind:after-read="afterRead"
-      bind:delete="deleteimg" />
-    </view>
     </van-tab>
   </van-tabs>
   <view class="sub">

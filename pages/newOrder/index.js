@@ -29,15 +29,12 @@ Page({
       partno: '',
       price: 0,
       status: "未收",
-      showUploaderImg:false
+      showUploaderImg:false,
+      attAdd: [],
     }],
     editpartname: '',
     editpartno: '',
     orderIndex: '',
-    fileList: [{
-      url: 'https://img.yzcdn.cn/vant/leaf.jpg',
-      name: '图片1'
-    }],
     insur: '', //保险公司
     dsy: '', //勘查员
     dsyid:'',
@@ -55,8 +52,25 @@ Page({
     insurid: '', //保险公司id
     garageid: '', //汽修公司id
     mopr:'',
+    addNum:0
   },
-  deleteimg(e) {},
+  deleteimg(e) {
+    console.log(e)
+    let query = e.currentTarget.dataset['index'];
+    let addQuery = e.detail.index;
+    this.data.orderList.forEach((item, index) => {
+      if (query == index) {
+        item.attAdd.forEach((a,d)=>{
+          if (addQuery == d){
+            item.attAdd.splice(addQuery, 1)
+          }
+        })
+      }
+    })
+    this.setData({
+      orderList: this.data.orderList
+    });
+  },
   showUploader:function(e){
     let query = e.currentTarget.dataset['index'];
     this.data.orderList.forEach((item, index) => {
@@ -78,7 +92,8 @@ Page({
     const {
       file
     } = event.detail;
-    console.log(file);
+    
+    console.log(event,11111);
     if (file.size >= 1024 * 1024 * 10) {
       alert('图片大小过大，应小于10M');
       wx.showToast({
@@ -105,7 +120,29 @@ Page({
           success: function (res) {
             wx.hideLoading();
             console.log(res);
-           
+            let rows = JSON.parse(res.rows);
+            console.log(rows,222)
+            let query = event.currentTarget.dataset['index'];
+            console.log(query, me.data.orderList,777)
+            me.data.orderList.forEach((item, index) => {
+              if (query == index) {
+                rows.forEach((i,v)=>{
+                  item.attAdd.push({ url: 'http://kld.8866.org:8088/dingdong/static/upload/' + i.fileUrl,
+                    isImage:true,
+                    paththumb: i.thumbUrl,
+                    sizekb: i.sizekb,
+                    sizewh: i.sizewh,
+                    tp: "定损照片",
+                    name: i.fileName,
+                    dtlid:item.id
+                   })
+                })
+              }
+            })
+            me.setData({
+              orderList: me.data.orderList
+            });
+            console.log(me.data.orderList,555)
           }
         });
       },
@@ -131,8 +168,9 @@ Page({
     });
   },
   add: function(e) {
+    let i = this.data.addNum -1;
     this.data.orderList.push({
-      id: 0,
+      id: i,
       isvalue: '否',
       ischeck: false,
       oid: 0,
@@ -140,11 +178,14 @@ Page({
       partno: "",
       price: 0,
       status: "未收",
-      showUploaderImg:false
+      showUploaderImg:false,
+      attAdd:[]
     })
     this.setData({
-      orderList: this.data.orderList
+      orderList: this.data.orderList,
+      addNum:i
     })
+    console.log(this.data.orderList)
   },
   subOrderlist: function() {
     this.data.orderList.forEach((item, index) => {
@@ -298,6 +339,12 @@ Page({
   },
   storage: function() {
     let that = this;
+    let arr = [];
+    that.data.orderList.forEach((item,index)=>{
+      item.attAdd.forEach((a,d)=>{
+        arr.push(a);
+      })
+    })
     let params = {
       isSubmit: false,
       checkSdt: "2019-12-07",
@@ -325,12 +372,12 @@ Page({
         srvid: 701,
         srvopr: that.data.mopr,
         status: "已暂存",
-        yydt: that.data.yydt
+        yydt: that.data.date
       },
       dtlAdd: that.data.orderList,
       dtlUpd: [],
       dtlDel: [],
-      attAdd: [],
+      attAdd: arr,
       attUpd: [],
       attDel: []
     }
@@ -405,7 +452,7 @@ Page({
       return;
     }
     
-    if (this.data.yydt == '') {
+    if (this.data.date == '') {
       wx.showToast({
         title: '请输入预约日期',
       })
@@ -450,7 +497,7 @@ Page({
         srvid: 701,
         srvopr: that.data.mopr,
         status: "已暂存",
-        yydt: that.data.yydt
+        yydt: that.data.date
       },
       dtlAdd: that.data.orderList,
       dtlUpd: [],
