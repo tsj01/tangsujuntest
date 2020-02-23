@@ -5,6 +5,8 @@ Page({
     latitude: 30.240243,
     longitude: 121.263275,
     markers: [],
+    showLabel:false,
+    showYcnt:false,
     items: [
       { name: '显示标签', value: 'label' },
       { name: '显示预约', value: 'ycnt' },
@@ -28,13 +30,12 @@ Page({
         console.log(res.latitude);
         that.setData({
           latitude: res.longitude,
-          longitude: res.latitude,
-          markers: that.data.markers
+          longitude: res.latitude
         });
       }
     })
   },
-  getOrderDistribution:function(){
+  getOrderDistribution: function (mapCtx){
     var that = this;
     app.sendRequest({
       action: 'getOrderDistribution',
@@ -64,7 +65,7 @@ Page({
                 padding: 5,  //文本边缘留白
                 textAlign: 'left'  //文本对齐方式。有效值: left, right, center
               },
-              calloutData: {
+              callout: {
                 content: rows[i].locateaddr,  //文本
                 color: '#0F0F0F',  //文本颜色
                 borderRadius: 3,  //边框圆角
@@ -75,15 +76,37 @@ Page({
                 textAlign: 'left'  //文本对齐方式。有效值: left, right, center
               }
             };
+            //m.label = m.labelData;
+            if(that.data.isShowLable){
+              m.label = m.labelData;
+            }
+            // if(that.data.isShowYcnt){
+
+            // }
             markers.push(m);
           }
           that.setData({
-            latitude: that.data.latitude,
-            longitude: that.data.longitude,
             markers: markers
           });
-        } else {
+          if(mapCtx){
+            let pointData = { padding: [10] };
+            let points = [];
+            for(let m = 0;m<markers.length;m++){
+              if (markers[m].latitude){
+                points.push({
+                  latitude: markers[m].latitude,
+                  longitude: markers[m].longitude
+                });
+              }
+            }
+            pointData.points = points;
+            if(points.length > 0){
+              mapCtx.includePoints(pointData);
+            }
 
+
+          }
+          
         }
       }
     });
@@ -112,16 +135,7 @@ Page({
   },
   //缩放视野展示所有经纬度
   includePoints: function () {
-    this.mapCtx.includePoints({
-      padding: [10],
-      points: [{
-        latitude: 23.10229,
-        longitude: 113.3345211,
-      }, {
-        latitude: 23.00229,
-        longitude: 113.3345211,
-      }]
-    })
+    this.getOrderDistribution(this.mapCtx);
   },
   //获取当前地图的缩放级别
   scaleClick: function () {
@@ -139,5 +153,26 @@ Page({
         console.log(res.northeast)
       }
     })
+  },
+  checkboxChange:function (e){
+    console.log(e);
+    let that = this;
+    let arr = e.detail.value;
+    let isShowLable = false;
+    let isShowYcnt = false;
+    for(let i=0;i<arr.length;i++){
+      if(arr[i] == 'label'){
+        isShowLable = true;
+      }
+      if (arr[i] == 'ycnt'){
+        isShowYcnt = true;
+      }
+    }
+
+    that.setData({
+      isShowLable: isShowLable,
+      isShowYcnt: isShowYcnt
+    });
+
   }
 })

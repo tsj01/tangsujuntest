@@ -27,7 +27,7 @@ page {
   width: 100%;
   background: #fff;
   border-bottom: solid 1px #ccc;
-  margin-top: 20rpx;
+  margin-top: 10rpx;
 }
 
 .navs .nav {
