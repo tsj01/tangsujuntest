@@ -36,7 +36,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    serverUrl: 'http://kld.8866.org:8088/dingdong/mobile'
+    serverUrl: 'http://kld.8866.org:8088/dingdong/mobile',
+    lastMonths: -2
   },
   sendRequest: function(options) {
     var self = this;

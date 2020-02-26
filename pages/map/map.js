@@ -70,7 +70,7 @@ Page({
                 color: '#0F0F0F',  //文本颜色
                 borderRadius: 3,  //边框圆角
                 borderWidth: 1,  //边框宽度
-                borderColor: '#FF0202',  //边框颜色
+                borderColor: '#FF0202',  //边框颜色 q
                 bgColor: '#ffffff',  //背景色
                 padding: 5,  //文本边缘留白
                 textAlign: 'left'  //文本对齐方式。有效值: left, right, center
