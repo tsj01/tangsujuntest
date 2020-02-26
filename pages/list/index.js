@@ -48,20 +48,24 @@ Page({
     this.getList();
   },
   getList: function (pages) {
-    var sdt = moment(moment().add(app.globalData.lastMonths, 'months')).format('YYYY-MM-DD');
     var that = this;
+    var sdt = moment(moment().add(app.globalData.lastMonths, 'months')).format('YYYY-MM-DD');
+    var params = {
+      usePaging: true,
+      start: pages || 0,
+      limit: 5,
+      withtj: true,
+      sdt: sdt,
+      actid: that.data.order_name,
+      title: that.data.title,
+      order_search: that.data.order_search
+    };
+    if (that.data.order_name == 'my_order'){
+      params.for_my = true;
+    }
     app.sendRequest({
       action: 'getOrderInfo',
-      params: {
-        usePaging:true,
-        start: pages || 0,
-        limit: 5,
-        withtj: true,
-        sdt: sdt,
-        actid: that.data.order_name,
-        title: that.data.title,
-        order_search: that.data.order_search
-      },
+      params: params,
       success: function (res) {
         wx.hideLoading();
         wx.stopPullDownRefresh();
