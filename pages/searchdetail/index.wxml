@@ -1,0 +1,28 @@
+<view>
+
+  <van-search value="{{ value }}" placeholder="请输入搜索关键词" use-action-slot bind:search="onSearch">
+    <view slot="action" bind:tap="onClick">搜索</view>
+  </van-search>
+  <view class="title" wx:if="{{type=='保险公司' || type=='汽修单位'}}">
+    <text class="label">简称</text>
+    <text>名称</text>
+  </view>
+  <view class="title" wx:if="{{type=='订单状态'}}">
+    <text>名称</text>
+  </view>
+  <view class="title" wx:if="{{type=='查勘员' || type=='回收人员'}}">
+    <text class="label">姓名</text>
+    <text>电话</text>
+  </view>
+  <view wx:if="{{type=='保险公司' || type=='汽修单位'}}" class="title" wx:for="{{list}}" wx:key="{{index}}" bindtap="choiceCompany" data-item="{{item}}">
+    <text class="label">{{item.shortname}}</text>
+    <text style="text-align: left;">{{item.brname}}</text>
+  </view>
+  <view wx:if="{{type=='查勘员' || type=='回收人员'}}" class="title" wx:for="{{list}}" wx:key="{{index}}" bindtap="choiceCompany" data-item="{{item}}">
+    <text class="label">{{item.name}}</text>
+    <text style="text-align: center;">{{item.tel}}</text>
+  </view>
+    <view wx:if="{{type=='订单状态'}}" class="title" wx:for="{{list}}" wx:key="{{index}}" bindtap="choiceCompany" data-item="{{item}}">
+    <text class="label">{{item.name}}</text>
+  </view>
+</view>

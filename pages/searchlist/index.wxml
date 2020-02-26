@@ -4,7 +4,6 @@
     <van-field
       value="{{ insur }}"
       center
-      required
       clearable
       label="保险公司"
       placeholder="请选择"
@@ -26,7 +25,6 @@
     <van-field
       value="{{ dsy }}"
       center
-      required
       clearable
       label="查勘员"
       placeholder="请选择"
@@ -48,7 +46,6 @@
     <van-field
       value="{{ garaddr }}"
       center
-      required
       clearable
       label="汽修单位"
       placeholder="请选择"
@@ -68,9 +65,8 @@
   </van-cell-group>
     <van-cell-group>
     <van-field
-      value="{{ garaddr }}"
+      value="{{ order }}"
       center
-      required
       clearable
       label="订单状态"
       placeholder="请选择"
@@ -84,7 +80,7 @@
         size="mini" 
         icon="arrow" 
         type="primary" 
-        bindtap="goGaraddr"
+        bindtap="goStatus"
       />
     </van-field>
   </van-cell-group>
@@ -97,9 +93,8 @@
   </view>
     <van-cell-group>
     <van-field
-      value="{{ garaddr }}"
+      value="{{ recovery }}"
       center
-      required
       clearable
       label="回收人员"
       placeholder="请选择"
@@ -113,8 +108,11 @@
         size="mini" 
         icon="arrow" 
         type="primary" 
-        bindtap="goGaraddr"
+        bindtap="goRecovery"
       />
     </van-field>
   </van-cell-group>
+  <view class="botton">搜索</view>
+  <view class="botton">清空选项</view>
+  <view class="botton">返回</view>
 </view>
