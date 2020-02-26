@@ -12,7 +12,8 @@
     "pages/choicelist/index",
     "pages/detail/index",
     "pages/searchlist/index",
-    "pages/login/index"
+    "pages/login/index",
+    "pages/searchdetail/index"
   ],
   "window": {
     "navigationBarTextStyle": "white",
