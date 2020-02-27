@@ -82,7 +82,7 @@
   border-top: solid 1px #ddd;
 }
 .order-list{
-  height: 66rpx;
+  height: 80rpx;
   width: 100%;
   font-size: 28rpx;
   color: #555;

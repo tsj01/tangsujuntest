@@ -45,8 +45,18 @@ Page({
       success: function (res) {
         if (res.success === true) {
           var rows = res.rows;
+          var cnt = 0;
+          var disp = '';
           var markers = [];
           for (var i = 0; i < rows.length; i++) {
+            if(!rows[i].lat){
+              continue;
+            }
+
+            if (rows[i].A_cnt) { disp += ' 今日' + rows[i].A_cnt; cnt += rows[i].A_cnt; }
+            if (rows[i].B_cnt) { disp += ' 今日(急)' + rows[i].B_cnt; cnt += rows[i].B_cnt; }
+            if (rows[i].C_cnt) { disp += ' 逾期' + rows[i].C_cnt; cnt += rows[i].C_cnt; }
+            if (rows[i].D_cnt) { disp += ' 预约' + rows[i].D_cnt; cnt += rows[i].D_cnt; }
             var m = {
               id: rows[i].garageid,
               latitude: rows[i].lat,
@@ -56,17 +66,18 @@ Page({
               locateaddr: rows[i].locateaddr,
               status: rows[i].status,
               labelData: {
-                content: rows[i].garage,  //文本
+                content: rows[i].garage + '(' + cnt + ')',  //文本
                 color: '#0F0F0F',  //文本颜色
                 borderRadius: 3,  //边框圆角
                 borderWidth: 1,  //边框宽度
-                borderColor: '#FF0202',  //边框颜色
+                borderColor: '#FF0202',  //边框颜色 q
                 bgColor: '#ffffff',  //背景色
                 padding: 5,  //文本边缘留白
                 textAlign: 'left'  //文本对齐方式。有效值: left, right, center
               },
               callout: {
-                content: rows[i].locateaddr,  //文本
+                content: '单位：' + rows[i].garage 
+                + '\n地址：' + rows[i].locateaddr + '\n订单：' + disp,  //文本
                 color: '#0F0F0F',  //文本颜色
                 borderRadius: 3,  //边框圆角
                 borderWidth: 1,  //边框宽度

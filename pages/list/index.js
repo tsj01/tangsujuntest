@@ -1,4 +1,5 @@
-// pages/faxian/faxian.js
+const moment = require('../../utils/moment.min.js');
+const app = getApp();
 Page({
 
   /**
@@ -47,54 +48,45 @@ Page({
     this.getList();
   },
   getList: function (pages) {
-    
     var that = this;
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getOrderInfo',
-      method: 'POST',
-      data: {
-        usePaging:true,
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        start: pages || 0,
-        limit: 5,
-        withtj: true,
-        sdt: '2019 - 11 - 28',
-        actid: that.data.order_name,
-        title: that.data.title,
-        order_search: that.data.order_search,
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
-      },
+    var sdt = moment(moment().add(app.globalData.lastMonths, 'months')).format('YYYY-MM-DD');
+    var params = {
+      usePaging: true,
+      start: pages || 0,
+      limit: 5,
+      withtj: true,
+      sdt: sdt,
+      actid: that.data.order_name,
+      title: that.data.title,
+      order_search: that.data.order_search
+    };
+    if (that.data.order_name == 'my_order'){
+      params.for_my = true;
+    }
+    app.sendRequest({
+      action: 'getOrderInfo',
+      params: params,
       success: function (res) {
-        if (res.statusCode == 200) {
-          wx.hideLoading();
-          wx.stopPullDownRefresh();
-          let lists = res.data.rows;
-          lists.forEach((item,index)=>{
-            if (item.yydt!=null){
-              item.yydt = item.yydt.substring(5);
-            }
-          })
-          if(that.data.list && pages){
-            let info = that.data.list.concat(lists);
-            that.setData({
-              list: info,
-              page:pages,
-              total: res.data.total
-            })
-          } else {
-            that.setData({
-              list: lists,
-              page: 0,
-              total: res.data.total
-            })
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+        let lists = res.rows;
+        lists.forEach((item, index) => {
+          if (item.yydt != null) {
+            item.yydt = item.yydt.substring(5);
           }
-
+        })
+        if (that.data.list && pages) {
+          let info = that.data.list.concat(lists);
+          that.setData({
+            list: info,
+            page: pages,
+            total: res.total
+          })
         } else {
-          wx.showToast({
-            title: res.data.message,
+          that.setData({
+            list: lists,
+            page: 0,
+            total: res.total
           })
         }
       }
