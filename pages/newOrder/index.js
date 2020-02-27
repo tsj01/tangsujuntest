@@ -102,8 +102,10 @@ Page({
         duration: 2000
       });
     }
-    var fileTypeArr = file[0].name.split('.');
+    console.log(file,333)
+    var fileTypeArr = file[0].path.split('.');
     var fileType = fileTypeArr[fileTypeArr.length - 1];
+    console.log(fileType)
     FileSystemManager.readFile({ 
       filePath: file[0].path, 
       encoding:'base64',

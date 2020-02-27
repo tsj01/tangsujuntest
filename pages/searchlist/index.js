@@ -1,4 +1,5 @@
 // pages/searchlist/index.js
+var formatTime = require('../../utils/util.js')
 Page({
 
   /**
@@ -12,11 +13,48 @@ Page({
     dsy:'',
     garaddr:'',
     order:'',
-    recovery:''
+    recovery:'',
+    setDate: '请选择',
+    endSetDate: '请选择',
+    orderDate: '请选择',
+    endOrderDate: '请选择',
+    getDate: '请选择',
+    endGetDate: '请选择',
   },
-  bindPickerChange: function (e) {
+  bindSetDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-      index: e.detail.value
+      setDate: e.detail.value
+    })
+  },
+  bindEndSetDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      endSetDate: e.detail.value
+    })
+  },
+  bindOrderDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      orderDate: e.detail.value
+    })
+  },
+  bindEndOrderDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      endOrderDate: e.detail.value
+    })
+  },
+  bindGetDateChange:function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      getDate: e.detail.value
+    })
+  },
+  bindEndGetDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      endGetDate: e.detail.value
     })
   },
   choiceCompany: function () {

@@ -245,7 +245,7 @@
           <van-uploader 
             data-index="{{index}}"
             multiple="{{true}}"
-            accept="{{image}}"
+            accept="image"
             file-list="{{ item.attAdd }}" 
             bind:after-read="afterRead"
             bind:delete="deleteimg" />
