@@ -57,3 +57,11 @@
 .list view{
   flex: 1;
 }
+.imginfo{
+  padding: 20rpx;
+}
+.imginfo .img{
+  display: block;
+  width: 140rpx;
+  height: 140rpx;
+}

@@ -20,7 +20,8 @@ Page({
     ],
     data:{},
     type:'',
-    list:[]
+    list:[],
+    imgList:[]
   },
 
   /**
@@ -116,7 +117,8 @@ Page({
         method: 'POST',
         data: {
           oid: that.data.type,
-          usePaging: false,
+          usePaging: true,
+          tp:'定损图片',
           kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
           openid:'',
           nickname:'',
@@ -130,6 +132,35 @@ Page({
           if (res.statusCode == 200) {
             that.setData({
               list: res.data.rows
+            })
+          } else {
+            wx.showToast({
+              title: res.data.message,
+            })
+          }
+        }
+      })
+    }
+    if (e.detail.title == '图片信息') {
+      wx.request({
+        url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getOrderImg',
+        method: 'POST',
+        data: {
+          oid: that.data.type,
+          usePaging: false,
+          kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
+          openid: '',
+          nickname: '',
+          ver: 200
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+        },
+        success: function (res) {
+
+          if (res.statusCode == 200) {
+            that.setData({
+              imgList: res.data.rows
             })
           } else {
             wx.showToast({

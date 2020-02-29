@@ -228,7 +228,7 @@
             <text>{{item.partno}}</text>
           </view>
           <view style="width:60rpx;line-height: 66rpx;text-align: center;">
-          <checkbox-group bindchange="checkboxChange">
+          <checkbox-group bindchange="checkboxChange" data-index="{{index}}">
             <checkbox 
             value= "{{item.isvalue}}"
             checked="{{item.ischeck}}"

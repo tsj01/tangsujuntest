@@ -153,7 +153,20 @@ Page({
       }
     });
   },
-  checkboxChange: function(e) {},
+  checkboxChange: function(e) {
+    console.log(e,111)
+    let query = e.currentTarget.dataset['index'];
+    this.data.orderList.forEach((item, index) => {
+      if (query == index && item.ischeck == false) {
+          item.ischeck = true
+      } else {
+          item.ischeck =false
+      }
+    })
+    this.setData({
+      orderList: this.data.orderList
+    });
+  },
   edit: function(e) {
     let query = e.currentTarget.dataset['index'];
     this.data.orderList.forEach((item, index) => {
