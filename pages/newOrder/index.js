@@ -268,15 +268,9 @@ Page({
     // 允许从相机和相册扫码
     wx.scanCode({
       success: (res) => {
-        var result = res.result;
-        var scanType = res.scanType;
-        var charSet = res.charSet;
-        var path = res.path;
-        _this.setData({
-          result: result,
-          scanType: scanType,
-          charSet: charSet,
-          path: path
+        console.log(res)
+        this.setData({
+          editpartno:res.result
         })
       }
     })

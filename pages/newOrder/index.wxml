@@ -227,7 +227,7 @@
             {{index+1}}<text>{{item.partname}}</text>
             <text>{{item.partno}}</text>
           </view>
-          <view style="width:60rpx;line-height: 66rpx;text-align: center;">
+          <view style="width:60rpx;line-height: 80rpx;text-align: center;">
           <checkbox-group bindchange="checkboxChange" data-index="{{index}}">
             <checkbox 
             value= "{{item.isvalue}}"
@@ -235,7 +235,7 @@
             ></checkbox>
             </checkbox-group>
           </view>
-          <view bindtap="showUploader" data-index="{{index}}" style="width:60rpx;line-height: 66rpx;text-align: center;">
+          <view bindtap="showUploader" data-index="{{index}}" style="width:60rpx;line-height: 80rpx;text-align: center;">
           <van-icon name="arrow-down" wx:if="{{item.showUploaderImg == false}}" />
           <van-icon name="arrow-up" wx:if="{{item.showUploaderImg == true}}" />
           </view>
