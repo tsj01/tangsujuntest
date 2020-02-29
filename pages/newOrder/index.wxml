@@ -241,7 +241,7 @@
           </view>
         </view>
         <view wx:if="{{item.showUploaderImg}}" class="uploader">
-          <view class="uploaderimg" bindtap="afterReads">
+          <view class="uploaderimg" data-id="{{item.id}}"  bindtap="afterReads">
             <text>+</text>
           </view>
         </view>
