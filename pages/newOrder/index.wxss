@@ -81,6 +81,19 @@
   margin: 0 20rpx 0 20rpx;
   border-top: solid 1px #ddd;
 }
+.uploader .uploaderimg{
+  width: 156rpx;
+  height: 156rpx;
+  background-color: #fff;
+  border: 1px dashed #ebedf0;
+  border-radius: 4px;
+  line-height: 131rpx;
+  text-align: center;
+  font-size: 120rpx;
+  color: #ebedf0;
+  margin: 20rpx 20rpx 20rpx 0;
+  font-weight: 100;
+}
 .order-list{
   height: 80rpx;
   width: 100%;
