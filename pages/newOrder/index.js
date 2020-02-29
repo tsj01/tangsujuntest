@@ -86,14 +86,73 @@ Page({
       orderList: this.data.orderList
     });
   },
-  afterReads:function(){
+  afterReads: function (event){
+    console.log(event);
+    var me = this;
+    var id = event.currentTarget.dataset.id;
     wx.chooseImage({
       count: 1,
       sourceType: ['camera'],
       success(res) {
+        console.log(res);
         // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths
-        console.log(res)
+        var file = res.tempFiles;
+        if (file.size >= 1024 * 1024 * 10) {
+          alert('图片大小过大，应小于10M');
+          wx.showToast({
+            title: '图片大小过大，应小于10M',
+            icon: 'fail',
+            duration: 2000
+          });
+        }
+        console.log(file,333);
+        var fileTypeArr = file[0].path.split('.');
+        var fileType = fileTypeArr[fileTypeArr.length - 1];
+        console.log(fileType)
+        FileSystemManager.readFile({
+          filePath: file[0].path, 
+          encoding:'base64',
+          success:function(data){
+            console.log(data);
+            wx.showLoading({
+              title: '上传中...',
+            })
+            app.sendRequest({
+              action: 'addImageMP',
+              params: {
+                image_data: 'data:image/' + fileType+';base64,' + data.data
+              },
+              success: function (res) {
+                wx.hideLoading();
+                console.log(res);
+                let rows = JSON.parse(res.rows);
+                console.log(rows,222)
+                me.data.orderList.forEach((item, index) => {
+                  if (id == index) {
+                    rows.forEach((i,v)=>{
+                      item.attAdd.push({ url: 'http://kld.8866.org:8088/dingdong/static/upload/' + i.fileUrl,
+                        isImage:true,
+                        paththumb: i.thumbUrl,
+                        sizekb: i.sizekb,
+                        sizewh: i.sizewh,
+                        tp: "定损照片",
+                        name: i.fileName,
+                        dtlid:item.id
+                      })
+                    })
+                  }
+                })
+                me.setData({
+                  orderList: me.data.orderList
+                });
+                console.log(me.data.orderList,555)
+              }
+            });
+          },
+          fail:function(res){
+            console.log(res);
+          }
+        });
       }
     })
   },
