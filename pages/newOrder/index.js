@@ -165,13 +165,14 @@ Page({
   //   });
   // },
   checkboxChange: function(e) {
-    console.log(e,111)
     let query = e.currentTarget.dataset['index'];
     this.data.orderList.forEach((item, index) => {
-      if (query == index && item.ischeck == false) {
+      if (query == index){
+        if (item.ischeck == false) {
           item.ischeck = true
-      } else {
-          item.ischeck =false
+        } else {
+          item.ischeck = false
+        }
       }
     })
     this.setData({
