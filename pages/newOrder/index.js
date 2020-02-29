@@ -89,6 +89,7 @@ Page({
   afterReads: function (event){
     console.log(event);
     var me = this;
+    var id = event.currentTarget.dataset.id;
     wx.chooseImage({
       count: 1,
       sourceType: ['camera'],
@@ -126,10 +127,8 @@ Page({
                 console.log(res);
                 let rows = JSON.parse(res.rows);
                 console.log(rows,222)
-                let query = event.currentTarget.dataset['index'];
-                console.log(query, me.data.orderList,777)
                 me.data.orderList.forEach((item, index) => {
-                  if (query == index) {
+                  if (id == index) {
                     rows.forEach((i,v)=>{
                       item.attAdd.push({ url: 'http://kld.8866.org:8088/dingdong/static/upload/' + i.fileUrl,
                         isImage:true,
