@@ -112,6 +112,42 @@
       />
     </van-field>
   </van-cell-group>
+  <view class="section">
+    <picker mode="date" value="{{setDate}}" start="2015-09-01" end="2017-09-01" bindchange="bindSetDateChange">
+      <view class="picker">
+        <text class="leftdate">建单日期: </text>{{setDate}}
+      </view>
+    </picker>
+    <picker mode="date" value="{{setDate}}" start="2015-09-01" end="2017-09-01" bindchange="bindEndSetDateChange">
+      <view class="picker">
+        <text class="leftdate">到: </text>{{endSetDate}}
+      </view>
+    </picker>
+  </view>
+  <view class="section">
+    <picker mode="date" value="{{orderDate}}" start="2015-09-01" end="2017-09-01" bindchange="bindOrderDateChange">
+      <view class="picker">
+        <text class="leftdate">预约日期: </text>{{orderDate}}
+      </view>
+    </picker>
+    <picker mode="date" value="{{orderDate}}" start="2015-09-01" end="2017-09-01" bindchange="bindEndOrderDateChange">
+      <view class="picker">
+        <text class="leftdate">到: </text>{{endOrderDate}}
+      </view>
+    </picker>
+  </view>
+  <view class="section">
+    <picker mode="date" value="{{getDate}}" start="2015-09-01" end="2017-09-01" bindchange="bindGetDateChange">
+      <view class="picker">
+        <text class="leftdate">收件日期: </text>{{getDate}}
+      </view>
+    </picker>
+    <picker mode="date" value="{{orderDate}}" start="2015-09-01" end="2017-09-01" bindchange="bindEndGetDateChange">
+      <view class="picker">
+        <text class="leftdate">到: </text>{{endGetDate}}
+      </view>
+    </picker>
+  </view>
   <view class="botton">搜索</view>
   <view class="botton">清空选项</view>
   <view class="botton">返回</view>
