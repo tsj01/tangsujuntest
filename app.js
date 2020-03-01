@@ -78,13 +78,11 @@ App({
                   if (xhr.data.message) {
                     wx.showToast({
                       title: xhr.data.message,
-                      icon: 'fail',
                       duration: 2000
                     });
                   } else {
                     wx.showToast({
                       title: '服务端错误',
-                      icon: 'fail',
                       duration: 2000
                     });
                   }
@@ -99,7 +97,6 @@ App({
           } else {
             wx.showToast({
               title: msg,
-              icon: 'fail',
               duration: 2000
             });
           }
