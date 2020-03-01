@@ -1,26 +1,29 @@
 <van-cell-group>
   <van-field
-    value="{{ password }}"
+    value="{{ oldpwd }}"
     type="password"
     label="旧密码"
     placeholder="请输入旧密码"
     border="{{ true }}"
+    bind:change="oldpwdChange"
   />
   <van-field
-    value="{{ password }}"
+    value="{{ newpwd }}"
     type="password"
     label="新密码"
     placeholder="请输入新密码"
     border="{{ true }}"
+    bind:change="newpwdChange"
   />
   <van-field
-    value="{{ password }}"
+    value="{{ setpwd }}"
     type="password"
     label="确认密码"
     placeholder="请确认密码"
     border="{{ true }}"
+    bind:change="setpwdChange"
   />
 </van-cell-group>
 <view class="btn">
-  <van-button custom-style="margin: 0 auto;" size="large" round type="info">确定</van-button>
+  <van-button bindtap="submit" custom-style="margin: 0 auto;" size="large" round type="info">确定</van-button>
 </view>
