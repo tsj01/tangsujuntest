@@ -52,7 +52,12 @@ Page({
         })
       },
       fail(res){
-        this.setData({ disabled: false });
+        that.setData({ disabled: false });
+        wx.showToast({
+          title: res.message,
+          icon: 'fail',
+          duration: 2000
+        });
       }
     });
   
@@ -61,7 +66,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
- 
+    wx.setStorageSync('kldkey', '');
   },
 
   /**
