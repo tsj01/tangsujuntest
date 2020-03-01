@@ -56,8 +56,8 @@ Page({
   },
   deleteimg(e) {
     console.log(e)
-    let query = e.currentTarget.dataset['index'];
-    let addQuery = e.detail.index;
+    let query = e.currentTarget.dataset['id'];
+    let addQuery = e.currentTarget.dataset['index'];
     this.data.orderList.forEach((item, index) => {
       if (query == index) {
         item.attAdd.forEach((a,d)=>{
@@ -70,6 +70,7 @@ Page({
     this.setData({
       orderList: this.data.orderList
     });
+    console.log(this.data.orderList,3333)
   },
   showUploader:function(e){
     let query = e.currentTarget.dataset['index'];
@@ -128,7 +129,7 @@ Page({
                 let rows = JSON.parse(res.rows);
                 console.log(rows,222)
                 me.data.orderList.forEach((item, index) => {
-                  if (id == index) {
+                  if (id == item.id) {
                     rows.forEach((i,v)=>{
                       item.attAdd.push({ url: 'http://kld.8866.org:8088/dingdong/static/upload/' + i.fileUrl,
                         isImage:true,
@@ -366,6 +367,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(this.data.orderList)
+    
     let that = this;
       that.setData({
         date: that.getCurrentDate(),

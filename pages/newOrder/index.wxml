@@ -241,8 +241,12 @@
           </view>
         </view>
         <view wx:if="{{item.showUploaderImg}}" class="uploader">
+          <view class="img" wx:for="{{item.attAdd}}" wx:for-index="indexs" wx:for-item="items">
+            <image src="{{items.url}}"></image>
+            <view class="del" bindtap="deleteimg" data-id="{{index}}" data-index="{{indexs}}">x</view>
+          </view>
           <view class="uploaderimg" data-id="{{item.id}}"  bindtap="afterReads">
-            <text>+</text>
+            +
           </view>
         </view>
       </view>

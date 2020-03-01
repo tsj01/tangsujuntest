@@ -80,19 +80,58 @@
 .uploader{
   margin: 0 20rpx 0 20rpx;
   border-top: solid 1px #ddd;
+  overflow: hidden;
+}
+.uploader .img{
+    width: 156rpx;
+  height: 156rpx;
+  border-radius: 4px;
+  display: inline-block;
+  float: left;
+  margin: 0 20rpx 20rpx 0;
+  position: relative;
+}
+.uploader image{
+  width: 156rpx;
+  height: 156rpx;
+  border-radius: 4px;
+  display: inline-block;
+  float: left;
+  margin: 20rpx 20rpx 20rpx 0;
+}
+.uploader .img .del {
+  position: absolute;
+  top: 4px;
+  right: -4px;
+  width: 30rpx;
+  height: 30rpx;
+  background: #555;
+  color: #fff;
+  border-radius: 15rpx;
+  text-align: center;
+  line-height: 30rpx;
+  font-weight: 100;
+
 }
 .uploader .uploaderimg{
+  float: left;
+  box-sizing:border-box;
+  display: inline-block;
   width: 156rpx;
   height: 156rpx;
   background-color: #fff;
   border: 1px dashed #ebedf0;
   border-radius: 4px;
-  line-height: 131rpx;
-  text-align: center;
   font-size: 120rpx;
   color: #ebedf0;
   margin: 20rpx 20rpx 20rpx 0;
   font-weight: 100;
+  line-height: 130rpx;
+  text-align: center;
+}
+.uploader .uploaderimg view{
+  display: inline;
+
 }
 .order-list{
   height: 80rpx;
