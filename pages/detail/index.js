@@ -39,67 +39,37 @@ Page({
     var that = this;
     app.sendRequest({
       action: 'getOrderSteps',
-      method: 'POST',
-      data: {
-        oid: e,
-        usePaging: false,
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        openid: '',
-        nickname: '',
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+      params: {
+        oid: e
       },
       success: function(res) {
         
-        if (res.statusCode == 200) {
-          let steps = []
-          res.data.rows.forEach((itme,index)=>{
-            steps.push({
-              text: itme.act,
-              desc: itme.dtm.slice(0, 10)
-            })
+        let steps = []
+        res.rows.forEach((itme, index) => {
+          steps.push({
+            text: itme.act,
+            desc: itme.dtm.slice(0, 10)
           })
-          
-          that.setData({
-            steps: steps
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-          })
-        }
+        })
+
+        that.setData({
+          steps: steps
+        })
       }
     })
     app.sendRequest({
       action: 'getOrder',
-      method: 'POST',
-      data: {
+      params: {
         usePaging: true,
         limit: 5,
         start: 0,
         id: e,
-        withtj: true,
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        openid: '',
-        nickname: '',
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+        withtj: true
       },
       success: function(res) {
-        
-        if (res.statusCode == 200) {
-          that.setData({
-            data: res.data.rows[0]
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-          })
-        }
+        that.setData({
+          data: res.rows[0]
+        })
       }
     })
   },
@@ -115,59 +85,30 @@ Page({
     if (e.detail.title == '收件明细') {
       app.sendRequest({
         action: 'getOrderdtl',
-        method: 'POST',
-        data: {
+        params: {
           oid: that.data.type,
           usePaging: true,
-          tp:'定损图片',
-          kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-          openid:'',
-          nickname:'',
-          ver: 200
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+          tp:'定损图片'
         },
         success: function (res) {
 
-          if (res.statusCode == 200) {
-            that.setData({
-              list: res.data.rows
-            })
-          } else {
-            wx.showToast({
-              title: res.data.message,
-            })
-          }
+          that.setData({
+            list: res.rows
+          })
         }
       })
     }
     if (e.detail.title == '图片信息') {
       app.sendRequest({
         action: 'getOrderImg',
-        method: 'POST',
-        data: {
-          oid: that.data.type,
-          usePaging: false,
-          kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-          openid: '',
-          nickname: '',
-          ver: 200
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+        params: {
+          oid: that.data.type
         },
         success: function (res) {
 
-          if (res.statusCode == 200) {
-            that.setData({
-              imgList: res.data.rows
-            })
-          } else {
-            wx.showToast({
-              title: res.data.message,
-            })
-          }
+          that.setData({
+            imgList: res.rows
+          })
         }
       })
     }
