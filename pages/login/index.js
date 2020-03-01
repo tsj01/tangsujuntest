@@ -52,7 +52,7 @@ Page({
         })
       },
       fail(res){
-        this.setData({ disabled: false });
+        that.setData({ disabled: false });
       }
     });
   
@@ -61,7 +61,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
- 
+    wx.setStorageSync('kldkey', '');
   },
 
   /**
