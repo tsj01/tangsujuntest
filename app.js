@@ -36,8 +36,9 @@ App({
   },
   globalData: {
     userInfo: null,
-    serverUrl: 'http://kld.8866.org:8088/dingdong/mobile',
-    lastMonths: -2
+    serverUrl: 'https://kld.bestedu.online/dingdong/mobile',
+    lastMonths: -2,
+    attrUrl: 'https://kld.bestedu.online/dingdong/static/static/upload/'
   },
   sendRequest: function(options) {
     var self = this;

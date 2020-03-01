@@ -131,7 +131,8 @@ Page({
                 me.data.orderList.forEach((item, index) => {
                   if (id == item.id) {
                     rows.forEach((i,v)=>{
-                      item.attAdd.push({ url: 'http://kld.8866.org:8088/dingdong/static/upload/' + i.fileUrl,
+                      item.attAdd.push({
+                        url: app.globalData.attrUrl + i.fileUrl,
                         isImage:true,
                         paththumb: i.thumbUrl,
                         sizekb: i.sizekb,
