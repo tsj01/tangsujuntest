@@ -1,4 +1,5 @@
 var md5 = require('../../utils/md5.js');
+const app = getApp();
 Page({
 
   /**
@@ -42,8 +43,8 @@ Page({
       })
       return;
     }
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=resetpwd',
+    app.sendRequest({
+      action: 'resetpwd',
       method: 'POST',
       data: {
         old_pwd: md5.hexMD5(that.data.oldpwd),

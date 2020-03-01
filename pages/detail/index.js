@@ -1,4 +1,5 @@
 // pages/detail/index.js
+const app = getApp();
 Page({
 
   /**
@@ -36,8 +37,8 @@ Page({
   },
   getDetail: function(e) {
     var that = this;
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getOrderSteps',
+    app.sendRequest({
+      action: 'getOrderSteps',
       method: 'POST',
       data: {
         oid: e,
@@ -71,8 +72,8 @@ Page({
         }
       }
     })
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getOrder',
+    app.sendRequest({
+      action: 'getOrder',
       method: 'POST',
       data: {
         usePaging: true,
@@ -112,8 +113,8 @@ Page({
     console.log(e,1111)
     var that = this;
     if (e.detail.title == '收件明细') {
-      wx.request({
-        url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getOrderdtl',
+      app.sendRequest({
+        action: 'getOrderdtl',
         method: 'POST',
         data: {
           oid: that.data.type,
@@ -142,8 +143,8 @@ Page({
       })
     }
     if (e.detail.title == '图片信息') {
-      wx.request({
-        url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getOrderImg',
+      app.sendRequest({
+        action: 'getOrderImg',
         method: 'POST',
         data: {
           oid: that.data.type,

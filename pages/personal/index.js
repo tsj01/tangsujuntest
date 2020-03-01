@@ -1,4 +1,5 @@
 // pages/wode/wode.js
+const app = getApp();
 Page({
 
   /**
@@ -23,8 +24,8 @@ Page({
   },
   getList: function() {
     var that = this;
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getUserInfo',
+    app.sendRequest({
+      action: 'getUserInfo',
       method: 'POST',
       data: {
         kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',

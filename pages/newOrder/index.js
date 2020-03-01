@@ -465,8 +465,8 @@ Page({
       attUpd: [],
       attDel: []
     }
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=saveOrder',
+    app.sendRequest({
+      action: 'saveOrder',
       method: 'POST',
       data: {
         rows: JSON.stringify(params),
@@ -590,8 +590,8 @@ Page({
       attUpd: [],
       attDel: []
     }
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=saveOrder',
+    app.sendRequest({
+      action: 'saveOrder',
       method: 'POST',
       data: {
         rows: JSON.stringify(params),

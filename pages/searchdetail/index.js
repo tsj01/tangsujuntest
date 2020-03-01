@@ -1,4 +1,5 @@
 // pages/searchdetail/index.js
+const app = getApp();
 Page({
 
   /**
@@ -36,8 +37,8 @@ Page({
   },
   goStatus:function(){
     var that = this;
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getBasicDict',
+    app.sendRequest({
+      action: 'getBasicDict',
       method: 'POST',
       data: {
         usePaging: false,
@@ -70,8 +71,8 @@ Page({
   getCompany: function (e) {
 
     var that = this;
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getBranch',
+    app.sendRequest({
+      action: 'getBranch',
       method: 'POST',
       data: {
         usePaging: true,
@@ -104,8 +105,8 @@ Page({
   getGaraddr: function (e) {
 
     var that = this;
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getBranch',
+    app.sendRequest({
+      action: 'getBranch',
       method: 'POST',
       data: {
         usePaging: true,
@@ -138,8 +139,8 @@ Page({
   getSurvey: function (e) {
 
     var that = this;
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getUser',
+    app.sendRequest({
+      action: 'getUser',
       method: 'POST',
       data: {
         usePaging: true,
@@ -172,8 +173,8 @@ Page({
   },
   goRecovery: function (e) {
     var that = this;
-    wx.request({
-      url: 'http://kld.8866.org:8088/dingdong/mobile/doAction?method=getUser',
+    app.sendRequest({
+      action: 'getUser',
       method: 'POST',
       data: {
         usePaging: true,
