@@ -53,6 +53,11 @@ Page({
       },
       fail(res){
         that.setData({ disabled: false });
+        wx.showToast({
+          title: res.message,
+          icon: 'fail',
+          duration: 2000
+        });
       }
     });
   
