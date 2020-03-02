@@ -62,6 +62,7 @@ App({
         'content-type': contentType //修改此处即可
       },
       complete: function(xhr) {
+        wx.hideLoading();
         if (xhr.statusCode == 200) {
           if (options.success) {
             if (xhr.data.success) {
