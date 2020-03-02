@@ -37,32 +37,18 @@ Page({
     var that = this;
     app.sendRequest({
       action: 'getBranch',
-      method: 'POST',
-      data: {
+      params: {
         usePaging: true,
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
         start: 0,
         limit: 20,
         brtp: e,
-        openid: '',
-        nickname: '',
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
       },
       success: function(res) {
-        if (res.statusCode == 200) {
-          wx.hideLoading();
-          wx.stopPullDownRefresh();
-          that.setData({
-            list: res.data.rows
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-          })
-        }
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+        that.setData({
+          list: res.rows
+        });
       }
     })
   },
@@ -71,32 +57,18 @@ Page({
     var that = this;
     app.sendRequest({
       action: 'getBranch',
-      method: 'POST',
-      data: {
+      params: {
         usePaging: true,
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
         start: 0,
         limit: 20,
-        brtp: e,
-        openid: '',
-        nickname: '',
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+        brtp: e
       },
       success: function(res) {
-        if (res.statusCode == 200) {
-          wx.hideLoading();
-          wx.stopPullDownRefresh();
-          that.setData({
-            list: res.data.rows
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-          })
-        }
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+        that.setData({
+          list: res.rows
+        });
       }
     })
   },
@@ -105,33 +77,19 @@ Page({
     var that = this;
     app.sendRequest({
       action: 'getUser',
-      method: 'POST',
-      data: {
+      params: {
         usePaging: true,
         limit: 20,
         start: 0,
         bid: e,
-        dname: "",
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        openid: "",
-        nickname: "",
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+        dname: ""
       },
       success: function(res) {
-        if (res.statusCode == 200) {
-          wx.hideLoading();
-          wx.stopPullDownRefresh();
-          that.setData({
-            list: res.data.rows
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-          })
-        }
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+        that.setData({
+          list: res.rows
+        })
       }
     })
   },
@@ -139,33 +97,19 @@ Page({
     var that = this;
     app.sendRequest({
       action: 'getUser',
-      method: 'POST',
-      data: {
+      params: {
         usePaging: true,
         limit: 20,
         start: 0,
         bid: e,
-        dname: "",
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        openid: "",
-        nickname: "",
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+        dname: ""
       },
       success: function (res) {
-        if (res.statusCode == 200) {
-          wx.hideLoading();
-          wx.stopPullDownRefresh();
-          that.setData({
-            list: res.data.rows
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-          })
-        }
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+        that.setData({
+          list: res.rows
+        })
       }
     })
   },

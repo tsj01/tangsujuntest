@@ -158,73 +158,6 @@ Page({
       }
     })
   },
-  // afterRead(event) {
-  //   //exif.getData();
-  //   var me = this;
-  //   const {
-  //     file
-  //   } = event.detail;
-    
-  //   console.log(event,11111);
-  //   if (file.size >= 1024 * 1024 * 10) {
-  //     alert('图片大小过大，应小于10M');
-  //     wx.showToast({
-  //       title: '图片大小过大，应小于10M',
-  //       icon: 'fail',
-  //       duration: 2000
-  //     });
-  //   }
-  //   console.log(file,333)
-  //   var fileTypeArr = file[0].path.split('.');
-  //   var fileType = fileTypeArr[fileTypeArr.length - 1];
-  //   console.log(fileType)
-  //   FileSystemManager.readFile({ 
-  //     filePath: file[0].path, 
-  //     encoding:'base64',
-  //     success:function(data){
-  //       console.log(data);
-  //       wx.showLoading({
-  //         title: '上传中...',
-  //       })
-  //       app.sendRequest({
-  //         action: 'addImageMP',
-  //         params: {
-  //           image_data: 'data:image/' + fileType+';base64,' + data.data
-  //         },
-  //         success: function (res) {
-  //           wx.hideLoading();
-  //           console.log(res);
-  //           let rows = JSON.parse(res.rows);
-  //           console.log(rows,222)
-  //           let query = event.currentTarget.dataset['index'];
-  //           console.log(query, me.data.orderList,777)
-  //           me.data.orderList.forEach((item, index) => {
-  //             if (query == index) {
-  //               rows.forEach((i,v)=>{
-  //                 item.attAdd.push({ url: 'http://kld.8866.org:8088/dingdong/static/upload/' + i.fileUrl,
-  //                   isImage:true,
-  //                   paththumb: i.thumbUrl,
-  //                   sizekb: i.sizekb,
-  //                   sizewh: i.sizewh,
-  //                   tp: "定损照片",
-  //                   name: i.fileName,
-  //                   dtlid:item.id
-  //                  })
-  //               })
-  //             }
-  //           })
-  //           me.setData({
-  //             orderList: me.data.orderList
-  //           });
-  //           console.log(me.data.orderList,555)
-  //         }
-  //       });
-  //     },
-  //     fail:function(res){
-  //       console.log(res);
-  //     }
-  //   });
-  // },
   checkboxChange: function(e) {
     let query = e.currentTarget.dataset['index'];
     this.data.orderList.forEach((item, index) => {
@@ -467,28 +400,13 @@ Page({
     }
     app.sendRequest({
       action: 'saveOrder',
-      method: 'POST',
-      data: {
-        rows: JSON.stringify(params),
-        usePaging: false,
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        openid: '',
-        nickname: '',
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+      params: {
+        rows: JSON.stringify(params)
       },
       success: function(res) {
-        if (res.statusCode == 200) {
-          wx.redirectTo({
-            url: '../list/index'
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-          })
-        }
+        wx.redirectTo({
+          url: '../list/index'
+        })
       }
     })
   },
@@ -592,28 +510,13 @@ Page({
     }
     app.sendRequest({
       action: 'saveOrder',
-      method: 'POST',
-      data: {
-        rows: JSON.stringify(params),
-        usePaging: false,
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        openid: '',
-        nickname: '',
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+      params: {
+        rows: JSON.stringify(params)
       },
       success: function (res) {
-        if (res.statusCode == 200) {
-          wx.redirectTo({
-            url: '../list/index'
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-          })
-        }
+        wx.redirectTo({
+          url: '../list/index'
+        })
       }
     })
     this.setData({

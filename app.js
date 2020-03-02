@@ -62,6 +62,7 @@ App({
         'content-type': contentType //修改此处即可
       },
       complete: function(xhr) {
+        wx.hideLoading();
         if (xhr.statusCode == 200) {
           if (options.success) {
             if (xhr.data.success) {
@@ -78,13 +79,11 @@ App({
                   if (xhr.data.message) {
                     wx.showToast({
                       title: xhr.data.message,
-                      icon: 'fail',
                       duration: 2000
                     });
                   } else {
                     wx.showToast({
                       title: '服务端错误',
-                      icon: 'fail',
                       duration: 2000
                     });
                   }
@@ -99,7 +98,6 @@ App({
           } else {
             wx.showToast({
               title: msg,
-              icon: 'fail',
               duration: 2000
             });
           }

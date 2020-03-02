@@ -74,6 +74,9 @@ Page({
           })
         } else {
         }
+        that.setData({
+          steps: steps
+        })
       }
     })
     app.sendRequest({
@@ -102,7 +105,6 @@ Page({
       oid: that.data.type,
       usePaging: true,
       tp: '定损图片',
-      kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
       openid: '',
       nickname: '',
       ver: 200
@@ -118,9 +120,7 @@ Page({
               list: res.rows
             })
           } else {
-            wx.showToast({
-              title: res.message,
-            })
+
           }
         }
       })
@@ -128,29 +128,14 @@ Page({
     if (e.detail.title == '图片信息') {
       app.sendRequest({
         action: 'getOrderImg',
-        method: 'POST',
-        data: {
-          oid: that.data.type,
-          usePaging: false,
-          kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-          openid: '',
-          nickname: '',
-          ver: 200
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+        params: {
+          oid: that.data.type
         },
         success: function (res) {
 
-          if (res.statusCode == 200) {
-            that.setData({
-              imgList: res.data.rows
-            })
-          } else {
-            wx.showToast({
-              title: res.data.message,
-            })
-          }
+          that.setData({
+            imgList: res.rows
+          })
         }
       })
     }

@@ -27,32 +27,17 @@ Page({
     app.sendRequest({
       action: 'getUserInfo',
       method: 'POST',
-      data: {
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        uid_: 15372697233,
-        limit: true,
-        usePaging: false,
-        openid: "",
-        nickname: "",
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+      params: {
+        limit: true
       },
       success: function(res) {
-        if (res.statusCode == 200) {
-          wx.hideLoading();
-          that.setData({
-            brtp: res.data.rows[0].brtp,
-            brname: res.data.rows[0].brname,
-            loginid: res.data.rows[0].loginid,
-            name: res.data.rows[0].name,
-            dname: res.data.rows[0].dname
-          })
-
-        } else {
-
-        }
+        that.setData({
+          brtp: res.rows[0].brtp,
+          brname: res.rows[0].brname,
+          loginid: res.rows[0].loginid,
+          name: res.rows[0].name,
+          dname: res.rows[0].dname
+        })
       }
     })
   },

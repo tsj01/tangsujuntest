@@ -45,30 +45,14 @@ Page({
     }
     app.sendRequest({
       action: 'resetpwd',
-      method: 'POST',
-      data: {
+      params: {
         old_pwd: md5.hexMD5(that.data.oldpwd),
-        new_pwd: md5.hexMD5(that.data.newpwd),
-        usePaging: false,
-        uid_: '',
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        openid: '',
-        nickname: '',
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
+        new_pwd: md5.hexMD5(that.data.newpwd)
       },
       success: function (res) {
-        if (res.statusCode == 200) {
-          wx.showToast({
-            title: res.data.message,
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-          })
-        }
+        wx.showToast({
+          title: res.rows
+        })
       }
     })
   },
