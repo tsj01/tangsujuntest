@@ -30,6 +30,7 @@ Page({
    */
   onLoad: function(options) {
     let type = options;
+    console.log(options,111)
     this.setData({
       type: type.id
     })
@@ -37,68 +38,54 @@ Page({
   },
   getDetail: function(e) {
     var that = this;
+    var paramssteps = {
+      oid: e,
+      usePaging: false,
+      openid: '',
+      nickname: '',
+      ver: 200
+    }
+    var paramsorder = {
+      usePaging: true,
+      limit: 5,
+      start: 0,
+      id: e,
+      withtj: true,
+      openid: '',
+      nickname: '',
+      ver: 200
+    }
+    
     app.sendRequest({
       action: 'getOrderSteps',
       method: 'POST',
-      data: {
-        oid: e,
-        usePaging: false,
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        openid: '',
-        nickname: '',
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
-      },
+      params: paramssteps,
       success: function(res) {
-        
-        if (res.statusCode == 200) {
+        if (res.success == true) {
           let steps = []
-          res.data.rows.forEach((itme,index)=>{
+          res.rows.forEach((itme,index)=>{
             steps.push({
               text: itme.act,
               desc: itme.dtm.slice(0, 10)
             })
           })
-          
           that.setData({
             steps: steps
           })
         } else {
-          wx.showToast({
-            title: res.data.message,
-          })
         }
       }
     })
     app.sendRequest({
       action: 'getOrder',
       method: 'POST',
-      data: {
-        usePaging: true,
-        limit: 5,
-        start: 0,
-        id: e,
-        withtj: true,
-        kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-        openid: '',
-        nickname: '',
-        ver: 200
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' //修改此处即可
-      },
+      params: paramsorder,
       success: function(res) {
-        
-        if (res.statusCode == 200) {
+        if (res.success == true) {
           that.setData({
-            data: res.data.rows[0]
+            data: res.rows[0]
           })
         } else {
-          wx.showToast({
-            title: res.data.message,
-          })
         }
       }
     })
@@ -110,33 +97,29 @@ Page({
 
   },
   onChange:function(e){
-    console.log(e,1111)
     var that = this;
+    let params = {
+      oid: that.data.type,
+      usePaging: true,
+      tp: '定损图片',
+      kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
+      openid: '',
+      nickname: '',
+      ver: 200
+    }
     if (e.detail.title == '收件明细') {
       app.sendRequest({
         action: 'getOrderdtl',
         method: 'POST',
-        data: {
-          oid: that.data.type,
-          usePaging: true,
-          tp:'定损图片',
-          kldkey: '5633838366032366735303566353562626169353162693439333364616031356323333237393632373335313',
-          openid:'',
-          nickname:'',
-          ver: 200
-        },
-        header: {
-          'content-type': 'application/x-www-form-urlencoded' //修改此处即可
-        },
+        params: params,
         success: function (res) {
-
-          if (res.statusCode == 200) {
+          if (res.success == true) {
             that.setData({
-              list: res.data.rows
+              list: res.rows
             })
           } else {
             wx.showToast({
-              title: res.data.message,
+              title: res.message,
             })
           }
         }

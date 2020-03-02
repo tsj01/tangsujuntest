@@ -14,6 +14,7 @@ Page({
     order_search:''
   },
   goDetail(e){
+    console.log(e)
     wx.navigateTo({
       url: '../detail/index?id=' + e.currentTarget.dataset.item.id
     })
