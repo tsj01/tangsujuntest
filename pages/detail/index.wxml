@@ -71,9 +71,17 @@
         <text class="left">回收备注</text>
         <text class="right">宁波格斯美-015605</text>
       </view>
+      <view class="bottom-box">
+        <view class="bottom">
+          <view>修改</view>
+          <view>复制</view>
+          <view>留言</view>
+        </view>
+      </view>
+
     </van-tab>
     <van-tab title="收件明细">
-      <view class="list" wx:for="{{list}}">
+      <view class="list" wx:for="{{list}}" bindtap="listdetail" data-index="{{index}}">
         <view>
         <text>{{item.partname}}</text>
         </view>

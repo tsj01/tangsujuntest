@@ -1,0 +1,29 @@
+/* pages/recovery/index.wxss */
+.content{
+  padding: 40rpx;
+}
+.content .name {
+  overflow: hidden;
+  padding-left: 140rpx;
+  position: relative;
+}
+.content .name .label{
+  display: inline-block;
+  width: 140rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  color: #555;
+  position: absolute;
+  top: 4rpx;
+  left: 0;
+}
+.content .name .info{
+  display: inline-block;
+  width: 100%;
+  height: 70rpx;
+  font-size: 28rpx;
+  color: #555;
+  line-height: 70rpx;
+  text-align: right
+}

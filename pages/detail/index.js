@@ -24,7 +24,11 @@ Page({
     list:[],
     imgList:[]
   },
-
+  listdetail:function(e){
+    wx.navigateTo({
+      url: '../recovery/index'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -74,9 +78,6 @@ Page({
           })
         } else {
         }
-        that.setData({
-          steps: steps
-        })
       }
     })
     app.sendRequest({
@@ -129,12 +130,16 @@ Page({
       app.sendRequest({
         action: 'getOrderImg',
         params: {
-          oid: that.data.type
+          oid: that.data.type,
+          tp: '定损图片',
+          openid: '',
+          nickname: '',
+          ver: 200
         },
         success: function (res) {
 
           that.setData({
-            imgList: res.rows
+            imgList: res.rows,
           })
         }
       })

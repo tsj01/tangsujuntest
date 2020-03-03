@@ -13,7 +13,8 @@
     "pages/detail/index",
     "pages/searchlist/index",
     "pages/login/index",
-    "pages/searchdetail/index"
+    "pages/searchdetail/index",
+    "pages/recovery/index"
   ],
   "window": {
     "navigationBarTextStyle": "white",
