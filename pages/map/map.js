@@ -124,6 +124,9 @@ Page({
   },
   callouttap:function(e){
     console.log(e);
+    wx.navigateTo({
+      url: '../list/index'
+    });
   },
   //将地图中心移动到当前定位点
   moveToLocation: function () {
