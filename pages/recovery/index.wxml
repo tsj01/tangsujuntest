@@ -45,7 +45,6 @@
     <view class="weinput">
       <input class="input" placeholder="输入备注" type="text"></input>
     </view>
-    
   </view>
   <view class="name">
     <text class="label">回收状态:</text>
@@ -60,11 +59,17 @@
   <view class="name" wx:if="{{status == 'no'}}">
     <text class="label">不收原因:</text>
     <view class="info-radio-no">
-        <radio-group class="radio-group-no" bindchange="radioChange1">
+        <radio-group class="radio-group-no" bindchange="reasonChange">
             <radio class="radio-no" wx:for-items="{{items}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
                 <text>{{item.value}}</text>
             </radio>
         </radio-group>
+    </view>
+  </view>
+  <view class="name" wx:if="{{reasonStatus == 'other'}}">
+    <text class="label">其他情况:</text>
+    <view class="weinput">
+      <input class="input" placeholder="输入备注" type="text"></input>
     </view>
   </view>
 </view>

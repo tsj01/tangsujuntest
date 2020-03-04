@@ -11,17 +11,23 @@ Page({
       { name: 'no', value: '不收' },
     ],
     items: [
-      { name: 'not', value: '已被修理厂处理' },
-      { name: 'yes', value: '保险公司改配件', checked: 'true' },
-      { name: 'no', value: '配件无价值' },
-      { name: 'no', value: '其他情况' },
+      { name: 'repair', value: '已被修理厂处理' },
+      { name: 'company', value: '保险公司改配件', checked: 'true' },
+      { name: 'parts', value: '配件无价值' },
+      { name: 'other', value: '其他情况' },
     ],
-    status:''
+    status:'',
+    reasonStatus:''
   },
   radioChange:function(e){
     console.log(e,1111)
     this.setData({
       status:e.detail.value
+    })
+  },
+  reasonChange:function(e){
+    this.setData({
+      reasonStatus: e.detail.value
     })
   },
   /**
