@@ -5,9 +5,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    itemStatus: [
+      { name: 'not', value: '未收' ,checked: 'true'},
+      { name: 'yes', value: '已收' },
+      { name: 'no', value: '不收' },
+    ],
+    items: [
+      { name: 'not', value: '已被修理厂处理' },
+      { name: 'yes', value: '保险公司改配件', checked: 'true' },
+      { name: 'no', value: '配件无价值' },
+      { name: 'no', value: '其他情况' },
+    ],
+    status:''
   },
-
+  radioChange:function(e){
+    console.log(e,1111)
+    this.setData({
+      status:e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

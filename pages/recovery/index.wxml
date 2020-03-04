@@ -16,7 +16,7 @@
     <text class="label">单价:</text>
     <text class="info">11111</text>
   </view>
-  <view class="name">
+  <view class="name border">
     <text class="label">价值件:</text>
     <text class="info">11111</text>
   </view>
@@ -24,7 +24,7 @@
     <text class="label">定损照片:</text>
     <text class="info">11111</text>
   </view>
-  <view class="name">
+  <view class="name border">
     <text class="label">回收照片:</text>
     <text class="info">11111</text>
   </view>
@@ -42,10 +42,29 @@
   </view>
   <view class="name">
     <text class="label">回收备注:</text>
-    <text class="info">11111</text>
+    <view class="weinput">
+      <input class="input" placeholder="输入备注" type="text"></input>
+    </view>
+    
   </view>
   <view class="name">
     <text class="label">回收状态:</text>
-    <text class="info">11111</text>
+    <view class="info-radio">
+        <radio-group class="radio-group" bindchange="radioChange">
+            <radio class="radio" wx:for-items="{{itemStatus}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
+                <text>{{item.value}}</text>
+            </radio>
+        </radio-group>
+    </view>
+  </view>
+  <view class="name" wx:if="{{status == 'no'}}">
+    <text class="label">不收原因:</text>
+    <view class="info-radio-no">
+        <radio-group class="radio-group-no" bindchange="radioChange1">
+            <radio class="radio-no" wx:for-items="{{items}}" wx:key="name" value="{{item.name}}" checked="{{item.checked}}">
+                <text>{{item.value}}</text>
+            </radio>
+        </radio-group>
+    </view>
   </view>
 </view>

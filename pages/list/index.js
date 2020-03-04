@@ -11,7 +11,19 @@ Page({
     title:'',
     page:0,
     total:0,
-    order_search:''
+    order_search:'',
+    srv: '',
+    insur: '',
+    dsy: '',
+    garage: '',
+    status: '',
+    cmforder: '',
+    recvoprname: '',
+    edt: '',
+    srecvdtm: '',
+    erecvdtm: '',
+    syydt: '',
+    eyydt: '',
   },
   goDetail(e){
     console.log(e)
@@ -23,7 +35,21 @@ Page({
     this.setData({
       order_search: e.detail
     })
-    if (e.detail != ''){
+    if (e.detail !== null){
+      this.setData({
+        srv: '',
+        insur: '',
+        dsy: '',
+        garage: '',
+        status: '',
+        cmforder: '',
+        recvoprname: '',
+        edt: '',
+        srecvdtm: '',
+        erecvdtm: '',
+        syydt: '',
+        eyydt: '',
+      })
       this.getList();
     }
   },
@@ -37,15 +63,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let type = options.order_name;
-    this.setData({
-      order_name: type,
-      title: options.order_title
-    })
-    wx.setNavigationBarTitle({ title: options.order_title })
-    wx.showLoading({
-      title: '加载中',
-    })
+    if (options.order_name){
+      let type = options.order_name;
+      this.setData({
+        order_name: type,
+        title: options.order_title
+      })
+      wx.setNavigationBarTitle({ title: options.order_title })
+      wx.showLoading({
+        title: '加载中',
+      })
+    }
     this.getList();
   },
   getList: function (pages) {
@@ -59,10 +87,27 @@ Page({
       sdt: sdt,
       actid: that.data.order_name,
       title: that.data.title,
-      order_search: that.data.order_search
+      order_search: that.data.order_search,
+      srv: that.data.srv,
+      insur: that.data.insur,
+      dsy: that.data.dsy,
+      garage: that.data.garage,
+      status: that.data.status,
+      cmforder: that.data.cmforder,
+      recvoprname: that.data.recvoprname,
+      edt: that.data.edt,
+      srecvdtm: that.data.srecvdtm,
+      erecvdtm: that.data.erecvdtm,
+      syydt: that.data.syydt,
+      eyydt: that.data.eyydt,
     };
     if (that.data.order_name == 'my_order'){
       params.for_my = true;
+    }
+    for (var key in params) {
+      if (params[key] === '' || params[key] === '请选择') {
+        delete params[key]
+      }
     }
     app.sendRequest({
       action: 'getOrderInfo',

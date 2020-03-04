@@ -89,7 +89,7 @@ Page({
         wx.hideLoading();
         wx.stopPullDownRefresh();
         that.setData({
-          list: res.data.rows
+          list: res.rows
         })
       }
     })
@@ -110,7 +110,7 @@ Page({
         wx.hideLoading();
         wx.stopPullDownRefresh();
         that.setData({
-          list: res.data.rows
+          list: res.rows
         })
       }
     })
@@ -131,7 +131,7 @@ Page({
         wx.hideLoading();
         wx.stopPullDownRefresh();
         that.setData({
-          list: res.data.rows
+          list: res.rows
         })
       }
     })

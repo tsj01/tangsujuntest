@@ -1,4 +1,4 @@
-var formatTime = require('../../utils/util.js')
+let formatTime = require('../../utils/util.js')
 let exif = require("../../utils/exif");
 const FileSystemManager = wx.getFileSystemManager();
 const app = getApp();

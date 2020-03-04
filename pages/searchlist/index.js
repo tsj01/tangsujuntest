@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    endtime: formatTime,
     array: ['是', '否'],
     index: 1,
     insur:'',
@@ -20,6 +21,11 @@ Page({
     endOrderDate: '请选择',
     getDate: '请选择',
     endGetDate: '请选择',
+  },
+  bindPickerChange:function(e){
+    this.setData({
+      index: e.detail.value
+    })
   },
   bindSetDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -81,6 +87,54 @@ Page({
   goStatus:function(){
     wx.navigateTo({
       url: '../searchdetail/index?brtp=订单状态'
+    })
+  },
+  search:function(){
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+      insur: this.data.insur,
+      dsy: this.data.dsy,
+      garage: this.data.garaddr,
+      status: this.data.order,
+      cmforder: this.data.array[this.data.index],
+      recvoprname: this.data.recovery,
+      sdt: this.data.setDate,
+      edt: this.data.endSetDate,
+      srecvdtm: this.data.getDate,
+      erecvdtm: this.data.endGetDate,
+      syydt: this.data.orderDate,
+      eyydt: this.data.endOrderDate,
+    })
+    wx.navigateBack({
+      delta: 1,// 返回上一级页面。
+      success: function () {
+        prevPage.getList(); // 执行前一个页面的getList方法
+      }
+    })
+  },
+  empty:function(e){
+    this.setData({
+      index: 1,
+      insur: '',
+      insurid: '',
+      dsy: '',
+      garaddr: '',
+      order: '',
+      recovery: '',
+      setDate: '请选择',
+      endSetDate: '请选择',
+      orderDate: '请选择',
+      endOrderDate: '请选择',
+      getDate: '请选择',
+      endGetDate: '请选择',
+    })
+  },
+  backe:function(){
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    wx.navigateBack({
+      delta: 1,// 返回上一级页面。
     })
   },
   /**

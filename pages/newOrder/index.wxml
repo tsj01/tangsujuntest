@@ -212,7 +212,7 @@
       <view class="order-title">
         <text>配件名称</text>
         <text>易碎贴</text>
-        <view style="width:100rpx;line-height: 66rpx;">价值件</view>
+        <view style="width:140rpx;line-height: 66rpx;">价值件</view>
       </view>
       <view  
         bindtap="add"
