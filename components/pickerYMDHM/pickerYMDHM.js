@@ -46,6 +46,7 @@ Component({
       let date = new Date();
       if (this.data.date != null) {
         let str = this.data.date;
+        console.log(str)
         str = str.replace(/-/g, "/");
         date = new Date(str);
       }

@@ -73,9 +73,9 @@
       </view>
       <view class="bottom-box">
         <view class="bottom">
-          <view>修改</view>
-          <view>复制</view>
-          <view>留言</view>
+          <view bindtap="modify">修改</view>
+          <view bindtap="copy">复制</view>
+          <view bindtap="LeaMes">留言</view>
         </view>
       </view>
 

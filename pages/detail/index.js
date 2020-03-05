@@ -29,6 +29,12 @@ Page({
       url: '../recovery/index'
     })
   },
+  modify:function(e){
+    let info = JSON.stringify(this.data.data);
+    wx.navigateTo({
+      url: '../newOrder/index?data='+ info
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

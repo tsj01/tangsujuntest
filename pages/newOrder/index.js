@@ -1,4 +1,4 @@
-let formatTime = require('../../utils/util.js')
+var formatTime = require('../../utils/util.js')
 let exif = require("../../utils/exif");
 const FileSystemManager = wx.getFileSystemManager();
 const app = getApp();
@@ -301,13 +301,39 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(this.data.orderList)
-    
     let that = this;
+    if (options.data){
+      let datas = JSON.parse(options.data);
       that.setData({
-        date: that.getCurrentDate(),
-        placeholder: that.getCurrentDate(),
+        id: datas.id,
+        accno: datas.accno,
+        carmodel: datas.carmodel,
+        dept: datas.dept,
+        dsy: datas.dsy,
+        dsyid: datas.dsyid,
+        dsytel: datas.dsytel,
+        garaddr: datas.garaddr,
+        garage: datas.garage,
+        garageid: datas.garageid,
+        garlxr: datas.garlxr,
+        gartel: datas.gartel,
+        insur: datas.insur,
+        insurid: datas.insurid,
+        isdisp: datas.isdisp,
+        isurgent: datas.isurgent,
+        memo: datas.memo,
+        plateno: datas.plateno,
+        srv: datas.srv,
+        srvid: datas.srvid,
+        srvopr: datas.mopr,
+        status: datas.status,
+        yydt: datas.date
       })
+    }
+    that.setData({
+      date: that.getCurrentDate(),
+      placeholder: that.getCurrentDate(),
+    })
   },
   getCurrentDate() {
     var timeStr = '-';
@@ -369,7 +395,7 @@ Page({
       mst: {
         id: 0,
         accno: that.data.accno,
-        carmodel: "eeee",
+        carmodel: that.data.carmodel,
         dept: null,
         dsy: that.data.dsy,
         dsyid: that.data.dsyid,
@@ -479,7 +505,7 @@ Page({
       mst: {
         id: 0,
         accno: that.data.accno,
-        carmodel: "eeee",
+        carmodel: that.data.carmodel,
         dept: null,
         dsy: that.data.dsy,
         dsyid: that.data.dsyid,
@@ -498,7 +524,7 @@ Page({
         srv: "",
         srvid: 701,
         srvopr: that.data.mopr,
-        status: "已暂存",
+        status: "提交",
         yydt: that.data.date
       },
       dtlAdd: that.data.orderList,
