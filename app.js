@@ -38,7 +38,7 @@ App({
     userInfo: null,
     serverUrl: 'https://kld.bestedu.online/dingdong/mobile',
     lastMonths: -2,
-    attrUrl: 'https://kld.bestedu.online/dingdong/static/static/upload/'
+    attrUrl: 'https://kld.bestedu.online/dingdong/static/upload/'
   },
   sendRequest: function(options) {
     var self = this;
