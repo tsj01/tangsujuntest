@@ -8,10 +8,20 @@ Page({
    * 页面的初始数据
    */
   data: {
+    "attAdd": [{
+      "url": "https://kld.bestedu.online/dingdong/static/upload/3302/2020-03-08/46d40ea677304e2781350d431e9f2bb7_img.jpg",
+      "isImage": true,
+      "paththumb": "3302/2020-03-08/46d40ea677304e2781350d431e9f2bb7_img_thumb.jpg",
+      "sizekb": 160,
+      "sizewh": "1080x607",
+      "tp": "定损照片",
+      "name": "46d40ea677304e2781350d431e9f2bb7_img.jpg",
+      "dtlid": 0
+    }],
     active: 0,
     show: false,
-    orderShow:false,
-    subShow:false,
+    orderShow: false,
+    subShow: false,
     array: ['是', '否'],
     index: 1,
     time: '1212',
@@ -29,7 +39,7 @@ Page({
       partno: '',
       price: 0,
       status: "未收",
-      showUploaderImg:false,
+      showUploaderImg: false,
       attAdd: [],
     }],
     editpartname: '',
@@ -37,7 +47,7 @@ Page({
     orderIndex: '',
     insur: '', //保险公司
     dsy: '', //勘查员
-    dsyid:'',
+    dsyid: '',
     dsytel: '', //联系方式
     accno: '', //报案号
     plateno: '', //车牌号
@@ -51,8 +61,8 @@ Page({
     memo: '', //订单备注
     insurid: '', //保险公司id
     garageid: '', //汽修公司id
-    mopr:'',
-    addNum:0
+    mopr: '',
+    addNum: 0
   },
   deleteimg(e) {
     console.log(e)
@@ -60,8 +70,8 @@ Page({
     let addQuery = e.currentTarget.dataset['index'];
     this.data.orderList.forEach((item, index) => {
       if (query == index) {
-        item.attAdd.forEach((a,d)=>{
-          if (addQuery == d){
+        item.attAdd.forEach((a, d) => {
+          if (addQuery == d) {
             item.attAdd.splice(addQuery, 1)
           }
         })
@@ -70,15 +80,15 @@ Page({
     this.setData({
       orderList: this.data.orderList
     });
-    console.log(this.data.orderList,3333)
+    console.log(this.data.orderList, 3333)
   },
-  showUploader:function(e){
+  showUploader: function(e) {
     let query = e.currentTarget.dataset['index'];
     this.data.orderList.forEach((item, index) => {
       if (query == index) {
-        if(item.showUploaderImg == false) {
+        if (item.showUploaderImg == false) {
           item.showUploaderImg = true
-        }else{
+        } else {
           item.showUploaderImg = false
         }
       }
@@ -87,7 +97,7 @@ Page({
       orderList: this.data.orderList
     });
   },
-  afterReads: function (event){
+  afterReads: function(event) {
     console.log(event);
     var me = this;
     var id = event.currentTarget.dataset.id;
@@ -106,14 +116,14 @@ Page({
             duration: 2000
           });
         }
-        console.log(file,333);
+        console.log(file, 333);
         var fileTypeArr = file[0].path.split('.');
         var fileType = fileTypeArr[fileTypeArr.length - 1];
         console.log(fileType)
         FileSystemManager.readFile({
-          filePath: file[0].path, 
-          encoding:'base64',
-          success:function(data){
+          filePath: file[0].path,
+          encoding: 'base64',
+          success: function(data) {
             console.log(data);
             wx.showLoading({
               title: '上传中...',
@@ -121,25 +131,25 @@ Page({
             app.sendRequest({
               action: 'addImageMP',
               params: {
-                image_data: 'data:image/' + fileType+';base64,' + data.data
+                image_data: 'data:image/' + fileType + ';base64,' + data.data
               },
-              success: function (res) {
+              success: function(res) {
                 wx.hideLoading();
                 console.log(res);
                 let rows = JSON.parse(res.rows);
-                console.log(rows,222)
+                console.log(rows, 222)
                 me.data.orderList.forEach((item, index) => {
                   if (id == item.id) {
-                    rows.forEach((i,v)=>{
+                    rows.forEach((i, v) => {
                       item.attAdd.push({
                         url: app.globalData.attrUrl + i.fileUrl,
-                        isImage:true,
+                        isImage: true,
                         paththumb: i.thumbUrl,
                         sizekb: i.sizekb,
                         sizewh: i.sizewh,
                         tp: "定损照片",
                         name: i.fileName,
-                        dtlid:item.id
+                        dtlid: item.id
                       })
                     })
                   }
@@ -147,11 +157,11 @@ Page({
                 me.setData({
                   orderList: me.data.orderList
                 });
-                console.log(me.data.orderList,555)
+                console.log(me.data.orderList, 555)
               }
             });
           },
-          fail:function(res){
+          fail: function(res) {
             console.log(res);
           }
         });
@@ -161,7 +171,7 @@ Page({
   checkboxChange: function(e) {
     let query = e.currentTarget.dataset['index'];
     this.data.orderList.forEach((item, index) => {
-      if (query == index){
+      if (query == index) {
         if (item.ischeck == false) {
           item.ischeck = true
         } else {
@@ -189,7 +199,7 @@ Page({
     });
   },
   add: function(e) {
-    let i = this.data.addNum -1;
+    let i = this.data.addNum - 1;
     this.data.orderList.push({
       id: i,
       isvalue: '否',
@@ -199,12 +209,12 @@ Page({
       partno: "",
       price: 0,
       status: "未收",
-      showUploaderImg:false,
-      attAdd:[]
+      showUploaderImg: false,
+      attAdd: []
     })
     this.setData({
       orderList: this.data.orderList,
-      addNum:i
+      addNum: i
     })
     console.log(this.data.orderList)
   },
@@ -265,7 +275,7 @@ Page({
       success: (res) => {
         console.log(res)
         this.setData({
-          editpartno:res.result
+          editpartno: res.result
         })
       }
     })
@@ -302,7 +312,7 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    if (options.data){
+    if (options.data) {
       let datas = JSON.parse(options.data);
       that.setData({
         id: datas.id,
@@ -338,44 +348,44 @@ Page({
   getCurrentDate() {
     var timeStr = '-';
     var curDate = new Date();
-    var curYear = curDate.getFullYear();  //获取完整的年份(4位,1970-????)
-    var curMonth = curDate.getMonth() + 1;  //获取当前月份(0-11,0代表1月)
-    var curDay = curDate.getDate();       //获取当前日(1-31)
-    var curWeekDay = curDate.getDay();    //获取当前星期X(0-6,0代表星期天)
-    var curHour = curDate.getHours();      //获取当前小时数(0-23)
-    var curMinute = curDate.getMinutes();   // 获取当前分钟数(0-59)
-    var curSec = curDate.getSeconds();      //获取当前秒数(0-59)
+    var curYear = curDate.getFullYear();  //获取完整的年份(4位,1970-????)
+    var curMonth = curDate.getMonth() + 1;  //获取当前月份(0-11,0代表1月)
+    var curDay = curDate.getDate();    //获取当前日(1-31)
+    var curWeekDay = curDate.getDay();   //获取当前星期X(0-6,0代表星期天)
+    var curHour = curDate.getHours();    //获取当前小时数(0-23)
+    var curMinute = curDate.getMinutes();  // 获取当前分钟数(0-59)
+    var curSec = curDate.getSeconds();    //获取当前秒数(0-59)
     var Current = curYear + timeStr + curMonth + timeStr + curDay + ' ' + curHour + ':' + curMinute + ':' + curSec;
     console.log(Current);
     // this.datetime=Current;
     return Current;
   },
-  accnoChange:function(event){
+  accnoChange: function(event) {
     this.setData({
       accno: event.detail
     })
   },
-  platenoChange: function (event){
+  platenoChange: function(event) {
     this.setData({
       plateno: event.detail
     })
   },
-  carmodelChange:function(event) {
+  carmodelChange: function(event) {
     this.setData({
       carmodel: event.detail
     })
   },
-  garlxrChange: function (event) {
+  garlxrChange: function(event) {
     this.setData({
       garlxr: event.detail
     })
   },
-  gartelChange: function (event) {
+  gartelChange: function(event) {
     this.setData({
       gartel: event.detail
     })
   },
-  memoChange: function (event) {
+  memoChange: function(event) {
     this.setData({
       memo: event.detail
     })
@@ -383,8 +393,8 @@ Page({
   storage: function() {
     let that = this;
     let arr = [];
-    that.data.orderList.forEach((item,index)=>{
-      item.attAdd.forEach((a,d)=>{
+    that.data.orderList.forEach((item, index) => {
+      item.attAdd.forEach((a, d) => {
         arr.push(a);
       })
     })
@@ -436,7 +446,7 @@ Page({
       }
     })
   },
-  submits:function(){
+  submits: function() {
     if (this.data.insur == '') {
       wx.showToast({
         title: '请输入保险公司',
@@ -466,7 +476,7 @@ Page({
         title: '请输入车型名称',
       })
       return;
-    } 
+    }
     if (this.data.garlxr == '') {
       wx.showToast({
         title: '请输入联系人',
@@ -479,7 +489,7 @@ Page({
       })
       return;
     }
-    
+
     if (this.data.date == '') {
       wx.showToast({
         title: '请输入预约日期',
@@ -493,11 +503,17 @@ Page({
       return;
     }
     this.setData({
-      subShow:true
+      subShow: true
     })
   },
-  subOrder:function(){
+  subOrder: function() {
     let that = this;
+    let arr = [];
+    that.data.orderList.forEach((item, index) => {
+      item.attAdd.forEach((a, d) => {
+        arr.push(a);
+      })
+    })
     let params = {
       isSubmit: true,
       checkSdt: "2019-12-07",
@@ -530,7 +546,7 @@ Page({
       dtlAdd: that.data.orderList,
       dtlUpd: [],
       dtlDel: [],
-      attAdd: [],
+      attAdd: arr,
       attUpd: [],
       attDel: []
     }
@@ -539,7 +555,7 @@ Page({
       params: {
         rows: JSON.stringify(params)
       },
-      success: function (res) {
+      success: function(res) {
         wx.redirectTo({
           url: '../list/index'
         })
@@ -549,7 +565,7 @@ Page({
       subShow: false
     })
   },
-  delOrder:function(){
+  delOrder: function() {
     this.setData({
       subShow: false
     })
