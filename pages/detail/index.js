@@ -28,8 +28,9 @@ Page({
     url: app.globalData.attrUrl
   },
   listdetail:function(e){
+    let info = JSON.stringify(this.data.list);
     wx.navigateTo({
-      url: '../recovery/index'
+      url: '../recovery/index?list=' + info
     })
   },
   modify:function(e){

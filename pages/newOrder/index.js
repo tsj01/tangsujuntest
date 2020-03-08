@@ -8,16 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    "attAdd": [{
-      "url": "https://kld.bestedu.online/dingdong/static/upload/3302/2020-03-08/46d40ea677304e2781350d431e9f2bb7_img.jpg",
-      "isImage": true,
-      "paththumb": "3302/2020-03-08/46d40ea677304e2781350d431e9f2bb7_img_thumb.jpg",
-      "sizekb": 160,
-      "sizewh": "1080x607",
-      "tp": "定损照片",
-      "name": "46d40ea677304e2781350d431e9f2bb7_img.jpg",
-      "dtlid": 0
-    }],
+    endtime: formatTime,
+    orderDate:'请选择',
     active: 0,
     show: false,
     orderShow: false,
@@ -27,9 +19,6 @@ Page({
     time: '1212',
     date: formatTime,
     disabled: false, //设置是否能点击 false可以 true不能点击
-    startDate: '2000-01-01',
-    endDate: '2050-03-12',
-    placeholder: '请选择时间',
     orderList: [{
       id: 0,
       isvalue: '否',
@@ -63,6 +52,12 @@ Page({
     garageid: '', //汽修公司id
     mopr: '',
     addNum: 0
+  },
+  bindOrderDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      orderDate: e.detail.value
+    })
   },
   deleteimg(e) {
     console.log(e)
@@ -247,11 +242,6 @@ Page({
       editpartno: event.detail
     })
   },
-  onPickerChange: function(e) {
-    this.setData({
-      date: e.detail.dateString
-    })
-  },
   showPopup() {
     this.setData({
       show: true
@@ -337,28 +327,9 @@ Page({
         srvid: datas.srvid,
         srvopr: datas.mopr,
         status: datas.status,
-        yydt: datas.date
+        orderDate: datas.yydt
       })
     }
-    that.setData({
-      date: that.getCurrentDate(),
-      placeholder: that.getCurrentDate(),
-    })
-  },
-  getCurrentDate() {
-    var timeStr = '-';
-    var curDate = new Date();
-    var curYear = curDate.getFullYear();  //获取完整的年份(4位,1970-????)
-    var curMonth = curDate.getMonth() + 1;  //获取当前月份(0-11,0代表1月)
-    var curDay = curDate.getDate();    //获取当前日(1-31)
-    var curWeekDay = curDate.getDay();   //获取当前星期X(0-6,0代表星期天)
-    var curHour = curDate.getHours();    //获取当前小时数(0-23)
-    var curMinute = curDate.getMinutes();  // 获取当前分钟数(0-59)
-    var curSec = curDate.getSeconds();    //获取当前秒数(0-59)
-    var Current = curYear + timeStr + curMonth + timeStr + curDay + ' ' + curHour + ':' + curMinute + ':' + curSec;
-    console.log(Current);
-    // this.datetime=Current;
-    return Current;
   },
   accnoChange: function(event) {
     this.setData({
@@ -425,7 +396,7 @@ Page({
         srvid: 701,
         srvopr: that.data.mopr,
         status: "已暂存",
-        yydt: that.data.date
+        yydt: that.data.orderDate
       },
       dtlAdd: that.data.orderList,
       dtlUpd: [],
@@ -490,7 +461,7 @@ Page({
       return;
     }
 
-    if (this.data.date == '') {
+    if (this.data.orderDate == '请选择') {
       wx.showToast({
         title: '请输入预约日期',
       })
@@ -541,7 +512,7 @@ Page({
         srvid: 701,
         srvopr: that.data.mopr,
         status: "提交",
-        yydt: that.data.date
+        yydt: that.data.orderDate
       },
       dtlAdd: that.data.orderList,
       dtlUpd: [],
