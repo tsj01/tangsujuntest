@@ -142,7 +142,7 @@ Page({
                           //   icon: 'success',
                           //   duration: 1000
                           // })
-                          me.uploadImage(me, file, fileType, id);
+                          me.getLocation(me, file, fileType, id);
 
                         } else {
                           // wx.showToast({
@@ -158,11 +158,11 @@ Page({
               })
             } else if (resSting.authSetting['scope.userLocation'] == undefined) {
               //调用wx.getLocation的API
-              me.uploadImage(me, file, fileType, id);
+              me.getLocation(me, file, fileType, id);
             }
             else {
               //调用wx.getLocation的API
-              me.uploadImage(me, file, fileType, id);
+              me.getLocation(me, file, fileType, id);
             }
           }
         })
@@ -172,61 +172,76 @@ Page({
       }
     })
   },
-  uploadImage: function (me, file, fileType, id){
+  getLocation: function (me, file, fileType, id){
     wx.getLocation({
       type: 'gcj02',
       success: function (locInfo) {
         console.log(locInfo);
-        FileSystemManager.readFile({
-          filePath: file[0].path,
-          encoding: 'base64',
-          success: function (data) {
-            console.log(data);
-            wx.showLoading({
-              title: '上传中...',
-            })
-            app.sendRequest({
-              action: 'addImageMP',
-              params: {
-                image_data: 'data:image/' + fileType + ';base64,' + data.data
-              },
-              success: function(res) {
-                wx.hideLoading();
-                console.log(res);
-                let rows = JSON.parse(res.rows);
-                console.log(rows, 222)
-                me.data.orderList.forEach((item, index) => {
-                  if (id == item.id) {
-                    rows.forEach((i, v) => {
-                      item.attAdd.push({
-                        url: app.globalData.attrUrl + i.fileUrl,
-                        isImage: true,
-                        paththumb: i.thumbUrl,
-                        sizekb: i.sizekb,
-                        sizewh: i.sizewh,
-                        tp: "定损照片",
-                        name: i.fileName,
-                        dtlid: item.id
-                      })
-                    })
-                  }
-                })
-                me.setData({
-                  orderList: me.data.orderList
-                });
-                console.log(me.data.orderList, 555)
-              }
-            });
-          },
-          fail: function (res) {
-            console.log(res);
-          }
-        });
+        
+        // wx.request({
+        //   url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + locInfo.latitude + ',' + locInfo.longitude+'&key=THFBZ-4MCCF-3HGJI-JGMF2-3OYPZ-AZB4A',
+        //   success: function (result) {
+        //     console.log(result.data.result.address_component.city)
+            
+        //   }
+
+        // })
+        me.uploadImage(me, file, fileType, id, locInfo);
       },
       fail: function (locInfo) {
         console.log(locInfo);
       }
     })
+  },
+  uploadImage: function (me, file, fileType, id, locInfo){
+    FileSystemManager.readFile({
+      filePath: file[0].path,
+      encoding: 'base64',
+      success: function (data) {
+        console.log(data);
+        wx.showLoading({
+          title: '上传中...',
+        })
+        app.sendRequest({
+          action: 'addImageMP',
+          params: {
+            image_data: 'data:image/' + fileType + ';base64,' + data.data,
+            locInf: '',
+            lng: locInfo.longitude,
+            lat: locInfo.latitude
+          },
+          success: function (res) {
+            wx.hideLoading();
+            console.log(res);
+            let rows = JSON.parse(res.rows);
+            console.log(rows, 222)
+            me.data.orderList.forEach((item, index) => {
+              if (id == item.id) {
+                rows.forEach((i, v) => {
+                  item.attAdd.push({
+                    url: app.globalData.attrUrl + i.fileUrl,
+                    isImage: true,
+                    paththumb: i.thumbUrl,
+                    sizekb: i.sizekb,
+                    sizewh: i.sizewh,
+                    tp: "定损照片",
+                    name: i.fileName,
+                    dtlid: item.id
+                  })
+                })
+              }
+            })
+            me.setData({
+              orderList: me.data.orderList
+            });
+            console.log(me.data.orderList, 555)
+          }
+        });
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    });
   },
   checkboxChange: function(e) {
     let query = e.currentTarget.dataset['index'];
