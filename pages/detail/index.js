@@ -22,17 +22,27 @@ Page({
     data:{},
     type:'',
     list:[],
-    imgList:[]
+    imgList:[],
+    recoveryList: [],
+    repairList: [],
+    url: app.globalData.attrUrl
   },
   listdetail:function(e){
+    let info = JSON.stringify(this.data.list);
     wx.navigateTo({
-      url: '../recovery/index'
+      url: '../recovery/index?list=' + info
     })
   },
   modify:function(e){
     let info = JSON.stringify(this.data.data);
     wx.navigateTo({
       url: '../newOrder/index?data='+ info
+    })
+  },
+  copy:function(e){
+    let info = JSON.stringify(this.data.data);
+    wx.navigateTo({
+      url: '../newOrder/index?data=' + info
     })
   },
   /**
@@ -111,7 +121,7 @@ Page({
     let params = {
       oid: that.data.type,
       usePaging: true,
-      tp: '定损图片',
+      tp: '定损照片',
       openid: '',
       nickname: '',
       ver: 200
@@ -137,15 +147,44 @@ Page({
         action: 'getOrderImg',
         params: {
           oid: that.data.type,
-          tp: '定损图片',
+          tp: '定损照片',
           openid: '',
           nickname: '',
           ver: 200
         },
         success: function (res) {
-
           that.setData({
             imgList: res.rows,
+          })
+        }
+      })
+      app.sendRequest({
+        action: 'getOrderImg',
+        params: {
+          oid: that.data.type,
+          tp: '回收照片',
+          openid: '',
+          nickname: '',
+          ver: 200
+        },
+        success: function (res) {
+          that.setData({
+            recoveryList: res.rows,
+          })
+        }
+      })
+      app.sendRequest({
+        action: 'getOrderImg',
+        params: {
+          oid: that.data.type,
+          tp: '维修照片',
+          openid: '',
+          nickname: '',
+          ver: 200
+        },
+        success: function (res) {
+          that.setData({
+            repairList: res.rows,
           })
         }
       })

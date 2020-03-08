@@ -2,23 +2,23 @@
 <view class="content">
   <view class="name">
     <text class="label">配件名称:</text>
-    <text class="info">11111</text>
+    <text class="info">{{datas.partname}}</text>
   </view>
   <view class="name">
     <text class="label">易碎贴号:</text>
-    <text class="info">11111</text>
+    <text class="info">{{datas.partno}}</text>
   </view>
   <view class="name">
     <text class="label">原厂编码:</text>
-    <text class="info">11111</text>
+    <text class="info">{{datas.orgsno}}</text>
   </view>
   <view class="name">
     <text class="label">单价:</text>
-    <text class="info">11111</text>
+    <text class="info">{{datas.price}}</text>
   </view>
   <view class="name border">
     <text class="label">价值件:</text>
-    <text class="info">11111</text>
+    <text class="info">{{datas.isvalue}}</text>
   </view>
   <view class="name">
     <text class="label">定损照片:</text>
@@ -30,15 +30,15 @@
   </view>
   <view class="name">
     <text class="label">回收日期:</text>
-    <text class="info">11111</text>
+    <text class="info">{{datas.recvdt}}</text>
   </view>
   <view class="name">
     <text class="label">回收人员:</text>
-    <text class="info">11111</text>
+    <text class="info">{{datas.recvop}}</text>
   </view>
   <view class="name">
     <text class="label">联系电话:</text>
-    <text class="info">11111</text>
+    <text class="info">{{datas.recvtel}}</text>
   </view>
   <view class="name">
     <text class="label">回收备注:</text>

@@ -183,15 +183,12 @@
           </view>
         </picker>
       </view>
-      <view class="detePicker" bindtap="showPopup">
-        <pickerYMDHM 
-          placeholder = "{{placeholder}}" 
-          date = "{{date}}" 
-          disabled = "{{disabled}}" 
-          bind:onPickerChange="onPickerChange" 
-          startDate="{{startDate}}" 
-          endDate="{{endDate}}">
-        </pickerYMDHM>
+      <view class="section">
+        <picker mode="date" value="{{orderDate}}" start="2015-09-01" end="{{endtime}}" bindchange="bindOrderDateChange">
+          <view class="picker">
+            <text class="leftdate">预约日期: </text>{{orderDate}}
+          </view>
+        </picker>
       </view>
       <van-cell-group>
         <van-field

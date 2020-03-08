@@ -17,7 +17,8 @@ Page({
       { name: 'other', value: '其他情况' },
     ],
     status:'',
-    reasonStatus:''
+    reasonStatus:'',
+    datas:''
   },
   radioChange:function(e){
     console.log(e,1111)
@@ -34,7 +35,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options.list) {
+      let datas = JSON.parse(options.list);
+      console.log(datas,1111)
+      this.setData({
+        datas:datas[0]
+      })
+    }
   },
 
   /**
