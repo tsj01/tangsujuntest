@@ -54,7 +54,20 @@ Page({
     addNum: 0,
     act:'add',
     id:0,
-    detailTypeid:''
+    detailTypeid:'',
+    imgUrls: []
+  },
+  imgYu: function (event) {
+    console.log(event)
+    var that = this;
+    var src = event.currentTarget.dataset.src;//获取data-src
+    var imgUrls = that.data.imgUrls;//获取data-list
+    imgUrls.push(src)
+    //图片预览
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: imgUrls // 需要预览的图片http链接列表
+    })
   },
   bindOrderDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)

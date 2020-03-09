@@ -25,7 +25,20 @@ Page({
     imgList:[],
     recoveryList: [],
     repairList: [],
-    url: app.globalData.attrUrl
+    url: app.globalData.attrUrl,
+    imgUrls:[]
+  },
+  imgYu: function (event) {
+    console.log(event)
+    var that = this;
+    var src = event.currentTarget.dataset.src;//获取data-src
+    var imgUrls = that.data.imgUrls;//获取data-list
+    imgUrls.push(src)
+    //图片预览
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: imgUrls // 需要预览的图片http链接列表
+    })
   },
   listdetail:function(e){
     let info = JSON.stringify(this.data.list);

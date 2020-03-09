@@ -97,7 +97,7 @@
     <van-tab title="图片信息">
     <view class="imginfo">
       <text>定损照片：</text>
-      <image class="img" wx:for="{{imgList}}" wx:key="{{index}}"  src="{{url+item.paththumb}}"></image>
+      <image  class="img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap='imgYu' data-src="{{url+item.paththumb}}" src="{{url+item.paththumb}}"></image>
     </view>
     <view class="imginfo">
       <text>回收照片：</text>
