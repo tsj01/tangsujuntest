@@ -117,54 +117,134 @@ Page({
         console.log(file, 333);
         var fileTypeArr = file[0].path.split('.');
         var fileType = fileTypeArr[fileTypeArr.length - 1];
-        console.log(fileType)
-        FileSystemManager.readFile({
-          filePath: file[0].path,
-          encoding: 'base64',
-          success: function(data) {
-            console.log(data);
-            wx.showLoading({
-              title: '上传中...',
-            })
-            app.sendRequest({
-              action: 'addImageMP',
-              params: {
-                image_data: 'data:image/' + fileType + ';base64,' + data.data
-              },
-              success: function(res) {
-                wx.hideLoading();
-                console.log(res);
-                let rows = JSON.parse(res.rows);
-                console.log(rows, 222)
-                me.data.orderList.forEach((item, index) => {
-                  if (id == item.id) {
-                    rows.forEach((i, v) => {
-                      item.attAdd.push({
-                        url: app.globalData.attrUrl + i.fileUrl,
-                        isImage: true,
-                        paththumb: i.thumbUrl,
-                        sizekb: i.sizekb,
-                        sizewh: i.sizewh,
-                        tp: "定损照片",
-                        name: i.fileName,
-                        dtlid: item.id
-                      })
+        console.log(fileType);
+
+        wx.getSetting({
+          success: (resSting) => {
+            console.log(JSON.stringify(resSting))
+            // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
+            // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
+            // res.authSetting['scope.userLocation'] == true    表示 地理位置授权
+            if (resSting.authSetting['scope.userLocation'] != undefined && resSting.authSetting['scope.userLocation'] != true) {
+              wx.showModal({
+                title: '请求授权当前位置',
+                content: '需要获取您的地理位置，请确认授权',
+                success: function (resshowModal) {
+                  if (resshowModal.cancel) {
+                    wx.showToast({
+                      title: '拒绝授权',
+                      icon: 'none',
+                      duration: 1000
+                    })
+                  } else if (resshowModal.confirm) {
+                    wx.openSetting({
+                      success: function (dataAu) {
+                        if (dataAu.authSetting["scope.userLocation"] == true) {
+                          // wx.showToast({
+                          //   title: '授权成功',
+                          //   icon: 'success',
+                          //   duration: 1000
+                          // })
+                          me.getLocation(me, file, fileType, id);
+
+                        } else {
+                          // wx.showToast({
+                          //   title: '授权失败',
+                          //   icon: 'none',
+                          //   duration: 1000
+                          // })
+                        }
+                      }
                     })
                   }
-                })
-                me.setData({
-                  orderList: me.data.orderList
-                });
-                console.log(me.data.orderList, 555)
-              }
-            });
-          },
-          fail: function(res) {
-            console.log(res);
+                }
+              })
+            } else if (resSting.authSetting['scope.userLocation'] == undefined) {
+              //调用wx.getLocation的API
+              me.getLocation(me, file, fileType, id);
+            }
+            else {
+              //调用wx.getLocation的API
+              me.getLocation(me, file, fileType, id);
+            }
           }
-        });
+        })
+        
+
+        
       }
     })
+  },
+  getLocation: function (me, file, fileType, id){
+    wx.getLocation({
+      type: 'gcj02',
+      success: function (locInfo) {
+        console.log(locInfo);
+        
+        // wx.request({
+        //   url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + locInfo.latitude + ',' + locInfo.longitude+'&key=THFBZ-4MCCF-3HGJI-JGMF2-3OYPZ-AZB4A',
+        //   success: function (result) {
+        //     console.log(result.data.result.address_component.city)
+            
+        //   }
+
+        // })
+        me.uploadImage(me, file, fileType, id, locInfo);
+      },
+      fail: function (locInfo) {
+        console.log(locInfo);
+      }
+    })
+  },
+  uploadImage: function (me, file, fileType, id, locInfo){
+    FileSystemManager.readFile({
+      filePath: file[0].path,
+      encoding: 'base64',
+      success: function (data) {
+        console.log(data);
+        wx.showLoading({
+          title: '上传中...',
+        })
+        app.sendRequest({
+          action: 'addImageMP',
+          params: {
+            image_data: 'data:image/' + fileType + ';base64,' + data.data,
+            locInf: '',
+            lng: locInfo.longitude,
+            lat: locInfo.latitude
+          },
+          success: function (res) {
+            wx.hideLoading();
+            console.log(res);
+            let rows = JSON.parse(res.rows);
+            console.log(rows, 222)
+            me.data.orderList.forEach((item, index) => {
+              if (id == item.id) {
+                rows.forEach((i, v) => {
+                  item.attAdd.push({
+                    url: app.globalData.attrUrl + i.fileUrl,
+                    isImage: true,
+                    paththumb: i.thumbUrl,
+                    sizekb: i.sizekb,
+                    sizewh: i.sizewh,
+                    tp: "定损照片",
+                    name: i.fileName,
+                    dtlid: item.id
+                  })
+                })
+              }
+            })
+            me.setData({
+              orderList: me.data.orderList
+            });
+            console.log(me.data.orderList, 555)
+          }
+        });
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    });
   },
   checkboxChange: function(e) {
     let query = e.currentTarget.dataset['index'];
@@ -614,5 +694,59 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  compressImage({ filePath, success, fail }) {
+    // 获取图片宽高
+    wx.getImageInfo({
+      src: filePath,
+      success: ({ width, height }) => {
+        const systemInfo = wx.getSystemInfoSync();
+        const canvasWidth = systemInfo.screenWidth;
+        const canvasHeight = systemInfo.screenHeight;
+        // 更新画布尺寸
+        this.setData({ canvasWidth, canvasHeight })
+
+        // 计算缩放比例
+        const scaleX = canvasWidth / width;
+        const scaleY = canvasHeight / height;
+        const scale = Math.min(scaleX, scaleY);
+        const imageWidth = width * scale;
+        const imageHeight = height * scale;
+
+        // 将缩放后的图片绘制到画布
+        const ctx = wx.createCanvasContext("hidden-canvas");
+        let dx = (canvasWidth - imageWidth) / 2;
+        let dy = (canvasHeight - imageHeight) / 2;
+        ctx.drawImage(filePath, dx, dy, imageWidth, imageHeight);
+        ctx.draw(false, () => {
+          // 导出压缩后的图片到临时文件
+          wx.canvasToTempFilePath({
+            canvasId: "hidden-canvas",
+            width: canvasWidth,
+            height: canvasHeight,
+            destWidth: canvasWidth,
+            destHeight: canvasHeight,
+            fileType: "jpg",
+            quality: 0.92,
+            success: ({ tempFilePath }) => {
+              // 隐藏画布
+              this.setData({ canvasWidth: 0, canvasHeight: 0 })
+
+              // 压缩完成
+              success({ tempFilePath });
+            },
+            fail: error => {
+              // 隐藏画布
+              this.setData({ canvasWidth: 0, canvasHeight: 0 })
+              fail(error);
+            }
+          });
+        });
+      },
+      fail: error => {
+        fail(error);
+      }
+    });
   }
+
 })
