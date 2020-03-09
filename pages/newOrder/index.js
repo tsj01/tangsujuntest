@@ -237,7 +237,7 @@ Page({
                   item.attAdd.push({
                     url: app.globalData.attrUrl + i.fileUrl,
                     isImage: true,
-                    paththumb: i.thumbUrl,
+                    paththumb: app.globalData.attrUrl+i.thumbUrl,
                     sizekb: i.sizekb,
                     sizewh: i.sizewh,
                     tp: "定损照片",
@@ -500,7 +500,7 @@ Page({
         isurgent: that.data.isurgent,
         memo: that.data.memo,
         plateno: that.data.plateno,
-        srv: "",
+        srv: "宁波格斯美",
         srvid: 701,
         srvopr: that.data.mopr,
         status: "已暂存",

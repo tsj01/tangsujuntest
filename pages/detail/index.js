@@ -133,8 +133,7 @@ Page({
     var that = this;
     let params = {
       oid: that.data.type,
-      usePaging: true,
-      tp: '定损照片',
+      usePaging: false,
       openid: '',
       nickname: '',
       ver: 200
@@ -160,6 +159,7 @@ Page({
         action: 'getOrderImg',
         params: {
           oid: that.data.type,
+          usePaging: true,
           tp: '定损照片',
           openid: '',
           nickname: '',
@@ -175,6 +175,7 @@ Page({
         action: 'getOrderImg',
         params: {
           oid: that.data.type,
+          usePaging: true,
           tp: '回收照片',
           openid: '',
           nickname: '',
@@ -190,6 +191,7 @@ Page({
         action: 'getOrderImg',
         params: {
           oid: that.data.type,
+          usePaging: true,
           tp: '维修照片',
           openid: '',
           nickname: '',
