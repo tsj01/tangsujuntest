@@ -51,7 +51,10 @@ Page({
     insurid: '', //保险公司id
     garageid: '', //汽修公司id
     mopr: '',
-    addNum: 0
+    addNum: 0,
+    act:'add',
+    id:0,
+    detailTypeid:''
   },
   bindOrderDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -304,6 +307,18 @@ Page({
     let that = this;
     if (options.data) {
       let datas = JSON.parse(options.data);
+      console.log(options)
+      if (options.name == 'modify'){
+        that.setData({
+          act: 'upd',
+          detailTypeid:options.type
+        })
+      }
+      if (options.name == 'copy'){
+        that.setData({
+          act: 'add'
+        })
+      }
       that.setData({
         id: datas.id,
         accno: datas.accno,
@@ -327,7 +342,7 @@ Page({
         srvid: datas.srvid,
         srvopr: datas.mopr,
         status: datas.status,
-        orderDate: datas.yydt
+        orderDate: datas.yydt,
       })
     }
   },
@@ -372,9 +387,9 @@ Page({
     let params = {
       isSubmit: false,
       checkSdt: "2019-12-07",
-      act: "add",
+      act: that.data.act,
       mst: {
-        id: 0,
+        id: that.data.id,
         accno: that.data.accno,
         carmodel: that.data.carmodel,
         dept: null,
@@ -411,6 +426,17 @@ Page({
         rows: JSON.stringify(params)
       },
       success: function(res) {
+        if(that.data.act == 'upd'){
+          let pages = getCurrentPages();
+          let prevPage = pages[pages.length - 2];
+          wx.navigateBack({
+            delta: 1,// 返回上一级页面。
+            success: function () {
+              prevPage.getDetail(that.data.detailTypeid); // 执行前一个页面的getList方法
+            }
+          })
+          return;
+        }
         wx.redirectTo({
           url: '../list/index'
         })
@@ -488,9 +514,9 @@ Page({
     let params = {
       isSubmit: true,
       checkSdt: "2019-12-07",
-      act: "add",
+      act: that.data.act,
       mst: {
-        id: 0,
+        id: that.data.id,
         accno: that.data.accno,
         carmodel: that.data.carmodel,
         dept: null,

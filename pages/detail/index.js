@@ -36,13 +36,13 @@ Page({
   modify:function(e){
     let info = JSON.stringify(this.data.data);
     wx.navigateTo({
-      url: '../newOrder/index?data='+ info
+      url: '../newOrder/index?name=modify&type='+this.data.type + '&data='+ info
     })
   },
   copy:function(e){
     let info = JSON.stringify(this.data.data);
     wx.navigateTo({
-      url: '../newOrder/index?data=' + info
+      url: '../newOrder/index?name=copy&data=' + info
     })
   },
   /**
