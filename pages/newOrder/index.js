@@ -1,4 +1,5 @@
-var formatTime = require('../../utils/util.js')
+let formatTime = require('../../utils/util.js')
+let dateTimePicker = require('../../utils/dateTimePicker.js')
 let exif = require("../../utils/exif");
 const FileSystemManager = wx.getFileSystemManager();
 const app = getApp();
@@ -8,8 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    endtime: formatTime,
-    orderDate:'请选择',
+    orderDate: '',
+    startT:'',
+    dateTimeArray:'',
     active: 0,
     show: false,
     orderShow: false,
@@ -52,16 +54,18 @@ Page({
     garageid: '', //汽修公司id
     mopr: '',
     addNum: 0,
-    act:'add',
-    id:0,
-    detailTypeid:'',
-    imgUrls: []
+    act: 'add',
+    id: 0,
+    detailTypeid: '',
+    imgUrls: [],
+    srv: '',
+    srvid: ''
   },
-  imgYu: function (event) {
+  imgYu: function(event) {
     console.log(event)
     var that = this;
-    var src = event.currentTarget.dataset.src;//获取data-src
-    var imgUrls = that.data.imgUrls;//获取data-list
+    var src = event.currentTarget.dataset.src; //获取data-src
+    var imgUrls = that.data.imgUrls; //获取data-list
     imgUrls.push(src)
     //图片预览
     wx.previewImage({
@@ -69,10 +73,13 @@ Page({
       urls: imgUrls // 需要预览的图片http链接列表
     })
   },
-  bindOrderDateChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindOrderDateChange: function(e) {
     this.setData({
       orderDate: e.detail.value
+    })
+    var startT = dateTimePicker.formatPickerDateTime(this.data.dateTimeArray, this.data.orderDate)
+    this.setData({
+      startT: startT
     })
   },
   deleteimg(e) {
@@ -114,7 +121,7 @@ Page({
     var id = event.currentTarget.dataset.id;
     wx.chooseImage({
       count: 1,
-      sourceType: ['camera'],
+      sourceType: ['album', 'camera'],
       success(res) {
         console.log(res);
         // tempFilePath可以作为img标签的src属性显示图片
@@ -142,7 +149,7 @@ Page({
               wx.showModal({
                 title: '请求授权当前位置',
                 content: '需要获取您的地理位置，请确认授权',
-                success: function (resshowModal) {
+                success: function(resshowModal) {
                   if (resshowModal.cancel) {
                     wx.showToast({
                       title: '拒绝授权',
@@ -151,7 +158,7 @@ Page({
                     })
                   } else if (resshowModal.confirm) {
                     wx.openSetting({
-                      success: function (dataAu) {
+                      success: function(dataAu) {
                         if (dataAu.authSetting["scope.userLocation"] == true) {
                           // wx.showToast({
                           //   title: '授权成功',
@@ -175,45 +182,41 @@ Page({
             } else if (resSting.authSetting['scope.userLocation'] == undefined) {
               //调用wx.getLocation的API
               me.getLocation(me, file, fileType, id);
-            }
-            else {
+            } else {
               //调用wx.getLocation的API
               me.getLocation(me, file, fileType, id);
             }
           }
         })
-        
-
-        
       }
     })
   },
-  getLocation: function (me, file, fileType, id){
+  getLocation: function(me, file, fileType, id) {
     wx.getLocation({
       type: 'gcj02',
-      success: function (locInfo) {
+      success: function(locInfo) {
         console.log(locInfo);
-        
+
         // wx.request({
         //   url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + locInfo.latitude + ',' + locInfo.longitude+'&key=THFBZ-4MCCF-3HGJI-JGMF2-3OYPZ-AZB4A',
         //   success: function (result) {
         //     console.log(result.data.result.address_component.city)
-            
+
         //   }
 
         // })
         me.uploadImage(me, file, fileType, id, locInfo);
       },
-      fail: function (locInfo) {
+      fail: function(locInfo) {
         console.log(locInfo);
       }
     })
   },
-  uploadImage: function (me, file, fileType, id, locInfo){
+  uploadImage: function(me, file, fileType, id, locInfo) {
     FileSystemManager.readFile({
       filePath: file[0].path,
       encoding: 'base64',
-      success: function (data) {
+      success: function(data) {
         console.log(data);
         wx.showLoading({
           title: '上传中...',
@@ -226,7 +229,7 @@ Page({
             lng: locInfo.longitude,
             lat: locInfo.latitude
           },
-          success: function (res) {
+          success: function(res) {
             wx.hideLoading();
             console.log(res);
             let rows = JSON.parse(res.rows);
@@ -237,7 +240,7 @@ Page({
                   item.attAdd.push({
                     url: app.globalData.attrUrl + i.fileUrl,
                     isImage: true,
-                    paththumb: app.globalData.attrUrl+i.thumbUrl,
+                    paththumb: app.globalData.attrUrl + i.thumbUrl,
                     sizekb: i.sizekb,
                     sizewh: i.sizewh,
                     tp: "定损照片",
@@ -254,7 +257,7 @@ Page({
           }
         });
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res);
       }
     });
@@ -322,7 +325,7 @@ Page({
     })
   },
   delOrderlist: function() {
-    this.data.orderList.splice(this.orderIndex, 1)
+    this.data.orderList.splice(this.data.orderIndex, 1)
     this.setData({
       orderList: this.data.orderList,
       orderShow: false
@@ -397,17 +400,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var start = app.initTime();
+    var obj = dateTimePicker.dateTimePicker(2015, 2060, start);
+    this.setData({
+      orderDate: obj.dateTime,
+      dateTimeArray: obj.dateTimeArray
+    });
+    var startT = dateTimePicker.formatPickerDateTime(this.data.dateTimeArray, this.data.orderDate)
+    this.setData({
+      startT: startT
+    })
     let that = this;
+    that.getLoginInfo();
     if (options.data) {
       let datas = JSON.parse(options.data);
       console.log(options)
-      if (options.name == 'modify'){
+      if (options.name == 'modify') {
         that.setData({
           act: 'upd',
-          detailTypeid:options.type
+          detailTypeid: options.type
         })
       }
-      if (options.name == 'copy'){
+      if (options.name == 'copy') {
         that.setData({
           act: 'add'
         })
@@ -435,7 +449,7 @@ Page({
         srvid: datas.srvid,
         srvopr: datas.mopr,
         status: datas.status,
-        orderDate: datas.yydt,
+        startT: datas.yydt,
       })
     }
   },
@@ -479,7 +493,7 @@ Page({
     })
     let params = {
       isSubmit: false,
-      checkSdt: "2019-12-07",
+      checkSdt: "2020-01-10",
       act: that.data.act,
       mst: {
         id: that.data.id,
@@ -500,11 +514,11 @@ Page({
         isurgent: that.data.isurgent,
         memo: that.data.memo,
         plateno: that.data.plateno,
-        srv: "宁波格斯美",
-        srvid: 701,
+        srv: that.data.srv,
+        srvid: that.data.srvid,
         srvopr: that.data.mopr,
         status: "已暂存",
-        yydt: that.data.orderDate
+        yydt: that.data.startT
       },
       dtlAdd: that.data.orderList,
       dtlUpd: [],
@@ -519,12 +533,12 @@ Page({
         rows: JSON.stringify(params)
       },
       success: function(res) {
-        if(that.data.act == 'upd'){
+        if (that.data.act == 'upd') {
           let pages = getCurrentPages();
           let prevPage = pages[pages.length - 2];
           wx.navigateBack({
-            delta: 1,// 返回上一级页面。
-            success: function () {
+            delta: 1, // 返回上一级页面。
+            success: function() {
               prevPage.getDetail(that.data.detailTypeid); // 执行前一个页面的getList方法
             }
           })
@@ -580,7 +594,7 @@ Page({
       return;
     }
 
-    if (this.data.orderDate == '请选择') {
+    if (this.data.startT == '') {
       wx.showToast({
         title: '请输入预约日期',
       })
@@ -606,7 +620,7 @@ Page({
     })
     let params = {
       isSubmit: true,
-      checkSdt: "2019-12-07",
+      checkSdt: "2020-01-10",
       act: that.data.act,
       mst: {
         id: that.data.id,
@@ -627,11 +641,11 @@ Page({
         isurgent: that.data.isurgent,
         memo: that.data.memo,
         plateno: that.data.plateno,
-        srv: "",
-        srvid: 701,
+        srv: that.data.srv,
+        srvid: that.data.srvid,
         srvopr: that.data.mopr,
         status: "提交",
-        yydt: that.data.orderDate
+        yydt: that.data.startT
       },
       dtlAdd: that.data.orderList,
       dtlUpd: [],
@@ -658,6 +672,23 @@ Page({
   delOrder: function() {
     this.setData({
       subShow: false
+    })
+  },
+  getLoginInfo: function(e) {
+    let that = this;
+    app.sendRequest({
+      action: 'getLoginInfo',
+      params: {},
+      success: function(res) {
+        console.log(res, 8888)
+        let ddvars = JSON.parse(res.rows.ddvars);
+        console.log(ddvars, 999)
+        that.setData({
+          srv: ddvars.branch.shortname,
+          srvid: ddvars.branch.id,
+          mopr: ddvars.mopr
+        })
+      }
     })
   },
   /**
@@ -708,16 +739,26 @@ Page({
   onShareAppMessage: function() {
 
   },
-  compressImage({ filePath, success, fail }) {
+  compressImage({
+    filePath,
+    success,
+    fail
+  }) {
     // 获取图片宽高
     wx.getImageInfo({
       src: filePath,
-      success: ({ width, height }) => {
+      success: ({
+        width,
+        height
+      }) => {
         const systemInfo = wx.getSystemInfoSync();
         const canvasWidth = systemInfo.screenWidth;
         const canvasHeight = systemInfo.screenHeight;
         // 更新画布尺寸
-        this.setData({ canvasWidth, canvasHeight })
+        this.setData({
+          canvasWidth,
+          canvasHeight
+        })
 
         // 计算缩放比例
         const scaleX = canvasWidth / width;
@@ -741,16 +782,26 @@ Page({
             destHeight: canvasHeight,
             fileType: "jpg",
             quality: 0.92,
-            success: ({ tempFilePath }) => {
+            success: ({
+              tempFilePath
+            }) => {
               // 隐藏画布
-              this.setData({ canvasWidth: 0, canvasHeight: 0 })
+              this.setData({
+                canvasWidth: 0,
+                canvasHeight: 0
+              })
 
               // 压缩完成
-              success({ tempFilePath });
+              success({
+                tempFilePath
+              });
             },
             fail: error => {
               // 隐藏画布
-              this.setData({ canvasWidth: 0, canvasHeight: 0 })
+              this.setData({
+                canvasWidth: 0,
+                canvasHeight: 0
+              })
               fail(error);
             }
           });

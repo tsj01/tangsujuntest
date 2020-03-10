@@ -1,4 +1,5 @@
 // pages/recovery/index.js
+const app = getApp();
 Page({
 
   /**
@@ -18,7 +19,9 @@ Page({
     ],
     status:'',
     reasonStatus:'',
-    datas:''
+    datas:'',
+    imgListLoss:[],
+    imgListRecovery:[]
   },
   radioChange:function(e){
     console.log(e,1111)
@@ -37,13 +40,54 @@ Page({
   onLoad: function (options) {
     if (options.list) {
       let datas = JSON.parse(options.list);
-      console.log(datas,1111)
       this.setData({
-        datas:datas[0]
+        datas:datas
       })
+      console.log(datas)
+      this.getList(datas.id, datas.oid)
     }
   },
-
+  getList:function(id,oid){
+    let that = this;
+    app.sendRequest({
+      action: 'getOrderImg',
+      params: {
+        limit: -1,
+        start: 0,
+        tp: '定损照片',
+        oid: oid,
+        dtlid: id,
+        openid:'',
+        nickname:'',
+        ver: 200,
+      },
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          imgListLoss:res.rows
+        })
+      }
+    })
+    app.sendRequest({
+      action: 'getOrderImg',
+      params: {
+        limit: -1,
+        start: 0,
+        tp: '回收照片',
+        oid: oid,
+        dtlid: id,
+        openid: '',
+        nickname: '',
+        ver: 200,
+      },
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          imgListRecovery: res.rows
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

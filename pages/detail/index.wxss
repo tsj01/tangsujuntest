@@ -61,9 +61,10 @@
   padding: 20rpx;
 }
 .imginfo .img{
-  display: block;
+  display: inline-block;
   width: 140rpx;
   height: 140rpx;
+  margin-right: 20rpx;
 }
 
 .bottom-box .bottom {

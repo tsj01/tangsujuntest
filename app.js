@@ -1,4 +1,4 @@
-//app.js
+
 App({
   onLaunch: function() {
     // 展示本地存储能力
@@ -33,6 +33,29 @@ App({
         }
       }
     })
+  },
+  initTime(){
+    var date = new Date();
+    //年
+    var year = date.getFullYear();
+    //月
+    var month = date.getMonth() + 1;
+    //日
+    var day = date.getDate() + 1;
+    //时
+    var hh = date.getHours();
+    //分
+    var mm = date.getMinutes();
+    //秒
+    var ss = date.getSeconds();
+    if (month < 10) {
+      month = "0" + month;
+    }
+    if (day < 10) {
+      day = "0" + day;
+    }
+    var rq = year + "-" + month + "-" + day + " " + "14" + ":" + "00" + ":" + "00";
+    return rq;
   },
   globalData: {
     userInfo: null,

@@ -61,3 +61,16 @@
   font-size: 28rpx;
   color: #555;
 }
+.content .name-img{
+  font-size: 28rpx;
+  color: #555;
+}
+.content .name-img .label-img{
+  display: block;
+}
+.content .name-img .img{
+  display: inline-block;
+  width: 140rpx;
+  height: 140rpx;
+  margin-right: 20rpx;
+}

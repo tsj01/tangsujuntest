@@ -41,7 +41,7 @@ Page({
     })
   },
   listdetail:function(e){
-    let info = JSON.stringify(this.data.list);
+    let info = JSON.stringify(this.data.list[e.currentTarget.dataset.index]);
     wx.navigateTo({
       url: '../recovery/index?list=' + info
     })
