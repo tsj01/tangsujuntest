@@ -26,7 +26,7 @@
   box-sizing: border-box;
   border-bottom: 1px solid #eee;
 }
-.content .detePicker::before {
+.content .section::before {
   position: absolute;
   left: 7px;
   font-size: 14px;

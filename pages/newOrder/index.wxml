@@ -186,7 +186,7 @@
       <view class="section">
         <picker mode="multiSelector" value="{{orderDate}}" start="2015-09-01" range="{{dateTimeArray}}" bindchange="bindOrderDateChange">
           <view class="picker">
-            <text class="leftdate">预约日期: </text>{{startT}}
+            <text class="leftdate" style="margin-right: 52rpx">预约日期: </text>{{startT}}
           </view>
         </picker>
       </view>
