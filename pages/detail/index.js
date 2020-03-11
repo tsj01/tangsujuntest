@@ -115,6 +115,9 @@ Page({
       params: paramsorder,
       success: function(res) {
         if (res.success == true) {
+            for (let key in res.rows[0]) {
+              res.rows[0][key] == null ? res.rows[0][key] = '' : res.rows[0][key];
+            }
           that.setData({
             data: res.rows[0]
           })

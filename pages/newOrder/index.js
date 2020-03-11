@@ -33,6 +33,8 @@ Page({
       showUploaderImg: false,
       attAdd: [],
     }],
+    updOrderList:[],
+    dtlUpd:[],
     editpartname: '',
     editpartno: '',
     orderIndex: '',
@@ -59,7 +61,8 @@ Page({
     detailTypeid: '',
     imgUrls: [],
     srv: '',
-    srvid: ''
+    srvid: '',
+    updStatus:''
   },
   imgYu: function(event) {
     console.log(event)
@@ -293,6 +296,27 @@ Page({
     });
   },
   add: function(e) {
+    if (this.data.updStatus == '修改') {
+      let i = this.data.addNum - 1;
+      let updOrderList = [];
+      updOrderList.push({
+        id: i,
+        isvalue: '否',
+        ischeck: false,
+        oid: 0,
+        partname: "",
+        partno: "",
+        price: 0,
+        status: "未收",
+        showUploaderImg: false,
+        attAdd: []
+      })
+      this.setData({
+        updOrderList: updOrderList,
+        addNum: i
+      })
+      console.log(this.data.updOrderList,44444)
+    }
     let i = this.data.addNum - 1;
     this.data.orderList.push({
       id: i,
@@ -316,13 +340,27 @@ Page({
     this.data.orderList.forEach((item, index) => {
       if (this.data.orderIndex == index) {
         item.partname = this.data.editpartname;
-        item.partno = this.data.editpartno
+        item.partno = this.data.editpartno;
+        if (this.data.updStatus == '修改') {
+          console.log(item,'修改暂存111')
+          this.data.dtlUpd.push({
+            partname: item.partname,
+            partno: item.partno,
+            oid: item.oid,
+            id:item.id
+          })
+          this.setData({
+            dtlUpd: this.data.dtlUpd,
+          })
+          console.log(this.data.dtlUpd, '修改暂存')
+        }
       }
     })
     this.setData({
       orderList: this.data.orderList,
       orderShow: false
     })
+
   },
   delOrderlist: function() {
     this.data.orderList.splice(this.data.orderIndex, 1)
@@ -400,13 +438,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var start = app.initTime();
-    var obj = dateTimePicker.dateTimePicker(2015, 2060, start);
+    
+    let start = app.initTime();
+    let obj = dateTimePicker.dateTimePicker(2015, 2060, start);
     this.setData({
       orderDate: obj.dateTime,
       dateTimeArray: obj.dateTimeArray
     });
-    var startT = dateTimePicker.formatPickerDateTime(this.data.dateTimeArray, this.data.orderDate)
+    let startT = dateTimePicker.formatPickerDateTime(this.data.dateTimeArray, this.data.orderDate)
     this.setData({
       startT: startT
     })
@@ -414,7 +453,8 @@ Page({
     that.getLoginInfo();
     if (options.data) {
       let datas = JSON.parse(options.data);
-      console.log(options)
+      console.log(datas,6666)
+      that.getOrderdtl(datas.id);
       if (options.name == 'modify') {
         that.setData({
           act: 'upd',
@@ -452,6 +492,54 @@ Page({
         startT: datas.yydt,
       })
     }
+    console.log(that.data.updStatus,33333)
+  },
+  getOrderdtl:function(e){
+    let that = this;
+    app.sendRequest({
+      action: 'getOrderdtl',
+      params: {
+        oid:e,
+        openid:'',
+        nickname:'',
+        ver: 200
+      },
+      success: function (res) {
+        console.log(res,'mingxi')
+        orderList: [{
+          id: 0,
+          isvalue: '否',
+          ischeck: false,
+          oid: 0,
+          partname: '',
+          partno: '',
+          price: 0,
+          status: "未收",
+          showUploaderImg: false,
+          attAdd: [],
+        }]
+        let arr = [];
+        res.rows.forEach((item,index)=>{
+          arr.push({
+            isvalue: item.isvalue,
+            ischeck: item.forRecv,
+            oid: item.oid,
+            id:item.id,
+            partname: item.partname,
+            partno: item.partno,
+            price: item.price,
+            status: item.status,
+            showUploaderImg: false,
+            attAdd: [],
+          })
+        })
+        console.log(arr)
+        that.setData({
+          updStatus:'修改',
+          orderList:arr
+        })
+      }
+    })
   },
   accnoChange: function(event) {
     this.setData({
@@ -520,13 +608,14 @@ Page({
         status: "已暂存",
         yydt: that.data.startT
       },
-      dtlAdd: that.data.orderList,
-      dtlUpd: [],
+      dtlAdd: that.data.updStatus == '修改' ? that.data.updOrderList : that.data.orderList,
+      dtlUpd: that.data.dtlUpd,
       dtlDel: [],
       attAdd: arr,
       attUpd: [],
       attDel: []
     }
+    
     app.sendRequest({
       action: 'saveOrder',
       params: {

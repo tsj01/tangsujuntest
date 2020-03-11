@@ -123,12 +123,22 @@ Page({
         })
         if (that.data.list && pages) {
           let info = that.data.list.concat(lists);
+          info.forEach((item,index)=>{
+            for (let key in item) {
+              item[key] == null ? item[key] = '' : item[key];
+            }
+          })
           that.setData({
             list: info,
             page: pages,
             total: res.total
           })
         } else {
+          lists.forEach((item, index) => {
+            for (let key in item) {
+              item[key] == null ? item[key] = '' : item[key];
+            }
+          })
           that.setData({
             list: lists,
             page: 0,
