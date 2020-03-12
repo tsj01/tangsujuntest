@@ -123,7 +123,7 @@ Page({
     var me = this;
     var id = event.currentTarget.dataset.id;
     wx.chooseImage({
-      count: 1,
+      count: 9,
       sourceType: ['album', 'camera'],
       success(res) {
         console.log(res);

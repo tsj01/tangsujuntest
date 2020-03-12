@@ -33,7 +33,10 @@ Page({
     var that = this;
     var src = event.currentTarget.dataset.src;//获取data-src
     var imgUrls = that.data.imgUrls;//获取data-list
-    imgUrls.push(src)
+    this.data.imgList.forEach((item,index)=>{
+      imgUrls.push(item.paththumb)
+    })
+    
     //图片预览
     wx.previewImage({
       current: src, // 当前显示图片的http链接
@@ -148,6 +151,11 @@ Page({
         params: params,
         success: function (res) {
           if (res.success == true) {
+            res.rows.forEach((item,index)=>{
+              for (let key in item) {
+                item[key] == null ? item[key] = '' : item[key];
+              }
+            })
             that.setData({
               list: res.rows
             })

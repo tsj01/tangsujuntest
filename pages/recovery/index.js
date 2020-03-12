@@ -21,7 +21,8 @@ Page({
     reasonStatus:'',
     datas:'',
     imgListLoss:[],
-    imgListRecovery:[]
+    imgListRecovery:[],
+    imgUrls: []
   },
   radioChange:function(e){
     console.log(e,1111)
@@ -32,6 +33,21 @@ Page({
   reasonChange:function(e){
     this.setData({
       reasonStatus: e.detail.value
+    })
+  },
+  imgYu: function (event) {
+    console.log(event)
+    var that = this;
+    var src = event.currentTarget.dataset.src;//获取data-src
+    var imgUrls = that.data.imgUrls;//获取data-list
+    this.data.imgListLoss.forEach((item, index) => {
+      imgUrls.push(item.paththumb)
+    })
+
+    //图片预览
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: imgUrls // 需要预览的图片http链接列表
     })
   },
   /**

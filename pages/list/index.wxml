@@ -27,6 +27,7 @@
     </view>
     <view class="thing">
       <text class="thing-left">{{item.dtl_info}}</text>
+      <text wx:if="{{item.isurgent == '是'}}" class="thing-text">急</text>
       <text class="thing-right">{{item.overdue_info}}</text>
     </view>
   </view>

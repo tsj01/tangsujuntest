@@ -111,8 +111,13 @@ page{ height:100%;}
 
 .ul .li .thing .thing-left{
   display: inline-block;
-  width: 532rpx;
+  width: 528rpx;
   color: #1E90FF;
+}
+ .ul .li .thing .thing-text{
+  display: inline-block;
+  color: #FF0000;
+  font-weight: bold;
 }
 .ul .li .thing .thing-right{
   display: inline-block;
