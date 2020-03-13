@@ -82,3 +82,24 @@
   border: 1px solid #3399f3;
   border-radius: 8rpx;
 }
+.desc .van-step__title{
+  width: 140rpx;
+}
+.stepslist{
+  text-align: center;
+  font-size: 12px;
+  color: #333;
+  padding: 10px;
+}
+.stepslist .circle{
+  width: 5px;
+  height: 5px;
+  background-color: #38f;
+  border-radius: 50%;
+  text-align: center;
+  margin: 10rpx auto;
+}
+.stepslist .time{
+  width: 140rpx;
+  margin: 0 auto;
+}

@@ -54,6 +54,7 @@ Page({
     memo: '', //订单备注
     insurid: '', //保险公司id
     garageid: '', //汽修公司id
+    checkSdt:'',
     mopr: '',
     addNum: 0,
     act: 'add',
@@ -66,14 +67,20 @@ Page({
   },
   imgYu: function(event) {
     console.log(event)
-    var that = this;
-    var src = event.currentTarget.dataset.src; //获取data-src
-    var imgUrls = that.data.imgUrls; //获取data-list
-    imgUrls.push(src)
+    let that = this;
+    let src = event.currentTarget.dataset.src; //获取data-src
+    let arr = [];
+    that.data.orderList.forEach((i,v)=>{
+      if (event.currentTarget.dataset.id == v){
+        i.attAdd.forEach((a,d)=>{
+          arr.push(a.url);
+        })
+      }
+    })
     //图片预览
     wx.previewImage({
       current: src, // 当前显示图片的http链接
-      urls: imgUrls // 需要预览的图片http链接列表
+      urls: arr // 需要预览的图片http链接列表
     })
   },
   bindOrderDateChange: function(e) {
@@ -697,6 +704,27 @@ Page({
     }
     this.setData({
       subShow: true
+    })
+  },
+  checkByAccnoPlateno:function(){
+    let that = this;
+    app.sendRequest({
+      action: 'checkByAccnoPlateno',
+      params: {
+        id: that.data.id,
+        insurid: that.data.insurid,
+        srvid: that.data.srvid,
+        accno: that.data.accno,
+        plateno: that.data.plateno,
+        checkSdt: that.data.checkSdt,
+        usePaging: false,
+        openid:'',
+        nickname:'',
+        ver: 200
+      },
+      success: function (res) {
+        that.subOrder();
+      }
     })
   },
   subOrder: function() {

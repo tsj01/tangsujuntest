@@ -14,10 +14,6 @@ Page({
         text: '步骤二',
         desc: '描述信息'
       },
-      {
-        text: '步骤三',
-        desc: '描述信息'
-      }
     ],
     data:{},
     type:'',
@@ -61,6 +57,26 @@ Page({
       url: '../newOrder/index?name=copy&data=' + info
     })
   },
+  open: function (e) {
+    console.log(e)
+    wx.showActionSheet({
+      itemList: [e.currentTarget.dataset.tel],
+      success: function (res) {
+        wx.makePhoneCall({
+          phoneNumber: e.currentTarget.dataset.tel,   
+          success: function () {
+            console.log("拨打电话成功！")
+          },
+          fail: function () {
+            console.log("拨打电话失败！")
+          }
+        })
+        if (!res.cancel) {
+          console.log(res.tapIndex)
+        }
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -100,14 +116,16 @@ Page({
         if (res.success == true) {
           let steps = []
           res.rows.forEach((itme,index)=>{
+            // .slice(0, 10)
             steps.push({
               text: itme.act,
-              desc: itme.dtm.slice(0, 10)
+              desc: itme.dtm
             })
           })
           that.setData({
             steps: steps
           })
+          console.log(that.data.steps)
         } else {
         }
       }
@@ -143,6 +161,9 @@ Page({
       openid: '',
       nickname: '',
       ver: 200
+    }
+    if (e.detail.title == '基本信息'){
+      that.getDetail(this.data.type);
     }
     if (e.detail.title == '收件明细') {
       app.sendRequest({

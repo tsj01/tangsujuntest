@@ -2,7 +2,12 @@
 <view class="content">
   <van-tabs swipeable color="#2fa4e7" active="{{ active }}" bind:change="onChange">
     <van-tab title="基本信息">
-      <van-steps steps="{{ steps }}" active="{{ steps.length }}" active-color="#38f" />
+      <van-steps wx:if="{{steps.length != 1}}" class="desc" steps="{{ steps }}" active="{{ steps.length }}" active-color="#38f" />
+      <view wx:if="{{steps.length == 1}}" wx:for="{{steps}}" wx:key="{{index}}" class="stepslist">
+        <view>{{item.text}}</view>
+        <view class="time">{{item.desc}}</view>
+        <view class="circle"></view>
+      </view>
       <view class="status">
         <text class="left">订单状态：<text>已派单</text></text>
         <text class="right">建单人员：<text>已派单</text></text>
@@ -49,7 +54,7 @@
       </view>
       <view class="main">
         <text class="left">联系方式</text>
-        <text class="right">{{data.gartel}}</text>
+        <text bindtap="open" data-tel="{{data.gartel}}" class="right">{{data.gartel}}</text>
       </view>
       <view class="main borderline">
         <text class="left">查勘员</text>
@@ -57,7 +62,7 @@
       </view>
       <view class="main">
         <text class="left">联系方式</text>
-        <text class="right">{{data.dsytel}}</text>
+        <text bindtap="open" data-tel="{{data.dsytel}}" class="right">{{data.dsytel}}</text>
       </view>
       <view class="main">
         <text class="left">订单备注</text>
