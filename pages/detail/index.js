@@ -22,7 +22,8 @@ Page({
     recoveryList: [],
     repairList: [],
     url: app.globalData.attrUrl,
-    imgUrls:[]
+    imgUrls:[],
+    title:'基本信息'
   },
   imgYu: function (event) {
     console.log(event)
@@ -30,7 +31,7 @@ Page({
     var src = event.currentTarget.dataset.src;//获取data-src
     var imgUrls = that.data.imgUrls;//获取data-list
     this.data.imgList.forEach((item,index)=>{
-      imgUrls.push(item.paththumb)
+      imgUrls.push(item.paththumb.replace('_thumb', ''))
     })
     
     //图片预览
@@ -76,6 +77,11 @@ Page({
         }
       }
     });
+  },
+  leaMes:function(e){
+    wx.navigateTo({
+      url: '../leavingms/index'
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -162,6 +168,9 @@ Page({
       nickname: '',
       ver: 200
     }
+    that.setData({
+      title: e.detail.title
+    })
     if (e.detail.title == '基本信息'){
       that.getDetail(this.data.type);
     }

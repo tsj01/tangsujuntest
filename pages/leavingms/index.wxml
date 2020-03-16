@@ -1,0 +1,13 @@
+<!--pages/leavingms/index.wxml-->
+<view class="leabox">
+  <view class="title">
+    <view class="title-tit">标题</view>
+    <view class="title-info">内容</view>
+    <view class="title-lea">留言人</view>
+    <view class="title-time">留言时间</view>
+    <view class="title-status">状态</view>
+  </view>
+  <view class="addbox">
+    <view class="add">新增</view>
+  </view>
+</view>

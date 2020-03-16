@@ -14,7 +14,9 @@
     "pages/searchlist/index",
     "pages/login/index",
     "pages/searchdetail/index",
-    "pages/recovery/index"
+    "pages/recovery/index",
+    "pages/leavingms/index",
+    "pages/leavingms/submit/index"
   ],
   "window": {
     "navigationBarTextStyle": "white",

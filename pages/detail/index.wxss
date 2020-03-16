@@ -1,6 +1,8 @@
 /* pages/detail/index.wxss */
 .content{
+  padding-bottom: 90rpx;
 }
+
 .status{
   display: flex;
   font-size: 24rpx;
@@ -68,7 +70,11 @@
 }
 
 .bottom-box .bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   display: flex;
+  background: #fff;
 }
 .bottom-box .bottom view{
   flex: 1;

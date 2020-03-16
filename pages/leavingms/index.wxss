@@ -1,0 +1,45 @@
+/* pages/leavingms/index.wxss */
+.title {
+  display: flex;
+  font-size: 28rpx;
+  color: #555;
+  padding: 20rpx;
+  border-bottom: 1px solid #e0e0e0;
+}
+.title .title-tit{
+  display: inline-block;
+  flex: 2;
+}
+
+.title .title-info{
+  display: inline-block;
+  flex: 3;
+}
+.title .title-lea{
+  display: inline-block;
+  flex: 2;
+}
+.title .title-time{
+  display: inline-block;
+  flex: 2;
+}
+.title .title-status{
+  display: inline-block;
+  flex: 1;
+}
+.addbox{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.add{
+  height: 80rpx;
+  margin: 10rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  border: solid 1px #1E90FF;
+  font-size: 28rpx;
+  color: #1E90FF;
+  line-height: 80rpx;
+  
+}

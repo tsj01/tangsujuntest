@@ -54,7 +54,7 @@
       </view>
       <view class="main">
         <text class="left">联系方式</text>
-        <text bindtap="open" data-tel="{{data.gartel}}" class="right">{{data.gartel}}</text>
+        <text style="color: #2fa4e7" bindtap="open" data-tel="{{data.gartel}}" class="right">拨打电话：{{data.gartel}}</text>
       </view>
       <view class="main borderline">
         <text class="left">查勘员</text>
@@ -62,7 +62,7 @@
       </view>
       <view class="main">
         <text class="left">联系方式</text>
-        <text bindtap="open" data-tel="{{data.dsytel}}" class="right">{{data.dsytel}}</text>
+        <text style="color: #2fa4e7" bindtap="open" data-tel="{{data.dsytel}}" class="right">拨打电话：{{data.dsytel}}</text>
       </view>
       <view class="main">
         <text class="left">订单备注</text>
@@ -76,13 +76,7 @@
         <text class="left">回收备注</text>
         <text class="right">宁波格斯美-015605</text>
       </view>
-      <view class="bottom-box">
-        <view class="bottom">
-          <view bindtap="modify">修改</view>
-          <view bindtap="copy">复制</view>
-          <view bindtap="LeaMes">留言</view>
-        </view>
-      </view>
+
 
     </van-tab>
     <van-tab title="收件明细">
@@ -114,4 +108,11 @@
     </view>    
     </van-tab>
   </van-tabs>
+  <view class="bottom-box" wx:if="{{title == '基本信息'}}">
+    <view class="bottom">
+      <view bindtap="modify">修改</view>
+      <view bindtap="copy">复制</view>
+      <view bindtap="leaMes">留言</view>
+    </view>
+  </view>
 </view>

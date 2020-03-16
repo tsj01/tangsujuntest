@@ -461,7 +461,7 @@ Page({
     if (options.data) {
       let datas = JSON.parse(options.data);
       console.log(datas,6666)
-      that.getOrderdtl(datas.id);
+      that.getOrderdtl(datas);
       if (options.name == 'modify') {
         that.setData({
           act: 'upd',
@@ -503,10 +503,11 @@ Page({
   },
   getOrderdtl:function(e){
     let that = this;
+    console.log(e);
     app.sendRequest({
       action: 'getOrderdtl',
       params: {
-        oid:e,
+        oid:e.id,
         openid:'',
         nickname:'',
         ver: 200
@@ -545,8 +546,42 @@ Page({
           updStatus:'修改',
           orderList:arr
         })
+        app.sendRequest({
+          action: 'getOrderImg',
+          params: {
+            oid: e.id,
+            tp: '定损照片',
+            openid: '',
+            nickname: '',
+            ver: 200
+          },
+          success: function (res) {
+
+            console.log(that.data.orderList,res, 'mingxi')
+            that.data.orderList.forEach((item,index)=>{
+              res.rows.forEach((i,v)=>{
+                if (item.id == i.dtlid) {
+                  item.attAdd.push({
+                    url: i.paththumb.replace('_thumb', ''),
+                    isImage: true,
+                    paththumb: i.paththumb,
+                    sizekb: i.sizekb,
+                    sizewh: i.sizewh,
+                    tp: i.tp,
+                    name: i.name,
+                    dtlid: i.dtlid
+                  })
+                }
+              })
+            })
+            that.setData({
+              orderList: that.data.orderList
+            })
+          }
+        })
       }
     })
+
   },
   accnoChange: function(event) {
     this.setData({
